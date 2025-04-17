@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela Registrar Chamado - Cliente</title>
+</head>
+<body>
+    <form class="form-container">
+      <div class="form-row">
+        <div style="flex: 1">
+          <label for="titulo">Título do chamado<span>*</span></label>
+          <input type="text" id="titulo" required>
+        </div>
+        <div class="protocolo">
+          Protocolo: XXXXXXXX
+          <br>
+          Data: XX/XX
+          <br>
+          Hora: XX:XX
+        </div>
+      </div>
+  
+      <div class="form-row">
+        <div>
+          <label for="categoria">Categoria<span>*</span></label>
+          <select id="categoria">
+            <option value="">Selecione</option>
+            <option value="hardware">Hardware</option>
+            <option value="software">Software</option>
+            <option value="rede">Rede</option>
+            <option value="acesso">Acesso/Senha</option>
+            <option value="outro">Outro</option>
+            <!-- caso OUTRO: abrir campo para descrição -->
+          </select>
+        </div>
+        <div>
+          <label for="urgencia">Nível de urgência<span>*</span></label>
+          <select id="categoria">
+            <option value="">Selecione</option>
+            <option value="baixa">Baixa</option>
+            <option value="media">Média</option>
+            <option value="alta">Alta</option>
+            <option value="critica">Crítica</option>
+          </select>
+        </div>
+      </div>
+  
+      <div>
+        <label for="descricao">Descrição<span>*</span></label>
+        <textarea id="descricao" required></textarea>
+      </div>
+  
+      <div>
+        <label>Anexar arquivos <span>(opcional)</span></label>
+        <div class="anexo">
+            <!-- pesquisar essa parte !!!-->
+            Arraste e solte arquivos aqui
+        </div>
+        <div class="info-upload">
+            Tipos permitidos: .jpg, .png, .pdf, .docx, .txt
+            <br>
+            Tamanho máximo: 10MB
+        </div>
+      </div>
+  
+      <div class="form-footer">
+        <button type="reset" class="cancelar">CANCELAR</button>
+        <button type="submit" class="enviar">ENVIAR CHAMADO</button>
+      </div>
+    </form>
+  </body>
+</html>

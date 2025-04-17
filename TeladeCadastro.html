@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de Cadastro - Sitema PIM</title>
+</head>
+<body>
+    <div class="container" id="cadastro-screen">
+        <h2>Cadastro</h2>
+
+        <!--Campos: Nome Completo e CPF-->
+        <div class="form-row">
+            <div class="form-group">
+                <label for="nome">Nome completo<span>*</span></label>
+                <input type="text" id="nome" required>
+            </div>
+            <div class="form-group">
+                <label for="cpf">CPF<span>*</span></label>
+                <input type="text" name="" id="cpf" required>
+            </div>
+        </div>
+        
+        <!--Campos: Telefone e Endereço-->
+        <div class="form-row">
+            <div class="form-group">
+                <label for="telefone">Telefone<span>*</span></label>
+                <input type="tel" id="telefone" required>
+            </div>
+            <div class="form-group">
+                <label for="endereco">Endereço<span>*</span></label>
+                <input type="text" name="" id="endereco" required>
+            </div>
+        </div>
+
+        <hr>
+
+        <!--Campos: E-mail -->
+        <div class="form-group">
+            <label for="email">E-mail*</label>
+            <input type="email" id="email" required>
+          </div>
+
+        <!--Campos: Senha e Confirmação de Senha -->
+        <div class="form-row">
+            <div class="form-group">
+                <label for="senha">Senha<span>*</span></label>
+                <input type="password" id="senha" required>
+            </div>
+            <div class="form-group">
+                <label for="confirmacao-senha">Confirmação de Senha<span>*</span></label>
+                <input type="password" name="" id="confirmacao-senha" required>
+            </div>
+        </div>
+
+        <button class="button">CADASTRAR CONTA</button>
+        <div class="switch-link">
+            <p>Já tem conta? <a href="TeladeLogin.html" onclick="toggleScreens()">Voltar para login</a></p>
+        </div>
+    </div>
+</body>
+</html>

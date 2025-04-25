@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="TeladeCadastro.css">
+    <link rel="stylesheet" href="padrao.css">
     <title>Tela de Cadastro - Sitema PIM</title>
 </head>
 <body>
@@ -19,10 +21,6 @@
                 <label for="cpf">CPF<span>*</span></label>
                 <input type="text" name="" id="cpf" required>
             </div>
-        </div>
-        
-        <!--Campos: Telefone e Endereço-->
-        <div class="form-row">
             <div class="form-group">
                 <label for="telefone">Telefone<span>*</span></label>
                 <input type="tel" id="telefone" required>
@@ -35,14 +33,12 @@
 
         <hr>
 
-        <!--Campos: E-mail -->
-        <div class="form-group">
-            <label for="email">E-mail*</label>
-            <input type="email" id="email" required>
-          </div>
-
-        <!--Campos: Senha e Confirmação de Senha -->
+        <!--Campos: E-mail, Senha e Confirmação de Senha -->
         <div class="form-row">
+            <div class="form-group">
+                <label for="email">E-mail<span>*</span></label>
+                <input type="email" id="email" required>
+            </div>
             <div class="form-group">
                 <label for="senha">Senha<span>*</span></label>
                 <input type="password" id="senha" required>
@@ -53,8 +49,8 @@
             </div>
         </div>
 
-        <button class="button">CANCELAR</button>
-        <button class="button">CADASTRAR CONTA</button>
+        <button class="btn-cancelar">CANCELAR</button>
+        <button class="btn-cadastrar">CADASTRAR CONTA</button>
         <div class="switch-link">
             <p>Já tem conta? <a href="TeladeLogin.html" onclick="toggleScreens()">Voltar para login</a></p>
         </div>

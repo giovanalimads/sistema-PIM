@@ -43,20 +43,3 @@ a {
   padding: 8px;
   box-sizing: border-box;
 }
-
-.button {
-  text-align: right;
-}
-
-button {
-  font-weight: 600;
-  padding: 10px;
-  border: ;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-.btn-logar {
-  background-color: #555;
-  color: #fff;
-}

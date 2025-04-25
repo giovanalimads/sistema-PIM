@@ -1,0 +1,42 @@
+/* CORPO DA PÁGINA E CORPO DO FORMULÁRIO */ 
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e6e6e6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 7px rgba(0,0,0,1);
+    width: 600px;
+}
+
+/* ASTERISCO DE OBRIGAÇÃO */
+span {
+    color: red;
+}
+
+/* BOTÕES */
+.button {
+    text-align: right;
+}
+  
+button {
+    font-weight: 600;
+    padding: 10px;
+    border: ;
+    cursor: pointer;
+
+    margin-top: 10px;
+}
+
+.btn-cadastrar, .btn-logar {
+    background-color: #555;
+    color: #fff;
+}

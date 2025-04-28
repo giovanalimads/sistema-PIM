@@ -1,18 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tela Inicial - Gerente</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administrador - Painel</title>
+  <style>
+    body {
+      background-color: #1e1e1e;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px;
+      gap: 20px;
+    }
+
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    button {
+      background-color: #5c2d91;
+      color: #ffffff;
+      border: none;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #7e57c2;
+    }
+
+    .full-width-button {
+      grid-column: 1 / -1;
+      background-color: #007acc;
+    }
+
+    .full-width-button:hover {
+      background-color: #3399ff;
+    }
+  </style>
 </head>
 <body>
-    <div class="conatiner">
-        <h2>Tela Inicial</h2>
-        <div class="options">
-            <button onclick="window.location.href='TelaTecnicos.html'">TÉCNICOS</button>
-            <button onclick="window.location.href='#'">RELATÓRIOS</button>
-            <button onclick="window.location.href='#'">DESEMPENHO</button>
-        </div>
+
+  <div class="container">
+    <h1>Painel do Administrador</h1>
+
+    <div class="button-grid">
+      <button>Visualizar Chamados</button>
+      <button>Cadastrar Técnico</button>
+      <button>Cadastrar Administrador</button>
+
+      <button>Visualizar Chamados Abertos</button>
+      <button>Excluir Técnico</button>
+      <button>Excluir Administrador</button>
+
+      <button>Visualizar Avaliações</button>
+      <button>Visualizar Técnicos</button>
+      <button>Visualizar Administradores</button>
+
+      <button class="full-width-button">Gerar Relatório</button>
     </div>
+  </div>
+
 </body>
 </html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel do Técnico</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 30px;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .boas-vindas {
+      text-align: center;
+      font-size: 20px;
+      margin-bottom: 30px;
+      color: #333;
+    }
+    .resumo {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 30px;
+    }
+    .card-resumo {
+      background-color: #007BFF;
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 200px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    .acoes {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+    .card-acao {
+      background-color: #ffffff;
+      border: 2px solid #007BFF;
+      border-radius: 10px;
+      width: 250px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s, background-color 0.3s;
+      cursor: pointer;
+    }
+    .card-acao:hover {
+      background-color: #007BFF;
+      color: white;
+      transform: translateY(-5px);
+    }
+    .icone {
+      font-size: 50px;
+      margin-bottom: 10px;
+    }
+    .titulo-acao {
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+    .descricao-acao {
+      font-size: 16px;
+      color: #555;
+    }
+    .card-acao:hover .descricao-acao {
+      color: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Painel do Técnico</h1>
+
+    <div class="boas-vindas">
+      Bem-vindo, <strong>João!</strong> Hoje você tem 3 chamados aguardando resposta.
+    </div>
+
+    <div class="resumo">
+      <div class="card-resumo">
+        <h2>3</h2>
+        <p>Chamados Abertos</p>
+      </div>
+      <div class="card-resumo" style="background-color: #28a745;">
+        <h2>12</h2>
+        <p>Chamados Finalizados</p>
+      </div>
+    </div>
+
+    <div class="acoes">
+      <div class="card-acao" onclick="window.location.href='visualizar_chamados.html'">
+        <div class="icone">📄</div>
+        <div class="titulo-acao">Visualizar Chamados</div>
+        <div class="descricao-acao">Veja todos os chamados disponíveis.</div>
+      </div>
+
+      <div class="card-acao" onclick="window.location.href='visualizar_chamados_abertos.html'">
+        <div class="icone">🚨</div>
+        <div class="titulo-acao">Chamados Abertos</div>
+        <div class="descricao-acao">Gerencie os chamados pendentes.</div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

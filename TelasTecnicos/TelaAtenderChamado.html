@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atender Chamado</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      background-color: #f5f5f5;
+    }
+    .container {
+      background: white;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      max-width: 700px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .info {
+      margin-bottom: 20px;
+    }
+    .info p {
+      margin: 8px 0;
+    }
+    textarea {
+      width: 100%;
+      height: 150px;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      resize: vertical;
+      font-size: 16px;
+    }
+    input[type="file"] {
+      display: block;
+      margin-bottom: 20px;
+    }
+    .btn-finalizar {
+      background-color: #007BFF;
+      color: white;
+      padding: 12px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+    }
+    .btn-finalizar:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Atender Chamado</h1>
+
+    <div class="info">
+      <p><strong>Protocolo:</strong> #1001</p>
+      <p><strong>Categoria:</strong> TI - Impressora</p>
+      <p><strong>Data de Abertura:</strong> 27/04/2025</p>
+      <p><strong>Urgência:</strong> Alta</p>
+      <p><strong>Descrição do Chamado:</strong> Impressora não está funcionando e apresenta erro de papel atolado mesmo sem papel.</p>
+    </div>
+
+    <form action="finalizar_chamado.php" method="POST" enctype="multipart/form-data">
+      <label for="resposta"><strong>Resposta do Técnico:</strong></label>
+      <textarea id="resposta" name="resposta" placeholder="Descreva o que foi feito para resolver o chamado..." required></textarea>
+
+      <label for="anexo"><strong>Anexar Arquivo:</strong></label>
+      <input type="file" id="anexo" name="anexo">
+
+      <button type="submit" class="btn-finalizar">Finalizar Chamado</button>
+    </form>
+  </div>
+
+</body>
+</html>

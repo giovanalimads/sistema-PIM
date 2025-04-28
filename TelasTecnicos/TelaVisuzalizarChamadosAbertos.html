@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chamados Abertos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      background-color: #f5f5f5;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 15px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+    th {
+      background-color: #007BFF;
+      color: white;
+    }
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+    .btn-atender {
+      padding: 8px 12px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn-atender:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Chamados Abertos</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Protocolo</th>
+        <th>Categoria</th>
+        <th>Data</th>
+        <th>Nível de Urgência</th>
+        <th>Ação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>#1001</td>
+        <td>TI - Impressora</td>
+        <td>27/04/2025</td>
+        <td>Alta</td>
+        <td><a href="atender_chamado.html?id=1001" class="btn-atender">Atender</a></td>
+      </tr>
+      <tr>
+        <td>#1002</td>
+        <td>Infraestrutura</td>
+        <td>27/04/2025</td>
+        <td>Média</td>
+        <td><a href="atender_chamado.html?id=1002" class="btn-atender">Atender</a></td>
+      </tr>
+      <tr>
+        <td>#1003</td>
+        <td>Rede</td>
+        <td>27/04/2025</td>
+        <td>Urgente</td>
+        <td><a href="atender_chamado.html?id=1003" class="btn-atender">Atender</a></td>
+      </tr>
+      <!-- Adicione mais chamados conforme necessário -->
+    </tbody>
+  </table>
+
+</body>
+</html>

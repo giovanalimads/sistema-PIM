@@ -3,15 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../script.js">
+    <link rel="stylesheet" href="TelaInicialCliente.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
+
     <title>Tela Inicial - Cliente</title>
 </head>
 <body>
     <div class="container">
         <h2>Tela Inicial</h2>
-        <div class="options">
-            <button onclick="window.location.href='TelaRegistraChamado.html'">REGISTRAR CHAMADO</button>
-            <button onclick="window.location.href='TelaAcompanharChamado.html'">ACOMPANHAR CHAMADO</button>
+
+        <div class="container-content">
+            <div class="sidebar">
+                <button class="btn-sidebar">REGISTRAR<br>CHAMADO</button>
+                <button class="btn-sidebar">ACOMPANHAR<br>CHAMADO</button>
+                <button class="btn-sidebar">REGISTRAR<br>CHAMADO</button>
+                <button class="btn-sidebar">REGISTRAR<br>CHAMADO</button>
+            </div>
+
+            <div class="content">
+                <div class="top-info">
+                    <div>
+                        <p>Chamados em aberto: <span id="abertos">0</span></p>
+                        <p>Chamados respondidos: <span id="respondidos">0</span></p>
+                    </div>
+                    <div class="tema-toggle">
+                        <button onclick="setTema('claro')">Tema Claro</button>
+                        <button onclick="setTema('escuro')">Tema Escuro</button>
+                    </div>
+                </div>
+
+                <table id="tabelaChamados" class="display">
+                    <thead>
+                        <tr>
+                            <th>Protocolo</th>
+                            <th>Categoria</th>
+                            <th>Status</th>
+                            <th>Data</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <td>001</td>
+                        <td>Equipamento</td>
+                        <td>Aberto</td>
+                        <td>28/04/2025</td>
+                        </tr>
+                        <tr>
+                        <td>002</td>
+                        <td>Redes</td>
+                        <td>Respondido</td>
+                        <td>25/04/2025</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
+
+    <!--REFAZER-->
+    <script src="../script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#tabelaChamados').DataTable();
+    });
+
+    function setTema(tema) {
+      if (tema === 'escuro') {
+        document.body.classList.add('dark');
+      } else {
+        document.body.classList.remove('dark');
+      }
+    }
+  </script>
 </body>
 </html>

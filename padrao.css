@@ -1,7 +1,7 @@
 /* CORPO DA PÁGINA E CORPO DO FORMULÁRIO */ 
 body {
     font-family: Arial, sans-serif;
-    background-color: #e6e6e6;
+    background: #f4f4f4;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,7 +13,7 @@ body {
     background-color: #fff;
     padding: 30px;
     border-radius: 8px;
-    box-shadow: 0 0 7px rgba(0,0,0,1);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
     width: 600px;
 }
 
@@ -28,14 +28,31 @@ span {
 }
   
 button {
-    font-weight: 600;
-    padding: 10px;
-    border: ;
+    padding: 12px;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
     cursor: pointer;
-    margin-top: 10px;
+    transition: background 0.3s ease;
 }
 
-.btn-cadastrar, .btn-logar {
-    background-color: #555;
+button:hover {
+    background-color: #004fa2;
+    color: white;
+}
+
+.btn-principal {
+    background-color: #007bff;
     color: #fff;
+}
+
+.btn-logar {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.btn-secundario {
+    background-color: white;
+    color: #007bff;
 }

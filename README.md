@@ -1,14 +1,15 @@
 # Projeto Acadêmico (Parte WEB)
 
-
-
 ## Telas:
 ### Tela de Login
-![Captura de tela 2025-04-29 122439](https://github.com/user-attachments/assets/d5eccac9-7ca7-471c-9735-fae562cdfe97)
+![image](https://github.com/user-attachments/assets/03b18e23-744e-496c-a876-1ec4d54bde06)
 
 ### Tela de Cadastro
-![Captura de tela 2025-04-29 122505](https://github.com/user-attachments/assets/b9928a41-bb19-4b59-acbc-4c00983aa481)
+![image](https://github.com/user-attachments/assets/df6bb849-8342-4153-a993-5a2accf5493d)
 
+### Login: Cliente
+![image](https://github.com/user-attachments/assets/c294ba3f-d2f4-4016-8646-b7bd7c6d56ba)
+![image](https://github.com/user-attachments/assets/66277b4d-c3d6-41b9-af39-f0e6a56c6a26)
 
-### Tela Inicial - Cliente
-![image](https://github.com/user-attachments/assets/d3ed1efe-0823-4c97-b998-8e6385c04c06)
+### Login: Técnico
+### Login: Administrador

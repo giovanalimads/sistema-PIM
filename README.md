@@ -10,6 +10,7 @@
 ### Login: Cliente
 ![image](https://github.com/user-attachments/assets/c294ba3f-d2f4-4016-8646-b7bd7c6d56ba)
 ![image](https://github.com/user-attachments/assets/66277b4d-c3d6-41b9-af39-f0e6a56c6a26)
+![image](https://github.com/user-attachments/assets/3c6bc1ed-054b-4bea-905c-9f1c8d06882b)
 
 ### Login: Técnico
 ### Login: Administrador

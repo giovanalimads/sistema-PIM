@@ -1,16 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tela Inicial - Técnico</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="TelaInicialTecnico.css">
+  <title>Painel do Técnico</title>
 </head>
 <body>
-    <div class="conatiner">
-        <h2>Tela Inicial</h2>
-        <div class="options">
-            <button onclick="window.location.href='#'">VIZUALIZAR CHAMADOS ABERTOS</button>
-        </div>
+
+  <div class="container">
+    <div class="info-top">
+      <h2>Tela Inicial</h2>
+      <div class="tema-toggle">
+        <button onclick="setTema('claro')">Tema Claro</button>
+        <button onclick="setTema('escuro')">Tema Escuro</button>
+      </div>
     </div>
+
+    <div class="boas-vindas">
+      Bem-vindo, <strong>João!</strong> Hoje você tem 3 chamados aguardando resposta.
+    </div>
+
+    <div class="resumo">
+      <div class="card-resumo">
+        <h2>3</h2>
+        <p>Chamados<br>Abertos</p>
+      </div>
+      <div class="card-resumo" style="background-color: #28a745;">
+        <h2>12</h2>
+        <p>Chamados Finalizados</p>
+      </div>
+    </div>
+
+    <div class="acoes">
+      <div class="card-acao" onclick="window.location.href='visualizar_chamados.html'">
+        <div class="titulo-acao">Visualizar Chamados</div>
+        <div class="descricao-acao">Veja todos os chamados disponíveis.</div>
+      </div>
+
+      <div class="card-acao" onclick="window.location.href='visualizar_chamados_abertos.html'">
+        <div class="titulo-acao">Chamados Abertos</div>
+        <div class="descricao-acao">Gerencie os chamados pendentes.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+     function setTema(tema) {
+      if (tema === 'escuro') {
+        document.body.classList.add('dark');
+      } else {
+        document.body.classList.remove('dark');
+      }
+    }
+  </script>
 </body>
 </html>

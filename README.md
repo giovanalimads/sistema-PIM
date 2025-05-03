@@ -14,5 +14,8 @@
 
 ### Login: Técnico
 ![Captura de tela 2025-05-02 204601](https://github.com/user-attachments/assets/90419650-f447-4906-ad09-3015e9a11e4b)
+![Captura de tela 2025-05-03 110014](https://github.com/user-attachments/assets/e8847a6f-5900-4f9b-bcbd-bc94cb240d35)
+![image](https://github.com/user-attachments/assets/eee5faaf-8f2d-4f8f-8498-a55f21c475f0)
+
 
 ### Login: Administrador

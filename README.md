@@ -13,6 +13,6 @@
 ![image](https://github.com/user-attachments/assets/3c6bc1ed-054b-4bea-905c-9f1c8d06882b)
 
 ### Login: Técnico
-![Captura de tela 2025-05-02 212748](https://github.com/user-attachments/assets/ac5d1357-28d2-493c-a816-6ef7292b4045)
+![Captura de tela 2025-05-02 204601](https://github.com/user-attachments/assets/90419650-f447-4906-ad09-3015e9a11e4b)
 
 ### Login: Administrador

@@ -7,7 +7,13 @@
 </head>
 <body>
   <div class="container">
-    <h2>Avaliações de Atendimento</h2>
+    <div class="info-top">
+      <h2>Avaliações de Atendimento</h2>
+      <div class="tema-toggle">
+        <button onclick="setTema('claro')">Tema Claro</button>
+        <button onclick="setTema('escuro')">Tema Escuro</button>
+      </div>
+    </div>
 
     <h3>Qual chamado você deseja avaliar?</h3>
     <div class="form-group">
@@ -58,6 +64,14 @@
         areaAvaliacao.style.display = 'none';
       }
     }
+    
+        function setTema(tema) {
+         if (tema === 'escuro') {
+           document.body.classList.add('dark');
+         } else {
+           document.body.classList.remove('dark');
+         }
+      }
   </script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 
 ## Telas:
 ### Tela de Login
-![image](https://github.com/user-attachments/assets/03b18e23-744e-496c-a876-1ec4d54bde06)
+![image](https://github.com/user-attachments/assets/b0c6da0c-efbe-457f-9f61-dc7a0484ec07)
 
 ### Tela de Cadastro
 ![image](https://github.com/user-attachments/assets/1be5778c-bf3d-47fc-a615-b45b93f18c04)
@@ -13,4 +13,6 @@
 ![image](https://github.com/user-attachments/assets/3c6bc1ed-054b-4bea-905c-9f1c8d06882b)
 
 ### Login: Técnico
+![Captura de tela 2025-05-02 212748](https://github.com/user-attachments/assets/ac5d1357-28d2-493c-a816-6ef7292b4045)
+
 ### Login: Administrador

@@ -8,7 +8,13 @@
 </head>
 <body>
     <div class="container" id="cadastro-screen">
-        <h2>Cadastro</h2>
+        <div class="info-top">
+            <h2>Cadastrar</h2>
+            <div class="tema-toggle">
+              <button onclick="setTema('claro')">Tema Claro</button>
+              <button onclick="setTema('escuro')">Tema Escuro</button>
+            </div>
+          </div>
 
         <!--Campos: Nome Completo e CPF-->
         <div class="form-row">
@@ -56,5 +62,15 @@
             <button class="btn-principal">CADASTRAR CONTA</button>
         </div>
     </div>
+
+    <script>
+        function setTema(tema) {
+         if (tema === 'escuro') {
+           document.body.classList.add('dark');
+         } else {
+           document.body.classList.remove('dark');
+         }
+       }
+     </script>
 </body>
 </html>

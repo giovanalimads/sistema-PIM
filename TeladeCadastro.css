@@ -21,6 +21,11 @@ span {
     color: red;
 }
 
+.info-top {
+    display: flex;
+    justify-content: space-between;
+}
+
 .container h2 {
     text-align: center;
     margin-bottom: 20px;
@@ -73,7 +78,7 @@ p {
     text-align: right;
 }
   
-button {
+.button > button {
     padding: 12px;
     border: none;
     color: white;
@@ -83,17 +88,48 @@ button {
     transition: background 0.3s ease;
 }
 
-button:hover {
+.button > button:hover {
     background-color: #004fa2;
     color: white;
 }
 
-.btn-principal {
+.button > .btn-principal {
     background-color: #007bff;
     color: #fff;
 }
 
-.btn-secundario {
+.button > .btn-secundario {
     background-color: white;
     color: #007bff;
+}
+
+/* TEMA ESCURO (FALTA FALZER)*/
+.tema-toggle {
+    display: flex;
+    margin-bottom: 10px;
+  }
+  
+  .tema-toggle button{
+    margin-left: 5px;
+    padding: 8px 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .dark {
+    background-color: #121212;
+    color: white;
+  }
+
+  .dark .container {
+    background-color: #373737;
+  }
+
+.dark input[type="text"],
+.dark input[type="tel"],
+.dark input[type="email"],
+.dark input[type="password"] {
+  background-color: #1e1e1e;
+  color: #fff;
+  border: 1px solid #555;
 }

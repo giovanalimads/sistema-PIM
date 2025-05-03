@@ -8,7 +8,13 @@
 </head>
 <body>
   <div class="container">
-    <h2>Registrar Chamado</h2>
+    <div class="info-top">
+      <h2>Registrar Chamado</h2>
+      <div class="tema-toggle">
+        <button onclick="setTema('claro')">Tema Claro</button>
+        <button onclick="setTema('escuro')">Tema Escuro</button>
+      </div>
+    </div>
 
     <div class="form-row">
       <div class="form-group">
@@ -17,10 +23,6 @@
       </div>
       
       <div class="form-group info-direita">
-          <div class="tema-toggle">
-            <button onclick="setTema('claro')">Tema Claro</button>
-            <button onclick="setTema('escuro')">Tema Escuro</button>
-        </div>
         <div class="info">
           <label>Protocolo:</label>
           <p id="protocolo">XXXXXXXXXX</p>

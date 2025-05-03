@@ -10,7 +10,13 @@
 </head>
 <body>
     <div class="container">
-        <h2>Tela Inicial</h2>
+        <div class="info-top">
+            <h2>Tela Inicial</h2>
+            <div class="tema-toggle">
+              <button onclick="setTema('claro')">Tema Claro</button>
+              <button onclick="setTema('escuro')">Tema Escuro</button>
+            </div>
+        </div>
 
         <div class="container-content">
             <div class="sidebar">
@@ -25,10 +31,6 @@
                     <div>
                         <p>Chamados em aberto: <span id="abertos">0</span></p>
                         <p>Chamados respondidos: <span id="respondidos">0</span></p>
-                    </div>
-                    <div class="tema-toggle">
-                        <button onclick="setTema('claro')">Tema Claro</button>
-                        <button onclick="setTema('escuro')">Tema Escuro</button>
                     </div>
                 </div>
 

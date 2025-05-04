@@ -1,0 +1,135 @@
+body {
+      font-family: Arial, sans-serif;
+      background-color: #e0e0e0;
+      padding: 30px;
+    }
+
+    .container {
+      background-color: white;
+      padding: 20px;
+      max-width: 700px;
+      margin: auto;
+      border-radius: 8px;
+    }
+
+    .info-top {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        margin-top: 0px;
+    }
+
+    span {
+        color: red;
+    }
+
+    p {
+      margin: 5px 0;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    textarea {
+        height: 90px;
+        padding: 10px;
+        margin-bottom: 20px;
+        resize: none;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #e6e6e6;
+    }
+
+    label {
+        margin-bottom: 6px;
+    }
+
+    .info-bottom {
+        display: flex;
+    }
+    
+    .file-drop {
+        width: 300px;
+        border: 2px dashed #ccc;
+        background-color: #e6e6e6;
+        padding: 20px;
+        text-align: center;
+    }
+    
+    .file-drop.dragover {
+        border-color: #999;
+        background-color: #f0f0f0;
+    }
+    
+    .file-info {
+        font-size: 12px;
+        color: #555;
+        margin-top: 5px;
+    }
+
+    .button {
+        text-align: right;
+    }
+      
+    .button > button {
+        padding: 12px;
+        border: none;
+        color: white;
+        font-weight: bold;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+    
+    .button > button:hover {
+        background-color: #004fa2;
+        color: white;
+    }
+    
+    .button > .btn-principal {
+        background-color: #007bff;
+        color: #fff;
+    }
+    
+    .button > .btn-secundario {
+        background-color: white;
+        color: #007bff;
+    }
+    
+    /* TEMA ESCURO (FALTA FALZER)*/
+    .tema-toggle {
+        display: flex;
+        margin-bottom: 10px;
+      }
+      
+      .tema-toggle button{
+        margin-left: 5px;
+        padding: 8px 10px;
+        border: none;
+        cursor: pointer;
+      }
+      
+      .dark {
+        background-color: #121212;
+        color: white;
+      }
+    
+      .dark .container {
+        background-color: #373737;
+      }
+    
+    .dark input[type="text"],
+    .dark input[type="tel"],
+    .dark input[type="email"],
+    .dark input[type="password"] {
+      background-color: #1e1e1e;
+      color: #fff;
+      border: 1px solid #555;
+    }

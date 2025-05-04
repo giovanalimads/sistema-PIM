@@ -122,6 +122,14 @@
       alert("Chamado enviado com sucesso!");
       // Aqui você pode integrar com um backend se quiser.
     }
+
+    function setTema(tema) {
+         if (tema === 'escuro') {
+           document.body.classList.add('dark');
+         } else {
+           document.body.classList.remove('dark');
+         }
+       }
   </script>
 </body>
 </html>

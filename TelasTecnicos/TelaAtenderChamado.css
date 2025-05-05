@@ -50,10 +50,6 @@ body {
     label {
         margin-bottom: 6px;
     }
-
-    .info-bottom {
-        display: flex;
-    }
     
     .file-drop {
         width: 300px;

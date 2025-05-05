@@ -31,5 +31,7 @@ Este é um projeto acadêmico desenvolvido com foco na prática de HTML, CSS e J
 ![Captura de tela 2025-05-02 204601](https://github.com/user-attachments/assets/90419650-f447-4906-ad09-3015e9a11e4b)
 ![Captura de tela 2025-05-03 110014](https://github.com/user-attachments/assets/e8847a6f-5900-4f9b-bcbd-bc94cb240d35)
 ![image](https://github.com/user-attachments/assets/eee5faaf-8f2d-4f8f-8498-a55f21c475f0)
+![image](https://github.com/user-attachments/assets/8adcd7dc-97fa-4322-bd2a-b3f8da7d2755)
+
 
 #### Login: Administrador

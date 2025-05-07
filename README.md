@@ -25,6 +25,7 @@ Este é um projeto acadêmico desenvolvido com foco na prática de HTML, CSS e J
 #### Login: Cliente
 ![Captura de tela 2025-05-02 205356](https://github.com/user-attachments/assets/e89cd320-4fcb-4292-be87-5ff09695ef54)
 ![Captura de tela 2025-05-02 205242](https://github.com/user-attachments/assets/32f0037a-8646-4e5b-af33-373c84c00228)
+![image](https://github.com/user-attachments/assets/bb4851a8-f9e7-4ef0-a4e5-977a3b932375)
 ![image](https://github.com/user-attachments/assets/4c7ba579-c679-4131-a077-b12bab626656)
 
 #### Login: Técnico

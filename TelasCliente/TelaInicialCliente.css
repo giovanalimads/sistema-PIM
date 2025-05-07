@@ -33,7 +33,6 @@ margin-top: 0px;
   display: flex;
 }
 
-
 .sidebar button {
   display: block;
   width: 100%;
@@ -41,8 +40,14 @@ margin-top: 0px;
   margin-bottom: 10px;
   background-color: #DFDFDF;
   border: none;
+  border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar button:hover {
+  background-color: #bbb;
 }
 
 .content {

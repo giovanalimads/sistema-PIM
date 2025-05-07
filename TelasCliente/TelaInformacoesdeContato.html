@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="TelaInformacoesdeContato.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Informações de Contato</title>
+</head>
+<body>
+
+<div class="container">
+  <div class="info-top">
+    <h2>Informações de Contato</h2>
+    <div class="tema-toggle">
+      <button onclick="setTema('claro')">Tema Claro</button>
+      <button onclick="setTema('escuro')">Tema Escuro</button>
+    </div>
+  </div>
+
+  <div class="user-profile">
+    <i class="fa-regular fa-user"></i>
+  </div>
+
+  <div class="user-info">
+    <div class="info">
+        <label>Nome:</label>
+        <p>Giovana Lima Oliveira</p>
+    </div>
+
+    <div class="info">
+        <label>CPF:</label>
+        <p>Esqueci</p>
+    </div>
+
+    <div class="info">
+        <label>Telefone:</label>
+        <p>Não Tenho</p>
+    </div>
+
+    <div class="info">
+        <label>Endereço:</label>
+        <p>De Baixo da Ponte</p>
+    </div>
+
+    <div class="info">
+        <label>E-mail:</label>
+        <p>gilmaolliveira@gmail.com</p>
+    </div>
+
+    <div class="info">
+        <label>Senha:</label>
+        <div class="user-password">
+            <p>**********</p>
+            <i class="fa-solid fa-lock"></i>
+        </div>
+    </div>
+  </div>
+
+  <div class="button">
+    <button class="btn-secundario" onclick="window.location.href='TeladeLogin.html'">VOLTAR</button>
+    <button class="btn-principal">ATUALIZAR INFORMAÇÕES</button>
+    </div>
+</div>
+
+<script>
+    function setTema(tema) {
+     if (tema === 'escuro') {
+       document.body.classList.add('dark');
+     } else {
+       document.body.classList.remove('dark');
+     }
+   }
+ </script>
+</body>
+</html>

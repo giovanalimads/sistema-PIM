@@ -1,46 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="TeladeLogin.css">
-    <title>Tela de Login - Sistema PIM</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="TeladeLogin.css">
+  <title>Tela de Login 2 - Sistema PIM</title>
 </head>
 <body>
-    <div class="container" id="login-screen">
-        <div class="info-top">
-          <h2>Login</h2>
-          <div class="tema-toggle">
-            <button onclick="setTema('claro')">Tema Claro</button>
-            <button onclick="setTema('escuro')">Tema Escuro</button>
-          </div>
-        </div>
+  <div class="container" id="login-screen">
+    <h2>Login</h2>
 
-        <div class="form-group">
-          <label for="login-email">E-mail<span>*</span></label>
-          <input type="email" id="login-email" required>
-        </div>
-        <div class="form-group">
-          <label for="login-senha">Senha<span>*</span></label>
-          <input type="password" id="login-senha" required>
-        </div>
-        <div>
-          <a class="esqueceu-senha" href="#">Esqueceu sua senha?</a>
-        </div>
-        <div class="button">
-          <button class="btn-secundario" onclick="window.location.href='TeladeCadastro.html'">CADASTRAR-SE</button>
-          <button class="btn-principal">LOGAR</button>
-        </div>
+    <div class="line"></div>
+
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="usuario">Usuário<span>*</span></label>
+        <input type="text" id="usuario" name="usuario">
+        <small class="erro" id="erroUsuario"></small>
       </div>
 
-      <script>
-        function setTema(tema) {
-         if (tema === 'escuro') {
-           document.body.classList.add('dark');
-         } else {
-           document.body.classList.remove('dark');
-         }
-       }
-     </script>
+      <div class="form-group">
+        <label for="senha">Senha<span>*</span></label>
+        <input type="password" id="senha" name="senha">
+        <small class="erro" id="erroSenha"></small>
+        <a class="esqueceu-senha" href="#">Esqueceu sua senha?</a>
+      </div>
+
+      <div class="line"></div>
+
+      <div class="button">
+        <button type="submit" class="btn-principal">ENTRAR</button>
+      </div>
+    </form>
+
+    <div class="info-botton">
+      <p class="fir">Sem conta?<a href="#">Registre-se aqui</a></p>
+      <p class="sec">Sem conta?<a href="#">Registre-se aqui</a></p>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const ADMIN_USER = 'kseokcherry';
+        const ADMIN_SENHA = 'mingyu';
+
+      const form = document.getElementById('loginForm');
+      const usuario = document.getElementById("usuario");
+      const senha = document.getElementById("senha");
+      const erroUsuario = document.getElementById("erroUsuario");
+      const erroSenha = document.getElementById("erroSenha");
+    const erroGeral = document.getElementById('erroGeral');
+
+
+      let valido = true;
+
+      erroUsuario.textContent = "";
+      erroSenha.textContent = "";
+
+      if (usuario.value.trim() === "") {
+        erroUsuario.textContent = "Digite o usuário.";
+        valido = false;
+      }
+
+      if (senha.value.trim() === "") {
+        erroSenha.textContent = "Digite uma senha.";
+        valido = false;
+      }
+
+      if (valido) {
+        alert("Login realizado com sucesso!");
+      }
+    });
+  </script>
 </body>
 </html>

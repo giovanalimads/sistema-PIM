@@ -19,43 +19,36 @@ body {
 
 .container h2 {
   text-align: center;
-  margin-bottom: 20px;
-  margin-top: 0px;
+}
+
+.line {
+    border: solid 1px #e2e2e2;
+    margin: 20px, 0, 20px, 0;
 }
 
 span {
   color: red;
 }
 
-.info-top {
-  display: flex;
-  justify-content: space-between;
-}
-
 .form-group {
   margin-top: 20px;
-  text-align: center;
+  margin-bottom: 20px;
 }
 
 .form-group label {
   font-weight: 600;
   display: flex;
-  margin-bottom: 5px;
+  margin-bottom: 3px;
 }
 
-a {
-  font-size: 12px;
-  color: black;
+.esqueceu-senha {
+  font-size: 10px;
 }
 
 .form-group input {
   width: 100%;
   padding: 8px;
   box-sizing: border-box;
-}
-
-.button {
-  text-align: right;
 }
 
 .button > button {
@@ -66,6 +59,7 @@ a {
   border-radius: 6px;
   cursor: pointer;
   transition: background 0.3s ease;
+  margin-top: 20px;
 }
 
 .button > button:hover {
@@ -76,44 +70,18 @@ a {
 .button > .btn-principal {
   background-color: #007bff;
   color: #fff;
+  width: 100%;
 }
 
-.button > .btn-secundario {
-  background-color: white;
-  color: #007bff;
+.info-botton {
+    font-size: 10px;
+    text-align: center;
 }
 
-/* TEMA ESCURO (FALTA FALZER)*/
-.tema-toggle {
-  display: flex;
-  margin-bottom: 10px;
-}
-
-.tema-toggle button{
-  margin-left: 5px;
-  padding: 8px 10px;
-  border: none;
-  cursor: pointer;
-}
-
-.dark {
-  background-color: #121212;
-  color: white;
-}
-
-.dark .container {
-  background-color: #373737;
-}
-
-.dark input[type="text"],
-.dark input[type="tel"],
-.dark input[type="email"],
-.dark input[type="password"] {
-background-color: #1e1e1e;
-color: #fff;
-border: 1px solid #555;
-}
-
-.dark .esqueceu-senha {
-  color: #fff;
+/*Mensagem de erro*/
+.erro {
+  color: red;
+  font-size: 0.9em;
+  display: block;
+  margin-top: 4px;
 }

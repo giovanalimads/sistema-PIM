@@ -1,41 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Login.css">
-    <title>Tela de Login 2- Sistema PIM</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="Login.css">
+  <title>Tela de Login 2 - Sistema PIM</title>
 </head>
 <body>
-    <div class="container" id="login-screen">
-        <h2>Login</h2>
+  <div class="container" id="login-screen">
+    <h2>Login</h2>
 
-        <div class="line"></div>
+    <div class="line"></div>
 
-        <div class="form-group">
-          <label for="login-email">Usuário<span>*</span></label>
-          <input type="email" id="login-email" required>
-        </div>
-        <div class="form-group">
-          <label for="login-senha">Senha<span>*</span></label>
-          <input type="password" id="login-senha" required>
-
-          <a class="esqueceu-senha" href="#">Esqueceu sua senha?</a>
-        </div>
-        
-
-        <div class="line"></div>
-
-        <div class="button">
-          <button class="btn-principal">ENTRAR</button>
-        </div>
-
-        <div class="info-botton">
-            <p class="fir">Sem conta?<a href="#">Registre-se aqui</a></p>
-            <p class="sec">Sem conta?<a href="#">Registre-se aqui</a></p>
-        </div>
+    <!-- troquei o div por form -->
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="usuario">Usuário<span>*</span></label>
+        <input type="text" id="usuario" name="usuario">
+        <small class="erro" id="erroUsuario"></small>
       </div>
 
-    
+      <div class="form-group">
+        <label for="senha">Senha<span>*</span></label>
+        <input type="password" id="senha" name="senha">
+        <small class="erro" id="erroSenha"></small>
+        <a class="esqueceu-senha" href="#">Esqueceu sua senha?</a>
+      </div>
+
+      <div class="line"></div>
+
+      <div class="button">
+        <button type="submit" class="btn-principal">ENTRAR</button>
+      </div>
+    </form>
+
+    <div class="info-botton">
+      <p class="fir">Sem conta?<a href="#">Registre-se aqui</a></p>
+      <p class="sec">Sem conta?<a href="#">Registre-se aqui</a></p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const usuario = document.getElementById("usuario");
+      const senha = document.getElementById("senha");
+      const erroUsuario = document.getElementById("erroUsuario");
+      const erroSenha = document.getElementById("erroSenha");
+
+      let valido = true;
+
+      erroUsuario.textContent = "";
+      erroSenha.textContent = "";
+
+      if (usuario.value.trim() === "") {
+        erroUsuario.textContent = "Digite o usuário.";
+        valido = false;
+      }
+
+      if (senha.value.trim() === "") {
+        erroSenha.textContent = "Digite uma senha.";
+        valido = false;
+      }
+
+      if (valido) {
+        alert("Login realizado com sucesso!");
+      }
+    });
+  </script>
 </body>
 </html>

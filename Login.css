@@ -72,3 +72,16 @@ span {
   color: #fff;
   width: 100%;
 }
+
+.info-botton {
+    font-size: 10px;
+    text-align: center;
+}
+
+/*Mensagem de erro*/
+.erro {
+  color: red;
+  font-size: 0.9em;
+  display: block;
+  margin-top: 4px;
+}

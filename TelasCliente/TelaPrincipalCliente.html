@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="TelaPrincipalCliente.css">
+    <title>Tele Principal - Cliente</title>
+</head>
+<body>
+    <div class="container-tela">
+        
+        <!-- Coluna lateral esquerda -->
+        <div class="conteudo-lateral">
+            <div class="perfil">
+                <div class="perfil-top">
+                    <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke-width="1.5" 
+                    stroke="currentColor" 
+                    class="size-6">
+                    <path 
+                    stroke-linecap="round" 
+                    stroke-linejoin="round" 
+                    d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                    </svg>
+                    <p id="nome-usuario">Giovana Lima Oliveira</p>
+                </div>
+                <p id="data-acesso"></p>
+                <p id="ip-acesso"></p>
+            </div>
+
+            <div class="menu">
+                <button id="btn-registrarChamado">Registrar Chamado</button>
+                <button id="btn-acompanharChamado">Acompanhar<br>Chamado</button>
+                <button id="btn-meusDados">Meus Dados</button>
+                <button id="btn-avaliacaoChamado">Avaliação de<br> Atendimento</button>
+            </div>
+        </div>
+
+        <div class="tele-central">
+            <!--retorna todas as quatro telas de acorddo com o botão que a pessoa clica-->
+        </div>
+    </div>
+
+    <script>
+        // retorna data e horário de acesso
+        document.addEventListener("DOMContentLoaded", () => {
+            const dataAcesso = document.getElementById("data-acesso");
+
+            const agora = new Date();
+            const dataFormatada = agora.toLocaleDateString("pt-BR", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "2-digit",
+            });
+
+            const horaFormatada = agora.toLocaleTimeString("pt-BR", {
+                hour: "2-digit",
+                minute: "2-digit",
+            });
+
+            // mostra na tela
+            dataAcesso.textContent = `Acesso em: ${dataFormatada} às ${horaFormatada}`;
+        });
+
+        // busca IP do usuário
+        fetch("https://api.ipify.org?format=json")
+        .then(reponse => response.json())
+        .then(data => {
+            const ipAcesso = document.getElementById("ip-acesso");
+            ipAcesso.textContent = `IP de acesso: ${data.ip}`;
+        })
+        .catch(() => {
+            const ipAcesso = document.getElementById("ip-acesso");
+            ipAcesso.textContent = "IP de acesso: não encontrado"
+        });
+    </script>
+
+</body>
+</html>

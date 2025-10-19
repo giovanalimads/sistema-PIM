@@ -1,0 +1,76 @@
+/* Tela geral */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: #f4f6f8;
+}
+
+.container-tela {
+  display: flex;
+  height: 100vh; /* ocupa a tela toda */
+}
+
+.perfil-top {
+    margin: 0 16px;
+    display: flex;
+    max-width: 350px;
+    gap: 10px;
+}
+/* Lateral esquerda */
+.conteudo-lateral {
+  width: 200px;
+  background-color: #1f2937; /* tom de cinza escuro */
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+/* Perfil do usuário */
+.perfil {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.perfil svg {
+  width: 70px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+}
+
+#nome-usuario {
+    
+}
+/* Menu lateral */
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.menu button {
+  background-color: transparent;
+  color: white;
+  border: 1px solid #374151;
+  padding: 0.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+  font-weight: 500;
+}
+
+.menu button:hover,
+.menu button.active {
+  background-color: #374151;
+}
+
+/* Área central */
+.tele-central {
+  flex: 1;
+  background-color: #ffffff;
+  padding: 2rem;
+  overflow-y: auto;
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="TeladeCadastro.css">
+    <title>Tela de Cadastro - Sitema PIM</title>
+</head>
+<body>
+    <div class="container" id="cadastro-screen">
+        <h2>Cadastrar</h2>
+
+        <hr>
+
+        <div class="form-row">
+
+            <!--Campo: Nome-->
+            <div class="form-group">
+                <label for="nome">Nome completo<span>*</span></label>
+                <input type="text" id="nome" required>
+                <small class="erro"></small>
+            </div>
+
+            <!--Campo: CPF e Telefone-->
+            <div class="form-group">
+                <div class="form-field">
+                    <label for="cpf">CPF<span>*</span></label>
+                    <input type="text" name="" id="cpf" required>
+                    <small class="erro"></small>
+                </div>
+                <div class="form-field">
+                    <label for="telefone">Telefone<span>*</span></label>
+                    <input type="tel" id="telefone" required>
+                    <small class="erro"></small>
+                </div>
+            </div>
+
+            <!--Campos: CEP e Endereço-->
+            <div class="form-group">
+                <div class="form-field">
+                    <label for="cep">CEP<span>*</span></label>
+                    <input type="number" id="cep" required>
+                    <small class="erro"></small>
+                </div>
+                <div class="form-field">
+                    <label for="endereco">Endereço<span>*</span></label>
+                    <input type="text" id="endereco" required>
+                    <small class="erro"></small>
+                </div>
+            </div>
+
+            <!--Campos: Bairro e Complemento-->
+            <div class="form-group">
+                <div class="form-field">
+                    <label for="bairro">Bairro<span>*</span></label>
+                    <input type="text" id="bairro" required>
+                    <small class="erro"></small>
+                </div>
+                <div class="form-field">
+                    <label for="complemento">Complemento</label>
+                    <input type="text" id="complemento">
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="button">
+            <button type="submit" class="btn-principal">AVANÇAR</button>
+        </div>
+        <div class="info-botton">
+            <p class="fir">Já possui conta? <a href="TeladeLogin.html">Faça seu login!</a></p>
+        </div>
+    </div>
+
+    <script>
+    const form = document.getElementById("form-cadastro");
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault(); // impede o envio padrão
+      let valido = true;
+
+      // Limpa mensagens antigas
+      document.querySelectorAll(".erro-msg").forEach((msg) => (msg.textContent = ""));
+      document.querySelectorAll("input").forEach((input) => input.classList.remove("erro"));
+
+      // Verifica campos obrigatórios
+      const campos = form.querySelectorAll("input[required]");
+      campos.forEach((campo) => {
+        if (!campo.value.trim()) {
+          const msgErro = campo.parentElement.querySelector(".erro-msg");
+          msgErro.textContent = "Este campo é obrigatório.";
+          campo.classList.add("erro");
+          valido = false;
+        }
+      });
+
+      if (valido) {
+        alert("Cadastro validado com sucesso!");
+        form.submit(); // Aqui você pode trocar por redirecionamento
+      }
+    });
+  </script>
+</body>
+</html>

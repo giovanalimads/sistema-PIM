@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="TeladeLogin.css">
-  <title>Tela de Login 2 - Sistema PIM</title>
+  <title>Tela de Login - Sistema PIM</title>
 </head>
 <body>
   <div class="container" id="login-screen">
     <h2>Login</h2>
 
-    <div class="line"></div>
+    <hr>
 
     <form id="loginForm">
       <div class="form-group">
@@ -26,7 +26,7 @@
         <a class="esqueceu-senha" href="#">Esqueceu sua senha?</a>
       </div>
 
-      <div class="line"></div>
+      <hr>
 
       <div class="button">
         <button type="submit" class="btn-principal">ENTRAR</button>
@@ -34,13 +34,21 @@
     </form>
 
     <div class="info-botton">
-      <p class="fir">Sem conta?<a href="#">Registre-se aqui</a></p>
-      <p class="sec">Sem conta?<a href="#">Registre-se aqui</a></p>
+      <p class="fir">Sem conta? <a href="TelaCadastro.html">Registre-se aqui</a></p>
+      <p class="sec">Para dúvidas <a href="#">Entre em contato aqui</a></p>
     </div>
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
+
+    /**
+     * todo - validações para letras, números e símbolos
+     * todo - simular com um usuário
+     * todo - colocar redirecionamento para  apróxima página
+     * todo - arrumar o "Digite um usuário" e o "Digite uma senha" que aparece 
+     * **/
+
+     document.addEventListener('DOMContentLoaded', () => {
         const ADMIN_USER = 'kseokcherry';
         const ADMIN_SENHA = 'mingyu';
 
@@ -49,7 +57,7 @@
       const senha = document.getElementById("senha");
       const erroUsuario = document.getElementById("erroUsuario");
       const erroSenha = document.getElementById("erroSenha");
-    const erroGeral = document.getElementById('erroGeral');
+      const erroGeral = document.getElementById('erroGeral');
 
 
       let valido = true;

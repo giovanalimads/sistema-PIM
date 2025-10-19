@@ -81,9 +81,10 @@ body {
 }
 
 /* Área central */
-.tele-central {
+.tela-central {
   flex: 1;
   background-color: #ffffff;
-  padding: 2rem;
+  margin: 3rem;
   overflow-y: auto;
+  border: solid #c2c2c2 3px;
 }

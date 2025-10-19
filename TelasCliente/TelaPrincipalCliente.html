@@ -34,14 +34,14 @@
             <div class="line"></div>
 
             <div class="menu">
-                <button id="btn-registrarChamado">Registrar Chamado</button>
-                <button id="btn-acompanharChamado">Acompanhar<br>Chamado</button>
-                <button id="btn-meusDados">Meus Dados</button>
-                <button id="btn-avaliacaoChamado">Avaliação de<br> Atendimento</button>
+                <button id="btn-registrarChamado" onclick="mostrarTela('registrarChamado')">Registrar Chamado</button>
+                <button id="btn-acompanharChamado" onclick="mostrarTela('acompanharChamado')">Acompanhar<br>Chamado</button>
+                <button id="btn-meusDados" onclick="mostrarTela('meusDados')">Meus Dados</button>
+                <button id="btn-avaliacaoChamado" onclick="mostrarTela('avaliacaoChamado')">Avaliação de<br> Atendimento</button>
             </div>
         </div>
 
-        <div class="tele-central">
+        <div class="tela-central" id="area">
             <!--retorna todas as quatro telas de acorddo com o botão que a pessoa clica-->
         </div>
     </div>
@@ -78,6 +78,25 @@
             const ipAcesso = document.getElementById("ip-acesso");
             ipAcesso.textContent = "IP de acesso: não encontrado"
         });
+
+        // troca as tela da área principal
+        function mostrarTela(tela) {
+            const area = document.getElementById('area');
+            let conteudo = '';
+
+            if (tela === 'registrarChamado') {
+                conteudo = `oi`;
+            } else if (tela === 'acompanharChamado') {
+                conteudo = `mingyu`;
+            } else if (tela === 'meusDados') {
+                conteudo = `gi`;
+            } else if (tela === 'avaliacaoChamado') {
+                conteudo = `kakakakka`;
+            }
+
+            area.innerHTML = conteudo;
+        }
+
     </script>
 
 </body>

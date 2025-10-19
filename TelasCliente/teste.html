@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Telas Alternáveis</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      height: 100vh;
+      margin: 0;
+    }
+
+    /* Menu lateral */
+    .menu {
+      width: 200px;
+      background-color: #222;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      gap: 10px;
+    }
+
+    .menu button {
+      background: #444;
+      border: none;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .menu button:hover {
+      background: #666;
+    }
+
+    /* Área principal */
+    .conteudo {
+      flex: 1;
+      background-color: #f5f5f5;
+      padding: 30px;
+    }
+
+    /* Simula a área vermelha da sua imagem */
+    .area-vermelha {
+      border: 2px solid red;
+      border-radius: 8px;
+      height: 100%;
+      padding: 20px;
+      background: white;
+    }
+  </style>
+</head>
+<body>
+  <!-- Menu lateral -->
+  <div class="menu">
+    <button onclick="mostrarTela('registrar')">Registrar Chamado</button>
+    <button onclick="mostrarTela('historico')">Histórico de Chamados</button>
+    <button onclick="mostrarTela('config')">Configurações</button>
+  </div>
+
+  <!-- Área principal -->
+  <div class="conteudo">
+    <div class="area-vermelha" id="area">
+      <h2>Bem-vindo!</h2>
+      <p>Escolha uma opção no menu ao lado.</p>
+    </div>
+  </div>
+
+  <script>
+    function mostrarTela(tela) {
+      const area = document.getElementById('area');
+      let conteudo = '';
+
+      if (tela === 'registrar') {
+        conteudo = `
+          <h2>Registrar Chamado</h2>
+          <form>
+            <label>CEP:</label><br>
+            <input type="text" placeholder="Digite o CEP"><br><br>
+            
+            <label>Endereço:</label><br>
+            <input type="text" placeholder="Digite o endereço"><br><br>
+            
+            <label>Bairro:</label><br>
+            <input type="text" placeholder="Digite o bairro"><br><br>
+            
+            <label>Complemento:</label><br>
+            <input type="text" placeholder="Digite o complemento"><br><br>
+            
+            <button type="submit">Enviar</button>
+          </form>
+        `;
+      } else if (tela === 'historico') {
+        conteudo = `
+          <h2>Histórico de Chamados</h2>
+          <p>Lista de chamados registrados aparecerá aqui...</p>
+        `;
+      } else if (tela === 'config') {
+        conteudo = `
+          <h2>Configurações</h2>
+          <p>Opções de configuração do sistema.</p>
+        `;
+      }
+
+      area.innerHTML = conteudo;
+    }
+  </script>
+</body>
+</html>

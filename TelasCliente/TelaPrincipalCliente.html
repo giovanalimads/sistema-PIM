@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="TelaPrincipalCliente.css">
-    <title>Tele Principal - Cliente</title>
+    <title>Tela Principal - Cliente</title>
 </head>
 <body>
     <div class="container-tela">
@@ -39,6 +39,21 @@
                 <button id="btn-meusDados" onclick="mostrarTela('meusDados')">Meus Dados</button>
                 <button id="btn-avaliacaoChamado" onclick="mostrarTela('avaliacaoChamado')">Avaliação de<br> Atendimento</button>
             </div>
+
+            <div class="log-out" id="btnLogout">
+                <svg   
+                xmlns="http://www.w3.org/2000/svg" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke-width="1.5" 
+                stroke="currentColor" 
+                class="size-6">
+                <path 
+                stroke-linecap="round" 
+                stroke-linejoin="round" 
+                d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
+                </svg>
+            </div>
         </div>
 
         <div class="tela-central" id="area">
@@ -47,6 +62,15 @@
     </div>
 
     <script>
+        /**
+         * todo - colocar função de deslogar da página
+         * todo - montar as 4 telas
+          todo - linkar 'nível de urgência' com 'categoria'
+         * todo - drag and drop de arquivos
+         * todo - integrar backend para registrar chamado
+         * todo - aviso antes de sair da tela como "tem certeza que deseja sair? seu chamado não será salvo"
+        **/
+
         // retorna data e horário de acesso
         document.addEventListener("DOMContentLoaded", () => {
             const dataAcesso = document.getElementById("data-acesso");
@@ -79,13 +103,86 @@
             ipAcesso.textContent = "IP de acesso: não encontrado"
         });
 
+        // desloga do sistema e volta para a tela de login
+
+
         // troca as tela da área principal
         function mostrarTela(tela) {
             const area = document.getElementById('area');
             let conteudo = '';
 
             if (tela === 'registrarChamado') {
-                conteudo = `oi`;
+                conteudo = `
+                <div class="container-registrar">
+                    <h2>Registrar Chamado</h2>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="titulo">Título do chamado<span>*</span></label>
+                            <input type="text" id="titulo" required />
+                        </div>
+                        
+                        <div class="form-group info-direita">
+                            <div class="info">
+                            <label >Protocolo:</label>
+                            <p id="protocolo">XXXXXXXXXX</p>
+                            </div>
+                            <div class="info">
+                            <label>Data:</label>
+                            <p id="data">XX/XX</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="categoria">Categoria<span>*</span></label>
+                            <select id="categoria">
+                            <option value="">Selecione</option>
+                            <option value="Sistemas e Maquininhas">Sistemas e Maquininhas</option>
+                            <option value="Equipamentos">Equipamentos</option>
+                            <option value="Redes e Internet">Redes e Internet</option>
+                            <option value="Equipamentos">Impressoras e Periféricos</option>
+                            <option value="Instalação/Atualização">Instalação/Atualização</option>
+                            <option value="Servidores">Servidores</option>
+                            <option value="Outro">Outro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="urgencia" id="nivelUrgencia">Nível de urgência</label>
+                            <input type="text" id="urgencia" readonly />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descricao">Descrição<span>*</span></label>
+                        <textarea id="descricao" required></textarea>
+                    </div>
+
+                    <div class="info-bottom">
+                        <div class="form-group">
+                            <label>Anexar arquivos <small>(opcional)</small></label>
+                            <div class="file-drop" id="fileDrop">
+                                <svg 
+                                xmlns="http://www.w3.org/2000/svg" 
+                                fill="none" 
+                                viewBox="0 0 24 24" 
+                                stroke-width="1.5"
+                                stroke="currentColor" 
+                                class="size-6">
+                                <path 
+                                stroke-linecap="round" 
+                                stroke-linejoin="round" 
+                                d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
+                                </svg>
+                            </div>
+                        </div>
+                
+                        <div class="button">
+                            <button class="btn-principal" onclick="enviarChamado()">ENVIAR CHAMADO</button>
+                        </div>
+                    </div>
+                `;
             } else if (tela === 'acompanharChamado') {
                 conteudo = `mingyu`;
             } else if (tela === 'meusDados') {
@@ -95,8 +192,57 @@
             }
 
             area.innerHTML = conteudo;
+
+            if (tela === "registrarChamado") {
+                const categoria = document.getElementById("categoria");
+                const urgencia = document.getElementById("urgencia");
+
+                categoria.addEventListener("change", () => {
+                    const valor = categoria.value;
+
+                    let nivel = "";
+
+                    switch (valor) {
+                        case "Equipamentos":
+                        case "Servidores":
+                            nivel = "Alta";
+                            break;
+                        case "Redes e Internet":
+                        case "Sistemas e Maquininhas":
+                            nivel = "Média";
+                            break;
+                        case "Impressoras e Periféricos":
+                        case "Instalação/Atualização":
+                            nivel = "Baixa";
+                            break;
+                        default:
+                            nivel = "";
+                    }
+
+                    urgencia.value = nivel;
+                });
+            }
         }
 
+        /**
+         * ! serve apenas para travar a tela que estou mexendo!!
+        **/ 
+        document.addEventListener("DOMContentLoaded", () => {
+            mostrarTela("registrarChamado");
+        });
+
+
+         // Gera um protocolo aleatório e define a data em 'Registrar Chamado'
+        document.addEventListener('DOMContentLoaded', () => {
+            const protocolo = 'PRT' + Math.floor(Math.random() * 1);
+            const hoje = new Date();
+            const data = hoje.toLocaleDateString('pt-BR');
+
+            document.getElementById('protocolo').textContent = protocolo;
+            document.getElementById('data').textContent = data;
+        });
+
+        
     </script>
 
 </body>

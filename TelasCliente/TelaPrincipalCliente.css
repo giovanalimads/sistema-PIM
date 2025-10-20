@@ -11,10 +11,10 @@ body {
 }
 
 .perfil-top {
-    margin: 0 16px;
-    display: flex;
-    max-width: 350px;
-    gap: 10px;
+  margin: 0 16px;
+  display: flex;
+  max-width: 350px;
+  gap: 10px;
 }
 
 /* Lateral esquerda */
@@ -43,7 +43,7 @@ body {
 }
 
 #nome-usuario {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 #data-acesso,
@@ -80,11 +80,136 @@ body {
   background-color: #616161;
 }
 
+.log-out svg {
+  width: 30px;
+  margin-top: 60px;
+  margin-left: 140px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.log-out svg:hover {
+  transform: scale(1.1);
+  color: #000000; 
+}
+
 /* Área central */
 .tela-central {
   flex: 1;
   background-color: #ffffff;
-  margin: 3rem;
+  border-radius: 8px;
+  margin: 2.5rem;
+  padding: 1rem 2rem;
   overflow-y: auto;
   border: solid #c2c2c2 3px;
+}
+
+/* === TELA REGISTRAR CHAMADO ===*/
+#area .container-registrar h2{
+  text-align: center;
+}
+
+#area .container-registrar .form-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 20px;
+}
+
+#area .container-registrar .form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+#area .container-registrar span {
+  color: red;
+}
+
+#area .container-registrar label {
+  font-weight: bold;
+}
+
+#area .container-registrar input[type="text"],
+#area .container-registrar select,
+#area .container-registrar textarea {
+  border: 1px solid #ccc;
+  border-radius: 8px;  
+  background-color: #e6e6e6;
+  height: 2rem;
+}
+
+#area .container-registrar textarea {
+  height: 70px;
+  resize: none;
+  margin-bottom: 20px;
+}
+
+#area .container-registrar .info-direita {
+  align-items: end;
+  margin-bottom: -20px;
+}
+
+#area .container-registrar .info {
+  display: flex;
+  gap: 10px;
+}
+
+#area .container-registrar .info > p {
+  margin: 0px;
+}
+
+#area .container-registrar .info-bottom {
+  display: flex;
+}
+
+#area .container-registrar .info-bottom svg {
+  width: 30px;
+  cursor: pointer;
+}
+
+#area .container-registrar .file-drop {
+  width: 200px;
+  border: 2px dashed #ccc;
+  background-color: #e6e6e6;
+  padding: 20px;
+  text-align: center;
+}
+
+#area .container-registrar .file-drop.dragover {
+  border-color: #999;
+  background-color: #f0f0f0;
+}
+
+#area .container-registrar .file-info {
+  font-size: 12px;
+  color: #555;
+  margin-top: 5px;
+}
+
+#area .container-registrar .button {
+  justify-content: center;
+  align-items: center;
+  margin-top: 70px;
+}
+
+#area .container-registrar .button > button {
+  text-align: right;
+  padding: 12px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+  
+#area .container-registrar .button > button:hover {
+  background-color: #004fa2;
+  color: white;
+}
+
+#area .container-registrar .button > .btn-principal {
+  background-color: #007bff;
+  color: #fff;
 }

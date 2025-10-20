@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="TelaPrincipalCliente.css">
+    <link rel="stylesheet" href="../css/TelaPrincipalCliente.css">
     <title>Tela Principal - Cliente</title>
 </head>
 <body>
@@ -145,7 +145,6 @@
                             <option value="Equipamentos">Impressoras e Periféricos</option>
                             <option value="Instalação/Atualização">Instalação/Atualização</option>
                             <option value="Servidores">Servidores</option>
-                            <option value="Outro">Outro</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -193,35 +192,7 @@
 
             area.innerHTML = conteudo;
 
-            if (tela === "registrarChamado") {
-                const categoria = document.getElementById("categoria");
-                const urgencia = document.getElementById("urgencia");
-
-                categoria.addEventListener("change", () => {
-                    const valor = categoria.value;
-
-                    let nivel = "";
-
-                    switch (valor) {
-                        case "Equipamentos":
-                        case "Servidores":
-                            nivel = "Alta";
-                            break;
-                        case "Redes e Internet":
-                        case "Sistemas e Maquininhas":
-                            nivel = "Média";
-                            break;
-                        case "Impressoras e Periféricos":
-                        case "Instalação/Atualização":
-                            nivel = "Baixa";
-                            break;
-                        default:
-                            nivel = "";
-                    }
-
-                    urgencia.value = nivel;
-                });
-            }
+            
         }
 
         /**
@@ -231,19 +202,7 @@
             mostrarTela("registrarChamado");
         });
 
-
-         // Gera um protocolo aleatório e define a data em 'Registrar Chamado'
-        document.addEventListener('DOMContentLoaded', () => {
-            const protocolo = 'PRT' + Math.floor(Math.random() * 1);
-            const hoje = new Date();
-            const data = hoje.toLocaleDateString('pt-BR');
-
-            document.getElementById('protocolo').textContent = protocolo;
-            document.getElementById('data').textContent = data;
-        });
-
-        
     </script>
-
+    <script src="../js/registrarChamado.js"></script>
 </body>
 </html>

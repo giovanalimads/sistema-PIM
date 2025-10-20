@@ -2,7 +2,7 @@
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
-  background-color: #f4f6f8;
+  background-color: #272A2D;
 }
 
 .container-tela {
@@ -20,7 +20,7 @@ body {
 /* Lateral esquerda */
 .conteudo-lateral {
   width: 170px;
-  background-color: #4E5054; /* tom de cinza escuro */
+  background-color: #4E5054; 
   color: white;
   display: flex;
   flex-direction: column;
@@ -90,25 +90,29 @@ body {
 
 .log-out svg:hover {
   transform: scale(1.1);
-  color: #000000; 
+  color: #6799CE; 
 }
 
 /* Área central */
 .tela-central {
   flex: 1;
-  background-color: #ffffff;
+  background-color: #4E5054;
   border-radius: 8px;
   margin: 2.5rem;
   padding: 1rem 2rem;
   overflow-y: auto;
-  border: solid #c2c2c2 3px;
 }
 
 /* === TELA REGISTRAR CHAMADO ===*/
 #area .container-registrar h2{
+  color: #fff;
   text-align: center;
 }
 
+#area .container-registrar #protocolo,
+#area .container-registrar #data {
+  color: #fff;
+}
 #area .container-registrar .form-row {
   display: flex;
   justify-content: space-between;
@@ -127,15 +131,17 @@ body {
 }
 
 #area .container-registrar label {
-  font-weight: bold;
+  color: #fff;
+  font-weight: 600;
 }
 
 #area .container-registrar input[type="text"],
 #area .container-registrar select,
 #area .container-registrar textarea {
-  border: 1px solid #ccc;
+  border: none;
   border-radius: 8px;  
-  background-color: #e6e6e6;
+  color: #fff;
+  background-color: #303133;
   height: 2rem;
 }
 
@@ -164,14 +170,21 @@ body {
 }
 
 #area .container-registrar .info-bottom svg {
+  color: #fff;
   width: 30px;
   cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+#area .container-registrar .info-bottom svg:hover {
+  color: #6799CE;
+  transform: scale(1.1);
 }
 
 #area .container-registrar .file-drop {
   width: 200px;
-  border: 2px dashed #ccc;
-  background-color: #e6e6e6;
+  background-color: #303133;
+  border-radius: 10px;
   padding: 20px;
   text-align: center;
 }
@@ -203,13 +216,13 @@ body {
   cursor: pointer;
   transition: background 0.3s ease;
 }
-  
-#area .container-registrar .button > button:hover {
-  background-color: #004fa2;
-  color: white;
+ 
+#area .container-registrar .button > .btn-principal {
+  background-color: #6799CE;
+  color: #fff;
 }
 
-#area .container-registrar .button > .btn-principal {
-  background-color: #007bff;
-  color: #fff;
+#area .container-registrar .button > .btn-principal:hover {
+  background-color: #4d78a5;
+  color: white;
 }

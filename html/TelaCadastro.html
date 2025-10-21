@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="TeladeCadastro.css">
+    <link rel="stylesheet" href="../css/TeladeCadastro.css">
 
     <!--API - CONSULTA CEP-->
      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -119,5 +119,38 @@
       }
     });
   </script>
+
+<script src="../js/server.js"></script>
+
+  <script>
+document.querySelector(".btn-principal").addEventListener("click", async (e) => {
+  e.preventDefault();
+
+  const dados = {
+    nome: document.getElementById("nome").value,
+    cpf: document.getElementById("cpf").value,
+    telefone: document.getElementById("telefone").value,
+    cep: document.getElementById("cep").value,
+    endereco: document.getElementById("endereco").value,
+    bairro: document.getElementById("bairro").value,
+    complemento: document.getElementById("complemento").value
+  };
+
+  try {
+    const resposta = await fetch("http://localhost:3000/cadastro", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(dados)
+    });
+
+    const resultado = await resposta.json();
+    alert(resultado.message || "Erro ao cadastrar.");
+  } catch (erro) {
+    console.error(erro);
+    alert("Falha na conexão com o servidor.");
+  }
+});
+</script>
+
 </body>
 </html>

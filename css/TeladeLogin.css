@@ -73,11 +73,11 @@ span {
 }
 
 .info-botton {
-    font-size: 12px;
-    text-align: center;
+  font-size: 12px;
+  text-align: center;
 }
 
-/*Mensagem de erro*/
+/* Mensagem de erro */
 .erro {
   color: red;
   font-size: 0.9em;

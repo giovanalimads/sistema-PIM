@@ -16,26 +16,25 @@
 
         <hr>
 
-        <div class="form-row">
-
+        <form id="cadastroForm">
             <!--Campo: Nome-->
             <div class="form-group">
                 <label for="nome" class="input-nome">Nome completo<span>*</span></label>
-                <input class="input-nome" type="text" id="nome" required>
-                <small class="erro"></small>
+                <input class="input-nome" type="text" id="nome">
+                <small class="erro" id="erroNome"></small>
             </div>
 
             <!--Campo: CPF e Telefone-->
             <div class="form-group">
                 <div class="form-field">
                     <label for="cpf">CPF<span>*</span></label>
-                    <input type="text" name="" id="cpf" required>
-                    <small class="erro"></small>
+                    <input type="text" name="" id="cpf">
+                    <small class="erro" id="erroCpf"></small>
                 </div>
                 <div class="form-field">
                     <label for="telefone">Telefone<span>*</span></label>
-                    <input type="tel" id="telefone" required>
-                    <small class="erro"></small>
+                    <input type="tel" id="telefone">
+                    <small class="erro" id="erroTelefone"></small>
                 </div>
             </div>
 
@@ -43,13 +42,12 @@
             <div class="form-group">
                 <div class="form-field">
                     <label for="cep">CEP<span>*</span></label>
-                    <input type="text" id="cep" required>
-                    <small class="erro"></small>
+                    <input type="text" id="cep">
+                    <small class="erro" id="erroCep"></small>
                 </div>
                 <div class="form-field">
                     <label for="endereco">Endereço<span>*</span></label>
-                    <input type="text" id="endereco" required>
-                    <small class="erro"></small>
+                    <input type="text" id="endereco" readonly>
                 </div>
             </div>
 
@@ -57,63 +55,106 @@
             <div class="form-group">
                 <div class="form-field">
                     <label for="bairro">Bairro<span>*</span></label>
-                    <input type="text" id="bairro" required>
-                    <small class="erro"></small>
+                    <input type="text" id="bairro" readonly>
                 </div>
                 <div class="form-field">
                     <label for="complemento">Complemento</label>
                     <input type="text" id="complemento" placeholder="Apto, bloco, casa, etc.">
                 </div>
             </div>
-        </div>
 
-        <hr>
+            <div class="line"></div>
 
-        <div class="button">
-            <button type="submit" class="btn-principal">AVANÇAR</button>
-        </div>
+            <div class="button">
+                <button type="submit" class="btn-principal">AVANÇAR</button>
+            </div>
+        </form>
         <div class="info-botton">
-            <p class="fir">Já possui conta? <a href="TeladeLogin.html">Faça seu login!</a></p>
+          <p class="fir">Já possui conta? <a href="TeladeLogin.html">Faça seu login!</a></p>
         </div>
     </div>
 
     <!-- código fonte da api -->
-    <script src="api_cep.js"></script>
+    <script src="../js/api_cep.js"></script>
 
-    <!-- código para validações -->
     <script>
-    
-    const form = document.getElementById("form-cadastro");
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('cadastroForm');
+      const nome = document.getElementById("nome");
+      const cpf = document.getElementById("cpf");
+      const telefone = document.getElementById("telefone");
+      const cep = document.getElementById("cep");
 
-    form.addEventListener("submit", (event) => {
-      event.preventDefault(); // impede o envio padrão
-      let valido = true;
+      const erroNome = document.getElementById("erroNome");
+      const erroCpf = document.getElementById("erroCpf");
+      const erroTelefone = document.getElementById("erroTelefone");
+      const erroCep = document.getElementById("erroCep");
 
-      // Limpa mensagens antigas
-      document.querySelectorAll(".erro-msg").forEach((msg) => (msg.textContent = ""));
-      document.querySelectorAll("input").forEach((input) => input.classList.remove("erro"));
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
 
-      // Verifica campos obrigatórios
-      const campos = form.querySelectorAll("input[required]");
-      campos.forEach((campo) => {
-        if (!campo.value.trim()) {
-          const msgErro = campo.parentElement.querySelector(".erro-msg");
-          msgErro.textContent = "Este campo é obrigatório.";
-          campo.classList.add("erro");
+        // reseta mensagens de erro
+        erroNome.textContent = "";
+        erroCpf.textContent = "";
+        erroTelefone.textContent = "";
+        erroCep.textContent = "";
+
+        let valido = true;
+
+        // Validação do nome (apenas letras)
+        const regexNome = /^[A-Za-zÀ-ÿ\s]+$/;
+        if (nome.value.trim() === "") {
+          erroNome.textContent = "Digite um nome.";
+          valido = false;
+        } else if (!regexNome.test(nome.value)) {
+          erroNome.textContent = "Este campo deve conter apenas letras.";
           valido = false;
         }
-      });
 
-      if (valido) {
-        alert("Cadastro validado com sucesso!");
-        form.submit(); // Aqui você pode trocar por redirecionamento
-      }
+        // Remove caracteres que não são números
+        const cpfNumeros = cpf.value.replace(/\D/g, '');
+        const telefoneNumeros = telefone.value.replace(/\D/g, '');
+        const cepNumeros = cep.value.replace(/\D/g, '');
+
+        // Validação do CPF (11 números)
+        if (cpfNumeros === "") {
+          erroCpf.textContent = "Digite seu CPF.";
+          valido = false;
+        } else if (cpfNumeros.length !== 11) {
+          erroCpf.textContent = "CPF inválido. Deve conter 11 números.";
+          valido = false;
+        }
+
+        // Validação do telefone (11 dígitos)
+        if (telefoneNumeros === "") {
+          erroTelefone.textContent = "Digite seu telefone.";
+          valido = false;
+        } else if (telefoneNumeros.length < 10 || telefoneNumeros.length > 11) {
+          erroTelefone.textContent = "Telefone inválido. Deve conter 11 dígitos.";
+          valido = false;
+        }
+
+        // Validação do CEP (8 dígitos)
+        if (cepNumeros === "") {
+          erroCep.textContent = "Digite seu CEP.";
+          valido = false;
+        } else if (cepNumeros.length !== 8) {
+          erroCep.textContent = "CEP inválido. Deve conter 8 números.";
+          valido = false;
+        }
+
+        if (valido) {
+          // Aqui você pode enviar o formulário ou redirecionar
+          window.location.href = "TelaCadastro2.html"; 
+        }
+      });
     });
   </script>
 
-<script src="../js/server.js"></script>
+    <script src="../js/serve.js"></script>
 
-  <script>
+<!--
+    <script>
 document.querySelector(".btn-principal").addEventListener("click", async (e) => {
   e.preventDefault();
 
@@ -141,7 +182,7 @@ document.querySelector(".btn-principal").addEventListener("click", async (e) => 
     alert("Falha na conexão com o servidor.");
   }
 });
-</script>
-
+  </script>
+-->
 </body>
 </html>

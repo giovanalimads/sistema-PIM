@@ -25,7 +25,7 @@ span {
   text-align: center;
 }
 
-.form-row {
+#cadastroForm {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -60,21 +60,27 @@ input {
 }
 
 hr {
-    margin-top: 20px;
-    margin-bottom: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.line {
+  border: none;
+  border-top: 0.9px solid #9A9A9A;
+  margin: 8px 0;
 }
 
 a {
-    font-size: 12px;
+  font-size: 12px;
 }
   
 .info-botton {
-    font-size: 12px;
-    text-align: center;
+  font-size: 12px;
+  text-align: center;
 }
 
 .button {
-    text-align: center;
+  text-align: center;
 }
   
 .button > button {
@@ -96,4 +102,12 @@ a {
     background-color: #007bff;
     color: #fff;
     width: 100%;
+}
+
+/* Mensagem de erro */
+.erro {
+  color: red;
+  font-size: 0.9em;
+  display: block;
+  margin-top: 4px;
 }

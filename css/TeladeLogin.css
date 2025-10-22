@@ -62,17 +62,18 @@ span {
 }
 
 .button > button:hover {
-  background-color: #004fa2;
+  background-color: #4654C0;
   color: white;
 }
 
 .button > .btn-principal {
-  background-color: #007bff;
+  background-color: #6799CE;
   color: #fff;
   width: 100%;
 }
 
 .info-botton {
+  color: #fff;
   font-size: 12px;
   text-align: center;
 }

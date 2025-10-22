@@ -1,0 +1,124 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #272A2D;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  background-color: #6A6E72;
+  padding: 10px 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  max-width: 400px;
+  width: 100%;
+}
+
+span {
+  color: red;
+}
+
+.info-top {
+    color: #fff;
+    text-align: center;
+    display: flex;
+    gap: 120px;
+}
+
+svg {
+    color: #fff;
+    font-size: bold;
+    width: 28px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+svg:hover {
+    color: #6799CE;
+    transform: scale(1.1);
+}
+
+#cadastroForm {
+  display: flex;
+  flex-direction: column;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.form-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+label {
+  color: #fff;
+  display: block;
+  font-weight: 600;
+  margin-bottom: -15px;
+}
+
+input {
+    color: #fff;
+    background-color: #303133;
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+hr {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.line {
+  border: none;
+  border-top: 0.9px solid #9A9A9A;
+  margin: 8px 0;
+}
+
+a {
+  font-size: 12px;
+}
+  
+.info-botton {
+    color: #fff;
+  font-size: 12px;
+  text-align: center;
+}
+
+.button {
+  text-align: center;
+}
+  
+.button > button {
+  padding: 12px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.button > button:hover {
+  background-color: #4654C0;
+  color: white;
+}
+
+.button > .btn-principal {
+    background-color: #6799CE;
+    color: #fff;
+    width: 100%;
+}
+
+/* Mensagem de erro */
+.erro {
+  color: red;
+  font-size: 0.9em;
+  display: block;
+  margin-top: 4px;
+}

@@ -7,6 +7,56 @@
     <title>Segunda etapa do Cadastro</title>
 </head>
 <body>
-    
+    <div class="container" id="cadastro2-screen">
+        <div class="info-top">
+            <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            fill="none" 
+            viewBox="0 0 24 24" 
+            stroke-width="1.5" 
+            stroke="currentColor" 
+            class="size-6">
+                <path 
+                stroke-linecap="round" 
+                stroke-linejoin="round" 
+                d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+            </svg>
+            <h2>Cadastrar</h2>
+        </div>
+        
+        <hr>
+
+        <form id="cadastroForm">
+            <!--Campo: E-mail-->
+            <div class="form-group">
+                <label for="email">E-mail:<span>*</span></label>
+                <input type="text" id="email">
+                <small class="erro" id="erroEmail"></small>
+            </div>
+
+            <!--Campo: CPF e Telefone-->
+            <div class="form-group">
+                <label for="password">Senha:<span>*</span></label>
+                <input type="password" name="" id="senha">
+                <small class="erro" id="erroSenha"></small>
+            </div>
+
+            <!--Campos: CEP e Endereço-->
+            <div class="form-group">
+                <label for="repetirSenha">Repita sua senha:<span>*</span></label>
+                <input type="password" id="repetirSenha">
+                <small class="erro" id="erroRepetirSenha"></small>
+            </div>
+
+            <div class="line"></div>
+
+            <div class="button">
+                <button type="submit" class="btn-principal">CADASTRAR</button>
+            </div>
+        </form>
+        <div class="info-botton">
+          <p class="fir">Já possui conta? <a href="TeladeLogin.html">Faça seu login!</a></p>
+        </div>
+    </div>
 </body>
 </html>

@@ -84,11 +84,23 @@
       const cpf = document.getElementById("cpf");
       const telefone = document.getElementById("telefone");
       const cep = document.getElementById("cep");
+      const endereco = document.getElementById("endereco");
+      const bairro = document.getElementById("bairro");
+      const complemento = document.getElementById("complemento");
 
       const erroNome = document.getElementById("erroNome");
       const erroCpf = document.getElementById("erroCpf");
       const erroTelefone = document.getElementById("erroTelefone");
       const erroCep = document.getElementById("erroCep");
+
+      // --- Pré-preenche os campos caso haja valores salvos
+      nome.value = localStorage.getItem('nome') || '';
+      cpf.value = localStorage.getItem('cpf') || '';
+      telefone.value = localStorage.getItem('telefone') || '';
+      cep.value = localStorage.getItem('cep') || '';
+      endereco.value = localStorage.getItem('endereco') || '';
+      bairro.value = localStorage.getItem('bairro') || '';
+      complemento.value = localStorage.getItem('complemento') || '';
 
       form.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -145,6 +157,16 @@
 
         if (valido) {
           // Aqui você pode enviar o formulário ou redirecionar
+
+          // --- Salva os dados no localStorage
+          localStorage.setItem('nome', nome.value);
+          localStorage.setItem('cpf', cpf.value);
+          localStorage.setItem('telefone', telefone.value);
+          localStorage.setItem('cep', cep.value);
+          localStorage.setItem('endereco', endereco.value);
+          localStorage.setItem('bairro', bairro.value);
+          localStorage.setItem('complemento', complemento.value);
+
           window.location.href = "TelaCadastro2.html"; 
         }
       });

@@ -26,6 +26,7 @@ span {
     text-align: center;
     display: flex;
     gap: 120px;
+    margin-bottom: -15px;
 }
 
 svg {
@@ -59,6 +60,7 @@ label {
   display: block;
   font-weight: 600;
   margin-bottom: -15px;
+  margin-top: 15px;
 }
 
 input {
@@ -66,21 +68,17 @@ input {
     background-color: #303133;
     width: 100%;
     padding: 8px;
+    margin-bottom: -16px;
     box-sizing: border-box;
 }
 
 hr {
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-.line {
-  border: none;
-  border-top: 0.9px solid #9A9A9A;
-  margin: 8px 0;
+  margin-top: 25px;
+  margin-bottom: 10px;
 }
 
 a {
+  color: #6799CE;
   font-size: 12px;
 }
   
@@ -91,6 +89,7 @@ a {
 }
 
 .button {
+  margin-top: 30px;
   text-align: center;
 }
   

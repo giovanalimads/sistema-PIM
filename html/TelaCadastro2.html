@@ -10,6 +10,7 @@
     <div class="container" id="cadastro2-screen">
         <div class="info-top">
             <svg 
+            id="voltar"
             xmlns="http://www.w3.org/2000/svg" 
             fill="none" 
             viewBox="0 0 24 24" 
@@ -26,7 +27,7 @@
         
         <hr>
 
-        <form id="cadastroForm">
+        <form id="cadastroSegForm">
             <!--Campo: E-mail-->
             <div class="form-group">
                 <label for="email">E-mail:<span>*</span></label>
@@ -48,7 +49,7 @@
                 <small class="erro" id="erroRepetirSenha"></small>
             </div>
 
-            <div class="line"></div>
+            <hr>
 
             <div class="button">
                 <button type="submit" class="btn-principal">CADASTRAR</button>
@@ -58,5 +59,72 @@
           <p class="fir">Já possui conta? <a href="TeladeLogin.html">Faça seu login!</a></p>
         </div>
     </div>
+
+    <script>
+        // validações dos campos
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('cadastroSegForm');
+            const email = document.getElementById("email");
+            const senha = document.getElementById("senha");
+            const confirmacao = document.getElementById("repetirSenha");
+
+            // variáveis de erro
+            const erroEmail = document.getElementById("erroEmail");
+            const erroSenha = document.getElementById("erroSenha");
+            const erroRepetirSenha = document.getElementById("erroRepetirSenha");
+
+            const btnVoltar = document.getElementById("voltar");
+
+            // voltar para a página anterior mantendo os dados em localStorage
+            btnVoltar.addEventListener("click", () => {
+                window.location.href = "TelaCadastro.html";
+            })
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                erroEmail.textContent = "";
+                erroSenha.textContent = "";
+                erroRepetirSenha.textContent = "";
+
+                let valido = true;
+
+                const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                 if (email.value.trim() === "") {
+                    erroEmail.textContent = "Digite seu e-mail.";
+                    valido = false;
+                } else if (!regexEmail.test(email.value)) {
+                    erroEmail.textContent = "Digite um e-mail válido (ex: exemplo@email.com).";
+                    valido = false;
+                }
+
+                 // validação da senha
+                if (senha.value.trim() === "") {
+                    erroSenha.textContent = "Digite uma senha.";
+                    valido = false;
+                } else if (senha.value.length < 8) {
+                    erroSenha.textContent = "A senha deve ter pelo menos 8 caracteres.";
+                    valido = false;
+                }
+
+                 // validação da confirmação de senha
+                if (confirmacao.value.trim() === "") {
+                    erroRepetirSenha.textContent = "Repita sua senha.";
+                    valido = false;
+                } else if (senha.value !== confirmacao.value) {
+                    erroRepetirSenha.textContent = "As senhas não coincidem.";
+                    valido = false;
+                }
+
+                // se estiver tudo certo
+                if (valido) {
+                    alert("Cadastro concluído com sucesso! Vá para a tela de login.");
+                    // redirecionamento ou envio ao backend
+                    // window.location.href = "pagina_inicial.html";
+                }
+            })
+        })
+
+    </script>
 </body>
 </html>

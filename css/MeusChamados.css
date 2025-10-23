@@ -1,0 +1,73 @@
+h2{
+  color: #fff;
+  text-align: center;
+}
+
+.container > p {
+    color: #fff;
+    font-weight: 600;
+    font-size: 18px;
+    text-align: center;
+}
+
+.conteudo-chamados {
+    display: flex;
+    gap: 140px;
+    justify-content: center;
+    margin: 50px;
+}
+
+.icon-quantidade {
+    display: flex;
+}
+
+.chamadosUrgentes .icon-quantidade img {
+    width: 120px;
+}
+
+.chamadosFinalizados > img {
+    width: 172px;
+}
+
+.chamadosUrgentes h4 {
+    font-size: 18px;
+    color: #FF4747;
+    text-align: center;
+}
+
+.chamadosFinalizados h4 {
+    font-size: 18px;
+    color: #6799CE;
+    text-align: center;
+}
+
+button {
+    margin-top: 20px;
+    padding: 12px;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+ 
+#btnUrgentes {
+  background-color: #FF4747;
+  color: #fff;
+}
+
+#btnUrgentes:hover {
+    color: #fff;
+    background-color: #ac1f1f;
+}
+
+#btnFinalizados {
+    color: #fff;
+    background-color: #6799CE;
+}
+
+#btnFinalizados:hover {
+  background-color: #4654C0;
+  color: white;
+}

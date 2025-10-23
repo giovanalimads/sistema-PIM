@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/TelaPrincipalTec.css">
+    <link rel="stylesheet" href="../css/TelaPrincipal.css">
     <link rel="stylesheet" href="../css/MeusDadosTec.css">
     <link rel="stylesheet" href="../css/MeusChamados.css">
-    <link rel="stylesheet" href="../css/AvaliacaoAtendimento.css">
     <title>Tela Principal - Tecnico</title>
 </head>
 <body>
@@ -61,7 +60,7 @@
         </div>
 
         <div class="tela-central" id="area">
-            <!--retorna todas as quatro telas de acorddo com o botão que a pessoa clica-->
+            <!--retorna todas as duas telas de acordo com o botão que o técnico clica-->
         </div>
     </div>
 
@@ -81,24 +80,21 @@
 
                     <div class="conteudo-chamados">
                         <div class="chamadosUrgentes">
-                        <img src="../assets/icon-urgentes.png" alt="Chamados Urgentes">
-                        <p #quantidadeChamdosUrgentes></p>
-                        <div class="titulo-card">
+                            <div class="icon-quantidade">
+                                <img src="../assets/sino 2.svg" alt="Chamados Urgentes">
+                                <p #quantidadeChamdosUrgentes></p>
+                            </div>
                             <h4>URGENTES</h4>
-                        </div>
+                            <button id="btnUrgentes">VERIFICAR URGENTES</button>
                         </div>
                         <div class="chamadosFinalizados">
-                        <img src="../assets/icon-finalizados.png" alt="Chamados Finalizados">
-                        <p #quantidadeChamdosFinalizados></p>
-                        <div class="titulo-card">
+                            <div class="icon-quantidade">
+                                <img src="../assets/sino 1.svg" alt="Chamados Finalizados">
+                                <p #quantidadeChamdosFinalizados></p>
+                            </div>
                             <h4>FINALIZADOS</h4>
+                            <button id="btnFinalizados">VER FINALIZADOS</button>
                         </div>
-                        </div>
-
-                        <div class="buttons">
-                        <button id="btnUrgentes">VERIFICAR URGENTES</button>
-                        <button id="btnFinalizados">VER FINALIZADOS</button>
-
                         </div>
                     </div>
                 </div>

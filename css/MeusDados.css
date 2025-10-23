@@ -7,13 +7,43 @@ h2{
   color: #fff;
   text-align: center;
 }   
-    
-.user-profile svg {
-    width:80px;
+
+.user-profile {
+    position: relative;
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+}
+
+.user-profile .profile-icon {
+    width: 100%;
+    height: 100%;
     color: #fff;
     background-color: #6A6E72;
     padding: 10px;
-    border-radius: 100%;
+    border-radius: 50%;
+}
+
+.edit-photo-btn {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    color: #fff;
+    background-color: #6799CE;
+    border-radius: 50%;
+    padding: 40px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.edit-photo-btn:hover {
+    background-color: #4654C0;
+}
+
+.edit-photo-icon {
+    width: 16px;
+    height: 16px;
+    color: white;
 }
 
 .user-info {
@@ -42,8 +72,8 @@ h2{
     padding: 8px;
     border: none;
     border-radius: 6px;
+    color: #fff;
     background-color: #303133;
-    cursor: not-allowed;
 }
 
 .user-info input.editable {

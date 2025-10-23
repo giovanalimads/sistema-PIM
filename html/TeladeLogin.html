@@ -40,49 +40,57 @@
   </div>
 
   <script>
-     document.addEventListener('DOMContentLoaded', () => {
-      //usuário fictício
-        const ADMIN_USER = 'kseokcherry';
-        const ADMIN_SENHA = 'mingyu';
+document.addEventListener('DOMContentLoaded', () => {
+  // Usuários fictícios
+  const usuarios = [
+    { tipo: 'cliente', usuario: 'kseokcherry', senha: 'mingyugostoso', redirect: 'TelaPrincipalCliente.html' },
+    { tipo: 'admin', usuario: 'admin', senha: 'admin12345678', redirect: 'TelaPrincipalAdmin.html' },
+    { tipo: 'tecnico', usuario: 'tecnicolima', senha: 'tecnicolima', redirect: 'TelaPrincipalTecnico.html' }
+  ];
 
-      // validação dos campos
-      const form = document.getElementById('loginForm');
-      const usuario = document.getElementById("usuario");
-      const senha = document.getElementById("senha");
-      const erroUsuario = document.getElementById("erroUsuario");
-      const erroSenha = document.getElementById("erroSenha");
-      const erroGeral = document.getElementById("erroGeral");
+  // Seleção dos elementos
+  const form = document.getElementById('loginForm');
+  const usuario = document.getElementById("usuario");
+  const senha = document.getElementById("senha");
+  const erroUsuario = document.getElementById("erroUsuario");
+  const erroSenha = document.getElementById("erroSenha");
 
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
 
-        erroUsuario.textContent = "";
-        erroSenha.textContent = "";
+    erroUsuario.textContent = "";
+    erroSenha.textContent = "";
 
-        let valido = true;
+    let valido = true;
 
-        if (usuario.value.trim() === "") {
-          erroUsuario.textContent = "Digite o usuário.";
-          valido = false;
-        }
+    const usuarioInput = usuario.value.trim();
+    const senhaInput = senha.value.trim();
 
-        if (senha.value.trim() === "") {
-          erroSenha.textContent = "Digite uma senha.";
-          valido = false;
-        } 
+    if (usuarioInput === "") {
+      erroUsuario.textContent = "Digite o usuário.";
+      valido = false;
+    }
 
-        // Verifica usuário e senha
-        if (valido) {
-          if (usuario.value === ADMIN_USER && senha.value === ADMIN_SENHA) {
-            // Redireciona para a tela principal
-            window.location.href = "TelaPrincipalCliente.html";
-          } else {
-            erroUsuario.textContent = "Usuário ou senha incorretos.";
-            erroSenha.textContent = "Usuário ou senha incorretos.";
-          }
-        }
-      });
-    });
-  </script>
+    if (senhaInput === "") {
+      erroSenha.textContent = "Digite uma senha.";
+      valido = false;
+    }
+
+    if (!valido) return;
+
+    // Procura usuário no array
+    const usuarioEncontrado = usuarios.find(u => u.usuario === usuarioInput && u.senha === senhaInput);
+
+    if (usuarioEncontrado) {
+      // Redireciona para a tela correspondente
+      window.location.href = usuarioEncontrado.redirect;
+    } else {
+      erroUsuario.textContent = 'Usuário ou senha incorretos.';
+      erroSenha.textContent = 'Usuário ou senha incorretos.';
+    }
+  });
+});
+</script>
+
 </body>
 </html>

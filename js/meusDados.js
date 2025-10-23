@@ -36,4 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
     alert("Dados atualizados com sucesso!");
   });
 
+   // --- Preenche os campos com o que estiver salvo no localStorage ---
+  inputs.forEach(input => {
+    const valor = localStorage.getItem(input.id);
+    if (valor) input.value = valor;
+  });
+
 });

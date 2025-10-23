@@ -9,41 +9,32 @@
 <body>
 
   <div class="container">
-    <div class="info-top">
       <h2>Tela Inicial</h2>
-      <div class="tema-toggle">
-        <button onclick="setTema('claro')">Tema Claro</button>
-        <button onclick="setTema('escuro')">Tema Escuro</button>
-      </div>
-    </div>
+      <hr>
+      <p>Olá novamente, Técnico! Você possui:</p>
 
-    <div class="boas-vindas">
-      Bem-vindo, <strong>João!</strong> Hoje você tem 3 chamados aguardando resposta.
-    </div>
+      <div class="conteudo-chamados">
+        <div class="chamadosUrgentes">
+          <img src="../assets/icon-urgentes.png" alt="Chamados Urgentes">
+          <p #quantidadeChamdosUrgentes></p>
+          <div class="titulo-card">
+            <h4>URGENTES</h4>
+          </div>
+        </div>
+        <div class="chamadosFinalizados">
+          <img src="../assets/icon-finalizados.png" alt="Chamados Finalizados">
+          <p #quantidadeChamdosFinalizados></p>
+          <div class="titulo-card">
+            <h4>FINALIZADOS</h4>
+          </div>
+        </div>
 
-    <div class="resumo">
-      <div class="card-resumo">
-        <h2>3</h2>
-        <p>Chamados<br>Abertos</p>
-      </div>
-      <div class="card-resumo" style="background-color: #28a745;">
-        <h2>12</h2>
-        <p>Chamados Finalizados</p>
-      </div>
-    </div>
+        <div class="buttons">
+          <button id="btnUrgentes">VERIFICAR URGENTES</button>
+          <button id="btnFinalizados">VER FINALIZADOS</button>
 
-    <div class="acoes">
-      <div class="card-acao" onclick="window.location.href='visualizar_chamados.html'">
-        <div class="titulo-acao">Visualizar Chamados</div>
-        <div class="descricao-acao">Veja todos os chamados disponíveis.</div>
+        </div>
       </div>
-
-      <div class="card-acao" onclick="window.location.href='visualizar_chamados_abertos.html'">
-        <div class="titulo-acao">Chamados Abertos</div>
-        <div class="descricao-acao">Gerencie os chamados pendentes.</div>
-      </div>
-    </div>
-
   </div>
 
   <script>

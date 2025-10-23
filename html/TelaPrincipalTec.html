@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/TelaPrincipal.css">
-    <link rel="stylesheet" href="../css/RegistrarChamado.css">
-    <link rel="stylesheet" href="../css/MeusDados.css">
-    <link rel="stylesheet" href="../css/AcompanharChamado.css">
+    <link rel="stylesheet" href="../css/TelaPrincipalTec.css">
+    <link rel="stylesheet" href="../css/MeusDadosTec.css">
+    <link rel="stylesheet" href="../css/MeusChamados.css">
     <link rel="stylesheet" href="../css/AvaliacaoAtendimento.css">
     <title>Tela Principal - Tecnico</title>
 </head>
@@ -73,8 +72,36 @@
             const area = document.getElementById('area');
             let conteudo = '';
 
-            if (tela === 'registrarChamado') {
+            if (tela === 'meusChamados') {
                 conteudo = `
+                <div class="container">
+                    <h2>Tela Inicial</h2>
+                    <hr>
+                    <p>Olá novamente, Técnico! Você possui:</p>
+
+                    <div class="conteudo-chamados">
+                        <div class="chamadosUrgentes">
+                        <img src="../assets/icon-urgentes.png" alt="Chamados Urgentes">
+                        <p #quantidadeChamdosUrgentes></p>
+                        <div class="titulo-card">
+                            <h4>URGENTES</h4>
+                        </div>
+                        </div>
+                        <div class="chamadosFinalizados">
+                        <img src="../assets/icon-finalizados.png" alt="Chamados Finalizados">
+                        <p #quantidadeChamdosFinalizados></p>
+                        <div class="titulo-card">
+                            <h4>FINALIZADOS</h4>
+                        </div>
+                        </div>
+
+                        <div class="buttons">
+                        <button id="btnUrgentes">VERIFICAR URGENTES</button>
+                        <button id="btnFinalizados">VER FINALIZADOS</button>
+
+                        </div>
+                    </div>
+                </div>
                 `;
             } else if (tela === 'acompanharChamado') {
                 conteudo = `mingyu`;
@@ -92,7 +119,7 @@
          * ! serve apenas para travar a tela que estou mexendo!!
         **/ 
         document.addEventListener("DOMContentLoaded", () => {
-            mostrarTela("meusDados");
+            mostrarTela("meusChamados");
         });
 
     </script>

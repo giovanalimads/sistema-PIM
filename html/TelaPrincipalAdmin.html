@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/TelaPrincipalCliente.css">
-    <link rel="stylesheet" href="../css/RegistrarChamado.css">
+    <link rel="stylesheet" href="../css/TelaPrincipal.css">
+    <link rel="stylesheet" href="../css/Relatorios.css">
     <link rel="stylesheet" href="../css/MeusDados.css">
-    <link rel="stylesheet" href="../css/AcompanharChamado.css">
+    <link rel="stylesheet" href="../css/gerenciarFuncionarios.css">
     <link rel="stylesheet" href="../css/AvaliacaoAtendimento.css">
     <title>Tela Principal - Admin</title>
 </head>
@@ -75,11 +75,32 @@
             const area = document.getElementById('area');
             let conteudo = '';
 
-            if (tela === 'registrarChamado') {
+            if (tela === 'relatorios') {
                 conteudo = `
                 `;
-            } else if (tela === 'acompanharChamado') {
-                conteudo = `mingyu`;
+            } else if (tela === 'gerencFuncionarios') {
+                conteudo = `<div class="container-funcionarios">
+    <h2>Gerenciamento de Funcionários</h2>
+
+    <div class="barra-pesquisa">
+        <input type="text" id="pesquisa" placeholder="Pesquisar por nome ou e-mail...">
+    </div>
+
+    <table id="tabelaFuncionarios">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Categoria</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Funcionários serão inseridos via JS -->
+        </tbody>
+    </table>
+</div>
+`;
             } else if (tela === 'meusDados') {
                 conteudo = `
                 `;
@@ -94,9 +115,11 @@
          * ! serve apenas para travar a tela que estou mexendo!!
         **/ 
         document.addEventListener("DOMContentLoaded", () => {
-            mostrarTela("meusDados");
+            mostrarTela("gerencFuncionarios");
         });
 
     </script>
+
+    <script src="../js/gerenciarFuncionarios.js"></script>
 </body>
 </html>

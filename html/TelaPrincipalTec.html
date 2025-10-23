@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/TelaPrincipalCliente.css">
+    <link rel="stylesheet" href="../css/TelaPrincipal.css">
     <link rel="stylesheet" href="../css/RegistrarChamado.css">
     <link rel="stylesheet" href="../css/MeusDados.css">
     <link rel="stylesheet" href="../css/AcompanharChamado.css">
@@ -31,20 +31,18 @@
                     </svg>
                     <p id="nome-usuario">Giovana Lima Oliveira</p>
                 </div>
-                <p id="data-acesso"></p>
-                <p id="ip-acesso"></p>
+                <div class="acesso">
+                    <p id="data-acesso"></p>
+                    <p id="ip-acesso"></p>
+                </div>
             </div>
 
-            <hr style="width: 100%; border: 0; border-top: 1px solid #ccc; margin: 5px 0;">
+            <hr style="width: 100%; border: 0; border-top: 1px solid #ccc; margin: 15px 0;">
 
             <div class="menu">
-                <button id="btn-relatorios" onclick="mostrarTela('relatorios')">Relatórios</button>
+                <button id="btn-meusChamados" onclick="mostrarTela('meusChamados')">Meus<br>Chamados</button>
                 <hr style="width: 100%; border: 0; border-top: 1px solid #ccc; margin: 5px 0;">
-                <button id="btn-gerencFuncionarios" onclick="mostrarTela('gerencFuncionarios')">Gerenciar<br>Funcionários</button>
-                <hr style="width: 100%; border: 0; border-top: 1px solid #ccc; margin: 5px 0;">
-                <button id="btn-gerencChamados" onclick="mostrarTela('gerencChamados')">Gerenciar<br>Chamados</button>
-                <hr style="width: 100%; border: 0; border-top: 1px solid #ccc; margin: 5px 0;">
-                <button id="btn-meusDadosAdmin" onclick="mostrarTela('meusDadosAdmin')">Meus Dados</button>
+                <button id="btn-meusDadosTec" onclick="mostrarTela('meusDadosTec')">Meus Dados</button>
             </div>
 
             <div class="log-out" id="btnLogout">

@@ -1,39 +1,39 @@
 /* === TELA REGISTRAR CHAMADO ===*/
-h2{
+.container-registrar h2{
   color: #fff;
   text-align: center;
 }
 
-#protocolo,
-#data {
+.container-registrar  #protocolo,
+.container-registrar #data {
   color: #fff;
 }
 
-.form-row {
+.container-registrar  .form-row {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
   gap: 20px;
 }
 
-.form-group {
+.container-registrar .form-group {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-span {
+.container-registrar span {
   color: red;
 }
 
-label {
+.container-registrar label {
   color: #fff;
   font-weight: 600;
 }
 
-input[type="text"],
-select,
-textarea {
+.container-registrar input[type="text"],
+.container-registrar select,
+.container-registrar textarea {
   border: none;
   border-radius: 8px;  
   color: #fff;
@@ -41,43 +41,43 @@ textarea {
   height: 2rem;
 }
 
-textarea {
+.container-registrar textarea {
   height: 70px;
   resize: none;
   margin-bottom: 20px;
 }
 
-.info-direita {
+.container-registrar .info-direita {
   align-items: end;
   margin-bottom: -20px;
 }
 
-.info {
+.container-registrar .info {
   display: flex;
   gap: 10px;
 }
 
-.info > p {
+.container-registrar .info > p {
   margin: 0px;
 }
 
-.info-bottom {
+.container-registrar .info-bottom {
   display: flex;
 }
 
-.info-bottom svg {
+.container-registrar .info-bottom svg {
   color: #fff;
   width: 30px;
   cursor: pointer;
   transition: transform 0.2s ease;
 }
 
-.info-bottom svg:hover {
+.container-registrar .info-bottom svg:hover {
   color: #6799CE;
   transform: scale(1.1);
 }
 
-.file-drop {
+.container-registrar .file-drop {
   width: 200px;
   background-color: #303133;
   border-radius: 10px;
@@ -85,24 +85,24 @@ textarea {
   text-align: center;
 }
 
-.file-drop.dragover {
+.container-registrar .file-drop.dragover {
   border-color: #999;
   background-color: #f0f0f0;
 }
 
-.file-info {
+.container-registrar .file-info {
   font-size: 12px;
   color: #555;
   margin-top: 5px;
 }
 
-.button {
+.container-registrar .button {
   justify-content: center;
   align-items: center;
   margin-top: 70px;
 }
 
-.button > button {
+.container-registrar .button > button {
   text-align: right;
   padding: 12px;
   border: none;
@@ -113,12 +113,12 @@ textarea {
   transition: background 0.3s ease;
 }
  
-.button > .btn-principal {
+.container-registrar .button > .btn-principal {
   background-color: #6799CE;
   color: #fff;
 }
 
-.button > .btn-principal:hover {
+.container-registrar .button > .btn-principal:hover {
   background-color: #4654C0;
   color: white;
 }

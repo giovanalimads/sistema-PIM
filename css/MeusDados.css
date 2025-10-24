@@ -1,30 +1,37 @@
 /* === TELA MEUS DADOS ===*/
-.container-meusDados {
+.container-meusDados .container-meusDados {
     text-align: center;
 }
 
-h2{
+.container-meusDados h2 {
   color: #fff;
   text-align: center;
 }   
 
-.user-profile {
+.container-meusDados .user-profile {
+    background-color: #6A6E72;
+    border-radius: 50%;
     position: relative;
-    display: inline-block;
-    width: 80px;
-    height: 80px;
+    display: flex;
+    width: 100px;
+    height: 100px;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto ;
+    margin-bottom: 20px;
 }
 
-.user-profile .profile-icon {
+.container-meusDados .user-profile .profile-icon {
+    display: flex;
     width: 100%;
     height: 100%;
     color: #fff;
-    background-color: #6A6E72;
-    padding: 10px;
-    border-radius: 50%;
+    padding: 15px;
+    align-items: center;
+    justify-content: center;
 }
 
-.edit-photo-btn {
+.container-meusDados .edit-photo-btn {
     position: absolute;
     bottom: 5px;
     right: 5px;
@@ -36,17 +43,17 @@ h2{
     transition: 0.3s;
 }
 
-.edit-photo-btn:hover {
+.container-meusDados .edit-photo-btn:hover {
     background-color: #4654C0;
 }
 
-.edit-photo-icon {
+.container-meusDados .edit-photo-icon {
     width: 16px;
     height: 16px;
     color: white;
 }
 
-.user-info {
+.container-meusDados .user-info {
     display: grid;;
     grid-template-columns: 1fr 1fr;
     column-gap: 50px;
@@ -54,20 +61,20 @@ h2{
     margin: 40px;
 }
 
-.info {
+.container-meusDados .info {
     display: grid;
     grid-template-columns: 100px 1fr;
     align-items: center;
 }
 
-.info label {
+.container-meusDados .info label {
     color: #fff;
     font-size: 18px;
     font-weight: 600;
     text-align: left;
 }
 
-.info input {
+.container-meusDados .info input {
     width: 100%;
     padding: 8px;
     border: none;
@@ -76,18 +83,18 @@ h2{
     background-color: #303133;
 }
 
-.user-info input.editable {
+.container-meusDados .user-info input.editable {
     color: #fff;
     border: none;
     background-color: #303133;
 }
 
-.button {
+.container-meusDados .button {
     display: flex;
     justify-content: flex-end;
 }
 
-.button > button {
+.container-meusDados .button > button {
   text-align: right;
   padding: 12px;
   border: none;
@@ -98,14 +105,14 @@ h2{
   transition: background 0.3s ease;
 }
  
-.button > .btn-principal,
-.button > #salvar-btn {
+.container-meusDados .button > .btn-principal,
+.container-meusDados .button > #salvar-btn {
   background-color: #6799CE;
   color: #fff;
 }
 
-.button > .btn-principal:hover,
-.button > #salvar-btn:hover {
+.container-meusDados .button > .btn-principal:hover,
+.container-meusDados .button > #salvar-btn:hover {
   background-color: #4654C0;
   color: white;
 }

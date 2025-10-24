@@ -1,0 +1,46 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+    background-color: #e0e0e0;
+  }
+
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ccc;
+  }
+
+  th {
+    background-color: #d1d1d1;
+    font-weight: bold;
+  }
+
+  .button {
+    text-align: right;
+}
+  
+.button > button {
+    padding: 12px;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.button > button:hover {
+    background-color: #004fa2;
+    color: white;
+}
+
+.button > .btn-principal {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.button > .btn-secundario {
+    background-color: white;
+    color: #007bff;
+}

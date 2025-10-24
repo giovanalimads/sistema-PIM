@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/TelaPrincipal.css">
-    <link rel="stylesheet" href="../css/Relatorios.css">
-    <link rel="stylesheet" href="../css/MeusDados.css">
-    <link rel="stylesheet" href="../css/gerenciarFuncionarios.css">
-    <link rel="stylesheet" href="../css/AvaliacaoAtendimento.css">
+    <link rel="stylesheet" href="../css/relatorios.css">
+    <link rel="stylesheet" href="../css/meusDadosAdmin.css">
+    <link rel="stylesheet" href="../css/gerencFuncionarios.css">
     <title>Tela Principal - Admin</title>
 </head>
 <body>
@@ -31,11 +30,13 @@
                     </svg>
                     <p id="nome-usuario">Giovana Lima Oliveira</p>
                 </div>
-                <p id="data-acesso"></p>
-                <p id="ip-acesso"></p>
+                <div class="acessos">
+                    <p id="data-acesso"></p>
+                    <p id="ip-acesso"></p>
+                </div>
             </div>
 
-            <hr style="width: 100%; border: 0; border-top: 1px solid #ccc; margin: 5px 0;">
+            <hr style="width: 100%; border: 0; border-top: 1px solid #ccc; margin: 15px 0;">
 
             <div class="menu">
                 <button id="btn-relatorios" onclick="mostrarTela('relatorios')">Relatórios</button>
@@ -79,32 +80,150 @@
                 conteudo = `
                 `;
             } else if (tela === 'gerencFuncionarios') {
-                conteudo = `<div class="container-funcionarios">
-    <h2>Gerenciamento de Funcionários</h2>
-
-    <div class="barra-pesquisa">
-        <input type="text" id="pesquisa" placeholder="Pesquisar por nome ou e-mail...">
-    </div>
-
-    <table id="tabelaFuncionarios">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>E-mail</th>
-                <th>Categoria</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Funcionários serão inseridos via JS -->
-        </tbody>
-    </table>
-</div>
-`;
-            } else if (tela === 'meusDados') {
                 conteudo = `
+                <div class="container">
+                    <h2>Funcionários</h2>
+                    <hr>
+                    <div class="barra-pesquisa">
+                        <input type="text" id="pesquisa" placeholder="Digite o nome ou -mail do funcionário...">
+                    </div>
+                    <table>
+                    <thead>
+                        <tr>
+                        <th>Categoria</th>
+                        <th>Nome</th>
+                        <th>E-mail</th>
+                        <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabela-chamados">
+                        <!-- Os dados abaixo são apenas placeholders -->
+                        <tr>
+                        <td>Técnico</td>
+                        <td>Ricardo Dantas</td>
+                        <td>ricardinho@gmail.com</td>
+                        <td><button class="btn-acao" onclick="visualizarChamado('001')">Dados</button></td>
+                        </tr>
+                        <tr>
+                        <td>Técnico</td>
+                        <td>Jhonatan Afonso</td>
+                        <td>jhow@gmail.com</td>
+                        <td><button class="btn-acao" onclick="visualizarChamado('001')">Dados</button></td>
+                        </tr>
+                        <tr>
+                        <td>Técnico</td>
+                        <td>Guilherme Gomes</td>
+                        <td>guilhermegomes@gmail.com</td>
+                        <td><button class="btn-acao" onclick="visualizarChamado('002')">Dados</button></td>
+                        </tr>
+                        <tr>
+                        <td>Técnico</td>
+                        <td>João Vitor Soares</td>
+                        <td>joaosoares@gmail.com</td>
+                        <td><button class="btn-acao" onclick="visualizarChamado('003')">Dados</button></td>
+                        </tr>
+                        <tr>
+                        <td>Administrador</td>
+                        <td>Giovana Lima Oliveira</td>
+                        <td>gigi@gmail.com</td>
+                        <td><button class="btn-acao" onclick="visualizarChamado('003')">Dados</button></td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>
+            `;
+            } else if (tela === 'gerencChamados') {
+                conteudo = `
+                <div class="container">
+                    <h2>Chamados</h2>
+                    <hr>
+                    <table>
+                    <thead>
+                        <tr>
+                        <th>Protocolo</th>
+                        <th>Categoria</th>
+                        <th>Data</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabela-chamados">
+                        <!-- Os dados abaixo são apenas placeholders -->
+                        <tr>
+                        <td>001</td>
+                        <td>Equipamento</td>
+                        <td>01/04/2025</td>
+                        <td>Finalizado</td>
+                        <td><button class="btn-acao" onclick="visualizarChamado('001')">Visualizar</button></td>
+                        </tr>
+                        <tr>
+                        <td>002</td>
+                        <td>Redes e Internet</td>
+                        <td>28/03/2025</td>
+                        <td>Finalizado</td>
+                        <td><button class="btn-acao" onclick="visualizarChamado('002')">Visualizar</button></td>
+                        </tr>
+                        <tr>
+                        <td>003</td>
+                        <td>Servidores</td>
+                        <td>15/03/2025</td>
+                        <td>Em aberto</td>
+                        <td><button class="btn-acao" onclick="visualizarChamado('003')">Visualizar</button></td>
+                        </tr>
+                        <tr>
+                        <td>004</td>
+                        <td>Servidores</td>
+                        <td>15/09/2025</td>
+                        <td>Finalizado</td>
+                        <td><button class="btn-acao" onclick="visualizarChamado('003')">Visualizar</button></td>
+                        </tr>
+                        <tr>
+                        <td>005</td>
+                        <td>Servidores</td>
+                        <td>21/06/2025</td>
+                        <td>Em aberto</td>
+                        <td><button class="btn-acao" onclick="visualizarChamado('003')">Visualizar</button></td>
+                        </tr>
+                        <tr>
+                        <td>006</td>
+                        <td>Servidores</td>
+                        <td>11/07/2025</td>
+                        <td>Finalizado</td>
+                        <td><button class="btn-acao" onclick="visualizarChamado('003')">Visualizar</button></td>
+                        </tr>
+                        <tr>
+                        <td>007</td>
+                        <td>Servidores</td>
+                        <td>10/05/2025</td>
+                        <td>Finalizado</td>
+                        <td><button class="btn-acao" onclick="visualizarChamado('003')">Visualizar</button></td>
+                        </tr>
+                        <tr>
+                        <td>008</td>
+                        <td>Servidores</td>
+                        <td>26/07/2025</td>
+                        <td>Em aberto</td>
+                        <td><button class="btn-acao" onclick="visualizarChamado('003')">Visualizar</button></td>
+                        </tr>
+                        <tr>
+                        <td>009</td>
+                        <td>Servidores</td>
+                        <td>01/10/2025</td>
+                        <td>Em aberto</td>
+                        <td><button class="btn-acao" onclick="visualizarChamado('003')">Visualizar</button></td>
+                        </tr>
+                        <tr>
+                        <td>010</td>
+                        <td>Servidores</td>
+                        <td>15/10/2025</td>
+                        <td>Finalizado</td>
+                        <td><button class="btn-acao" onclick="visualizarChamado('003')">Visualizar</button></td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>
                 `;
-            } else if (tela === 'avaliacaoChamado') {
+            } else if (tela === 'meusDadosAdmin') {
                 conteudo = `kakakakka`;
             }
 
@@ -117,7 +236,6 @@
         document.addEventListener("DOMContentLoaded", () => {
             mostrarTela("gerencFuncionarios");
         });
-
     </script>
 
     <script src="../js/gerenciarFuncionarios.js"></script>

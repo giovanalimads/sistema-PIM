@@ -19,7 +19,7 @@ body {
 
 /* Lateral esquerda */
 .conteudo-lateral {
-  width: 170px;
+  width: 180px;
   background-color: #4E5054; 
   color: white;
   display: flex;
@@ -47,7 +47,7 @@ body {
   font-size: 16px;
 }
 
-.acesso {
+.acessos {
   margin-bottom: 10px;
 }
 

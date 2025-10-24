@@ -1,48 +1,29 @@
-// Lista fictícia de funcionários
-    const funcionarios = [
-        { nome: "Giovana Lima Oliveira", email: "giovana@empresa.com", categoria: "Administradora" },
-        { nome: "Carlos Mendes", email: "carlos@empresa.com", categoria: "Técnico" },
-        { nome: "Fernanda Souza", email: "fernanda@empresa.com", categoria: "Técnica" },
-        { nome: "Rafael Silva", email: "rafael@empresa.com", categoria: "Administrador" },
-        { nome: "Joana Torres", email: "joana@empresa.com", categoria: "Técnica" },
-    ];
+// Função que faz a busca na tabela
+    document.addEventListener('DOMContentLoaded', () => {
+        const inputPesquisa = document.getElementById('pesquisa');
+        const tabela = document.getElementById('tabela-chamados');
+        const linhas = tabela.getElementsByTagName('tr');
 
-    const tabela = document.querySelector("#tabelaFuncionarios tbody");
-    const pesquisa = document.getElementById("pesquisa");
+        inputPesquisa.addEventListener('keyup', function () {
+            const termo = inputPesquisa.value.toLowerCase();
 
-    // Função para renderizar tabela
-    function renderizarTabela(lista) {
-        tabela.innerHTML = "";
-        lista.forEach(f => {
-            const tr = document.createElement("tr");
-            tr.innerHTML = `
-                <td>${f.nome}</td>
-                <td>${f.email}</td>
-                <td>${f.categoria}</td>
-                <td><button class="btn-ver" onclick="verDados('${f.nome}', '${f.email}', '${f.categoria}')">Ver Dados</button></td>
-            `;
-            tabela.appendChild(tr);
+            for (let i = 0; i < linhas.length; i++) {
+                const colunas = linhas[i].getElementsByTagName('td');
+                if (colunas.length > 0) {
+                    const nome = colunas[1].textContent.toLowerCase();
+                    const email = colunas[2].textContent.toLowerCase();
+
+                    if (nome.includes(termo) || email.includes(termo)) {
+                        linhas[i].style.display = ''; // mostra a linha
+                    } else {
+                        linhas[i].style.display = 'none'; // oculta
+                    }
+                }
+            }
         });
-
-        if (lista.length === 0) {
-            tabela.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#999;">Nenhum funcionário encontrado.</td></tr>`;
-        }
-    }
-
-    // Função de pesquisa
-    pesquisa.addEventListener("input", () => {
-        const termo = pesquisa.value.toLowerCase();
-        const filtrados = funcionarios.filter(f =>
-            f.nome.toLowerCase().includes(termo) ||
-            f.email.toLowerCase().includes(termo)
-        );
-        renderizarTabela(filtrados);
     });
 
-    // Função de ação "Ver Dados"
-    function verDados(nome, email, categoria) {
-        alert(`👤 Nome: ${nome}\n📧 E-mail: ${email}\n🏷️ Categoria: ${categoria}`);
+    // Exemplo de função do botão "Dados"
+    function visualizarChamado(id) {
+        alert("Exibindo dados do funcionário com ID: " + id);
     }
-
-    // Renderiza ao carregar
-    renderizarTabela(funcionarios);

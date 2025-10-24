@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../css/TelaPrincipal.css">
     <link rel="stylesheet" href="../css/meusDadosTec.css">
     <link rel="stylesheet" href="../css/meusChamados.css">
+    <link rel="stylesheet" href="../css/chamadosUrgentes.css">
     <title>Tela Principal - Tecnico</title>
 </head>
 <body>
@@ -16,16 +17,16 @@
             <div class="perfil">
                 <div class="perfil-top">
                     <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    fill="none" 
-                    viewBox="0 0 24 24" 
-                    stroke-width="1.5" 
-                    stroke="currentColor" 
-                    class="size-6">
-                    <path 
-                    stroke-linecap="round" 
-                    stroke-linejoin="round" 
-                    d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                        xmlns="http://www.w3.org/2000/svg" 
+                        fill="none" 
+                        viewBox="0 0 24 24" 
+                        stroke-width="1.5" 
+                        stroke="currentColor" 
+                        class="size-6">
+                        <path 
+                            stroke-linecap="round" 
+                            stroke-linejoin="round" 
+                            d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                     </svg>
                     <p id="nome-usuario">Giovana Lima Oliveira</p>
                 </div>
@@ -45,79 +46,148 @@
 
             <div class="log-out" id="btnLogout">
                 <svg   
-                xmlns="http://www.w3.org/2000/svg" 
-                fill="none" 
-                viewBox="0 0 24 24" 
-                stroke-width="1.5" 
-                stroke="currentColor" 
-                class="size-6">
-                <path 
-                stroke-linecap="round" 
-                stroke-linejoin="round" 
-                d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
+                    xmlns="http://www.w3.org/2000/svg" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke-width="1.5" 
+                    stroke="currentColor" 
+                    class="size-6">
+                    <path 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round" 
+                        d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
                 </svg>
             </div>
         </div>
 
         <div class="tela-central" id="area">
-            <!--retorna todas as duas telas de acordo com o botão que o técnico clica-->
+            <!-- Aqui será trocado o conteúdo dinamicamente -->
         </div>
     </div>
 
     <script src="../js/dateTime_ip.js"></script>
     <script>
-        // troca as tela da área principal
         function mostrarTela(tela) {
             const area = document.getElementById('area');
             let conteudo = '';
 
+            // Tela principal - Meus Chamados
             if (tela === 'meusChamados') {
                 conteudo = `
-                <div class="container-meusChamados">
-                    <h2>Tela Inicial</h2>
-                    <hr>
-                    <p>Olá novamente, Técnico! Você possui:</p>
+                    <div class="container-meusChamados">
+                        <h2>Tela Inicial</h2>
+                        <hr>
+                        <p>Olá novamente, Técnico! Você possui:</p>
 
-                    <div class="conteudo-chamados">
-                        <div class="chamadosUrgentes">
-                            <div class="icon-quantidade">
-                                <img src="../assets/sino 2.svg" alt="Chamados Urgentes">
-                                <p #quantidadeChamdosUrgentes></p>
+                        <div class="conteudo-chamados">
+                            <div class="chamadosUrgentes">
+                                <div class="icon-quantidade">
+                                    <img src="../assets/sino 2.svg" alt="Chamados Urgentes">
+                                    <p id="quantidadeChamdosUrgentes"></p>
+                                </div>
+                                <h4>URGENTES</h4>
+                                <button id="btnUrgentes">VERIFICAR URGENTES</button>
                             </div>
-                            <h4>URGENTES</h4>
-                            <button id="btnUrgentes">VERIFICAR URGENTES</button>
-                        </div>
-                        <div class="chamadosFinalizados">
-                            <div class="icon-quantidade">
-                                <img src="../assets/sino 1.svg" alt="Chamados Finalizados">
-                                <p #quantidadeChamdosFinalizados></p>
+                            <div class="chamadosFinalizados">
+                                <div class="icon-quantidade">
+                                    <img src="../assets/sino 1.svg" alt="Chamados Finalizados">
+                                    <p id="quantidadeChamdosFinalizados"></p>
+                                </div>
+                                <h4>FINALIZADOS</h4>
+                                <button id="btnFinalizados">VER FINALIZADOS</button>
                             </div>
-                            <h4>FINALIZADOS</h4>
-                            <button id="btnFinalizados">VER FINALIZADOS</button>
-                        </div>
                         </div>
                     </div>
-                </div>
                 `;
-            } else if (tela === 'acompanharChamado') {
-                conteudo = `mingyu`;
-            } else if (tela === 'meusDados') {
+            } 
+            // Subtela - Chamados Urgentes
+            else if (tela === 'subtelaUrgentes') {
                 conteudo = `
+                    <div class="container-Urgentes">
+                        <h2>Chamados Urgentes</h2>
+                        <hr>
+                        <table>
+                        <thead>
+                            <tr>
+                            <th>Protocolo</th>
+                            <th>Categoria</th>
+                            <th>Data</th>
+                            <th>Nível</th>
+                            <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela-chamados">
+                            <!-- Os dados abaixo são apenas placeholders -->
+                            <tr>
+                            <td>001</td>
+                            <td>Equipamento</td>
+                            <td>01/04/2025</td>
+                            <td>Urgente</td>
+                            <td><button class="btn-acao" onclick="visualizarChamado('001')">Atender</button></td>
+                            </tr>
+                            <tr>
+                            <td>002</td>
+                            <td>Redes e Internet</td>
+                            <td>28/03/2025</td>
+                            <td>Urgente</td>
+                            <td><button class="btn-acao" onclick="visualizarChamado('002')">Atender</button></td>
+                            </tr>
+                            <tr>
+                            <td>003</td>
+                            <td>Servidores</td>
+                            <td>15/03/2025</td>
+                            <td>Urgente</td>
+                            <td><button class="btn-acao" onclick="visualizarChamado('003')">Atender</button></td>
+                            </tr>
+                            <tr>
+                            <td>006</td>
+                            <td>Servidores</td>
+                            <td>11/07/2025</td>
+                            <td>Urgente</td>
+                            <td><button class="btn-acao" onclick="visualizarChamado('003')">Atender</button></td>
+                            </tr>
+                            <td>009</td>
+                            <td>Servidores</td>
+                            <td>01/10/2025</td>
+                            <td>Urgente</td>
+                            <td><button class="btn-acao" onclick="visualizarChamado('003')">Atender</button></td>
+                            </tr>
+                        </tbody>
+                        </table>
+                    </div>
                 `;
-            } else if (tela === 'avaliacaoChamado') {
-                conteudo = `kakakakka`;
+            } 
+            // Tela Meus Dados
+            else if (tela === 'meusDadosTec') {
+                conteudo = `<div class="container-meusDados"><h2>Meus Dados</h2><p>Informações do técnico.</p></div>`;
             }
 
+            // Atualiza o conteúdo da área
             area.innerHTML = conteudo;
+
+            // Adiciona os eventos depois que o HTML foi injetado
+            if (tela === 'meusChamados') {
+                const btnUrgentes = document.getElementById('btnUrgentes');
+                if (btnUrgentes) {
+                    btnUrgentes.addEventListener('click', () => {
+                        mostrarTela('subtelaUrgentes');
+                    });
+                }
+            }
+
+            if (tela === 'subtelaUrgentes') {
+                const btnVoltar = document.getElementById('btnVoltar');
+                if (btnVoltar) {
+                    btnVoltar.addEventListener('click', () => {
+                        mostrarTela('meusChamados');
+                    });
+                }
+            }
         }
 
-        /**
-         * ! serve apenas para travar a tela que estou mexendo!!
-        **/ 
         document.addEventListener("DOMContentLoaded", () => {
             mostrarTela("meusChamados");
         });
-
     </script>
 </body>
 </html>

@@ -1,32 +1,31 @@
-.container-Chamados h2 {
-  color: #fff;
-  text-align: center;
+.container-Urgentes h2 {
+    color: #fff;
+    text-align: center;
 }
 
-.container-Chamados table {
+.container-Urgentes table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
     margin-bottom: 10px;
     background-color: #e0e0e0;
 }
-
-.container-Chamados th, td {
+  
+.container-Urgentes th, td {
     padding: 12px;
     text-align: left;
     border: 1px solid #ccc;
-  }
+}
 
-.container-Chamados th {
-    background-color: #d1d1d1;
+.container-Urgentes th {
+    background-color: #9C9C9C;
     font-weight: bold;
-  }
+}
 
-.container-Chamados .button {
+.container-Funcionarios .button {
     text-align: right;
 }
   
-.container-Chamados .button > button {
+.container-Funcionarios .button > button {
     padding: 12px;
     border: none;
     color: white;
@@ -36,17 +35,17 @@
     transition: background 0.3s ease;
 }
 
-.container-Chamados .button > button:hover {
+.container-Funcionarios .button > button:hover {
     background-color: #004fa2;
     color: white;
 }
 
-.container-Chamados .button > .btn-principal {
+.container-Funcionarios .button > .btn-principal {
     background-color: #007bff;
     color: #fff;
 }
 
-.container-Chamados .button > .btn-secundario {
+.container-Funcionarios .button > .btn-secundario {
     background-color: white;
     color: #007bff;
 }

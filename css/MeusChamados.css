@@ -1,47 +1,47 @@
-h2{
+.container-meusChamados h2{
   color: #fff;
   text-align: center;
 }
 
-.container > p {
+.container-meusChamados  p {
     color: #fff;
     font-weight: 600;
     font-size: 18px;
     text-align: center;
 }
 
-.conteudo-chamados {
+.container-meusChamados .conteudo-chamados {
     display: flex;
     gap: 140px;
     justify-content: center;
     margin: 50px;
 }
 
-.icon-quantidade {
+.container-meusChamados .icon-quantidade {
     display: flex;
 }
 
-.chamadosUrgentes .icon-quantidade img {
+.container-meusChamados  .chamadosUrgentes .icon-quantidade img {
     width: 120px;
 }
 
-.chamadosFinalizados > img {
+.container-meusChamados .chamadosFinalizados > img {
     width: 172px;
 }
 
-.chamadosUrgentes h4 {
+.container-meusChamados .chamadosUrgentes h4 {
     font-size: 18px;
     color: #FF4747;
     text-align: center;
 }
 
-.chamadosFinalizados h4 {
+.container-meusChamados .chamadosFinalizados h4 {
     font-size: 18px;
     color: #6799CE;
     text-align: center;
 }
 
-button {
+.container-meusChamados button {
     margin-top: 20px;
     padding: 12px;
     border: none;
@@ -52,22 +52,22 @@ button {
     transition: background 0.3s ease;
 }
  
-#btnUrgentes {
+.container-meusChamados #btnUrgentes {
   background-color: #FF4747;
   color: #fff;
 }
 
-#btnUrgentes:hover {
+.container-meusChamados #btnUrgentes:hover {
     color: #fff;
     background-color: #ac1f1f;
 }
 
-#btnFinalizados {
+.container-meusChamados #btnFinalizados {
     color: #fff;
     background-color: #6799CE;
 }
 
-#btnFinalizados:hover {
+.container-meusChamados #btnFinalizados:hover {
   background-color: #4654C0;
   color: white;
 }

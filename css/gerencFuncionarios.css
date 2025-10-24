@@ -1,40 +1,43 @@
-h2 {
+.container-Funcionarios h2 {
     color: #fff;
     text-align: center;
 }
 
-.barra-pesquisa input {
+.container-Funcionarios .barra-pesquisa input {
     width: 99%;
     height: 40px;
     font-size: 18px;
     color: #fff;
     background-color: #303133;
     margin: 10px 0;
+    border: none;
+    border-radius: 8px;
+    padding-left: 10px;
 }
 
-table {
+.container-Funcionarios table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 10px;
     background-color: #e0e0e0;
-  }
+}
   
-  th, td {
+.container-Funcionarios th, td {
     padding: 12px;
     text-align: left;
     border: 1px solid #ccc;
-  }
+}
 
-  th {
+.container-Funcionarios th {
     background-color: #9C9C9C;
     font-weight: bold;
-  }
+}
 
-  .button {
+.container-Funcionarios .button {
     text-align: right;
 }
   
-.button > button {
+.container-Funcionarios .button > button {
     padding: 12px;
     border: none;
     color: white;
@@ -44,17 +47,17 @@ table {
     transition: background 0.3s ease;
 }
 
-.button > button:hover {
+.container-Funcionarios .button > button:hover {
     background-color: #004fa2;
     color: white;
 }
 
-.button > .btn-principal {
+.container-Funcionarios .button > .btn-principal {
     background-color: #007bff;
     color: #fff;
 }
 
-.button > .btn-secundario {
+.container-Funcionarios .button > .btn-secundario {
     background-color: white;
     color: #007bff;
 }

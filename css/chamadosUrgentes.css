@@ -3,10 +3,15 @@
     text-align: center;
 }
 
+hr {
+    border: #6A6E72 solid 1px;
+}
+
 .container-Urgentes table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 10px;
+    margin-top: 20px;
     background-color: #e0e0e0;
 }
   

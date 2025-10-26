@@ -51,6 +51,17 @@
     <div class="tela-central" id="area"></div>
   </div>
 
+  <!-- Pop-up de confirmação de logout -->
+  <div id="popup-logout" class="popup-overlay">
+    <div class="popup-content">
+      <h3>Tem certeza que deseja deslogar do sistema?</h3>
+      <div class="botoes-popup">
+        <button id="cancelarLogout">CANCELAR</button>
+        <button id="confirmarLogout">TENHO CERTEZA</button>
+      </div>
+    </div>
+  </div>
+
   <script src="../js/dateTime_ip.js"></script>
 
   <script>
@@ -162,7 +173,6 @@
       conteudo = `<p>Em breve...</p>`;
     }
 
-    // ✅ Corrigido: fechamento do bloco principal
     area.innerHTML = conteudo;
 
     // Inicializações específicas

@@ -1,228 +1,314 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/TelaPrincipal.css">
-    <link rel="stylesheet" href="../css/meusDados.css">
-    <link rel="stylesheet" href="../css/registrarChamado.css">
-    <title>Tela Principal - Cliente</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/TelaPrincipal.css">
+  <link rel="stylesheet" href="../css/meusDados.css">
+  <link rel="stylesheet" href="../css/registrarChamado.css">
+  <title>Tela Principal - Cliente</title>
 </head>
 <body>
-    <div class="container-tela">
-        
-        <!-- Coluna lateral esquerda -->
-        <div class="conteudo-lateral">
-            <div class="perfil">
-                <div class="perfil-top">
-                    <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    fill="none" 
-                    viewBox="0 0 24 24" 
-                    stroke-width="1.5" 
-                    stroke="currentColor" 
-                    class="size-6">
-                    <path 
-                    stroke-linecap="round" 
-                    stroke-linejoin="round" 
-                    d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                    </svg>
-                    <p id="nome-usuario">Giovana Lima Oliveira</p>
-                </div>
-                <div class="acessos">
-                    <p id="data-acesso"></p>
-                    <p id="ip-acesso"></p>
-                </div>
-            </div>
+  <div class="container-tela">
 
-            <hr style="width: 100%; border: 0; border-top: 1px solid #ccc; margin: 15px 0;">
-
-            <div class="menu">
-                <button id="btn-registrarChamado" onclick="mostrarTela('registrarChamado')">Registrar Chamado</button>
-                <hr style="width: 100%; border: 0; border-top: 1px solid #ccc; margin: 5px 0;">
-                <button id="btn-acompanharChamado" onclick="mostrarTela('acompanharChamado')">Acompanhar<br>Chamado</button>
-                <hr style="width: 100%; border: 0; border-top: 1px solid #ccc; margin: 5px 0;">
-                <button id="btn-meusDados" onclick="mostrarTela('meusDados')">Meus Dados</button>
-                <hr style="width: 100%; border: 0; border-top: 1px solid #ccc; margin: 5px 0;">
-                <button id="btn-avaliacaoChamado" onclick="mostrarTela('avaliacaoChamado')">Avaliação de<br> Atendimento</button>
-            </div>
-
-            <div class="log-out" id="btnLogout">
-                <svg   
-                xmlns="http://www.w3.org/2000/svg" 
-                fill="none" 
-                viewBox="0 0 24 24" 
-                stroke-width="1.5" 
-                stroke="currentColor" 
-                class="size-6">
-                <path 
-                stroke-linecap="round" 
-                stroke-linejoin="round" 
-                d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
-                </svg>
-            </div>
+    <!-- Coluna lateral -->
+    <div class="conteudo-lateral">
+      <div class="perfil">
+        <div class="perfil-top">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+            stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+          </svg>
+          <p id="nome-usuario"></p>
         </div>
-
-        <div class="tela-central" id="area">
-            <!--retorna todas as quatro telas de acorddo com o botão que a pessoa clica-->
+        <div class="acessos">
+          <p id="data-acesso"></p>
+          <p id="ip-acesso"></p>
         </div>
+      </div>
+
+      <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 10px 0 20px 0;">
+
+      <div class="menu">
+        <button onclick="mostrarTela('registrarChamado')">Registrar Chamado</button>
+        <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 10px 0;">
+        <button onclick="mostrarTela('acompanharChamado')">Acompanhar<br>Chamado</button>
+        <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 10px 0;">
+        <button onclick="mostrarTela('meusDados')">Meus Dados</button>
+      </div>
+
+      <div class="log-out" id="btnLogout">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+          stroke-width="1.5" stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
+        </svg>
+      </div>
     </div>
 
-    <script src="../js/dateTime_ip.js"></script>
-    <script>
-        // troca as tela da área principal
-        function mostrarTela(tela) {
-            const area = document.getElementById('area');
-            let conteudo = '';
+    <!-- Área dinâmica -->
+    <div class="tela-central" id="area"></div>
+  </div>
 
-            if (tela === 'registrarChamado') {
-                conteudo = `
-                <div class="container-registrar">
-                    <h2>REGISTRAR CHAMADO</h2>
+  <script src="../js/dateTime_ip.js"></script>
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="titulo">Título do chamado<span>*</span></label>
-                            <input type="text" id="titulo" required />
-                        </div>
-                        
-                        <div class="form-group info-direita">
-                            <div class="info">
-                            <label >Protocolo:</label>
-                            <p id="protocolo"></p>
-                            </div>
-                            <div class="info">
-                            <label>Data:</label>
-                            <p id="data"></p>
-                            </div>
-                        </div>
-                    </div>
+  <script>
+  // ================================================
+  // FUNÇÃO PRINCIPAL DE TROCA DE TELAS
+  // ================================================
+  function mostrarTela(tela) {
+    const area = document.getElementById('area');
+    let conteudo = '';
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="categoria">Categoria<span>*</span></label>
-                            <select id="categoria">
-                            <option value="">Selecione</option>
-                            <option value="Sistemas e Maquininhas">Sistemas e Maquininhas</option>
-                            <option value="Equipamentos">Equipamentos</option>
-                            <option value="Redes e Internet">Redes e Internet</option>
-                            <option value="Equipamentos">Impressoras e Periféricos</option>
-                            <option value="Instalação/Atualização">Instalação/Atualização</option>
-                            <option value="Servidores">Servidores</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="urgencia" id="nivelUrgencia">Nível de urgência</label>
-                            <input type="text" id="urgencia" readonly />
-                        </div>
-                    </div>
+    if (tela === 'registrarChamado') {
+      conteudo = `
+        <div class="container-registrar">
+          <h2>REGISTRAR CHAMADO</h2>
 
-                    <div class="form-group">
-                        <label for="descricao">Descrição<span>*</span></label>
-                        <textarea id="descricao" required></textarea>
-                    </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="titulo">Título do chamado<span>*</span></label>
+              <input type="text" id="titulo" required />
+            </div>
+            
+            <div class="form-group info-direita">
+              <div class="info">
+                <label>Protocolo:</label>
+                <p id="protocolo"></p>
+              </div>
+              <div class="info">
+                <label>Data:</label>
+                <p id="data"></p>
+              </div>
+            </div>
+          </div>
 
-                    <div class="info-bottom">
-                        <div class="form-group">
-                            <label>Anexar arquivos <small>(opcional)</small></label>
-                            <div class="file-drop" id="fileDrop">
-                                <svg 
-                                xmlns="http://www.w3.org/2000/svg" 
-                                fill="none" 
-                                viewBox="0 0 24 24" 
-                                stroke-width="1.5"
-                                stroke="currentColor" 
-                                class="size-6">
-                                <path 
-                                stroke-linecap="round" 
-                                stroke-linejoin="round" 
-                                d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
-                                </svg>
-                            </div>
-                        </div>
-                
-                        <div class="button">
-                            <button class="btn-principal" onclick="enviarChamado()">ENVIAR CHAMADO</button>
-                        </div>
-                    </div>
-                `;
-            } else if (tela === 'acompanharChamado') {
-                conteudo = `mingyu`;
-            } else if (tela === 'meusDados') {
-                conteudo = `
-                <div class="container-meusDados">
-                    <h2>MEUS DADOS</h2>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="categoria">Categoria<span>*</span></label>
+              <select id="categoria">
+                <option value="">Selecione</option>
+                <option value="Sistemas e Maquininhas">Sistemas e Maquininhas</option>
+                <option value="Equipamentos">Equipamentos</option>
+                <option value="Redes e Internet">Redes e Internet</option>
+                <option value="Impressoras e Periféricos">Impressoras e Periféricos</option>
+                <option value="Instalação/Atualização">Instalação/Atualização</option>
+                <option value="Servidores">Servidores</option>
+              </select>
+            </div>
 
-                    <div class="user-profile">
-                        <svg 
-                        class="profile-icon"
-                        xmlns="http://www.w3.org/2000/svg" 
-                        fill="none" viewBox="0 0 24 24" 
-                        stroke-width="1.5" 
-                        stroke="currentColor">
-                            <path 
-                            stroke-linecap="round" 
-                            stroke-linejoin="round" 
-                            d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                        </svg>
-                    </div>
+            <div class="form-group">
+              <label for="urgencia">Nível de urgência</label>
+              <input type="text" id="urgencia" readonly />
+            </div>
+          </div>
 
-                    <hr> 
+          <div class="form-group">
+            <label for="descricao">Descrição<span>*</span></label>
+            <textarea id="descricao" required></textarea>
+          </div>
 
-                    <div class="user-info">
-                        <div class="info">
-                            <label>Nome:</label>
-                            <input type="text" id="nome" readonly>
-                        </div>
+          <div class="info-bottom">
+            <div class="form-group">
+              <label>Anexar arquivos <small>(opcional)</small></label>
+              <div class="file-drop" id="drop-area">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                  viewBox="0 0 24 24" stroke-width="1.5"
+                  stroke="currentColor" class="size-6">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
+                </svg>
+              </div>
+            </div>
 
-                        <div class="info">
-                            <label>CPF:</label>
-                            <input type="text" id="cpf" readonly>
-                        </div>
+            <div class="button">
+              <button class="btn-principal" onclick="enviarChamado()">ENVIAR CHAMADO</button>
+            </div>
+          </div>
+        </div>
+      `;
+    } else if (tela === 'meusDados') {
+      conteudo = `
+        <div class="container-meusDados">
+          <h2>MEUS DADOS</h2>
 
-                        <div class="info">
-                            <label>Telefone:</label>
-                            <input type="text" id="telefone" readonly>
-                        </div>
+          <div class="user-profile">
+            <svg class="profile-icon" xmlns="http://www.w3.org/2000/svg" fill="none"
+              viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+            </svg>
+          </div>
 
-                        <div class="info">
-                            <label>Endereço:</label>
-                            <input type="text" id="endereco" readonly>
-                        </div>
+          <hr>
 
-                        <div class="info">
-                            <label>E-mail:</label>
-                            <input type="text" id="email" readonly>
-                        </div>
+          <div class="user-info">
+            <div class="info"><label>Nome:</label><input id="nome" readonly></div>
+            <div class="info"><label>CPF:</label><input id="cpf" readonly></div>
+            <div class="info"><label>Telefone:</label><input id="telefone" readonly></div>
+            <div class="info"><label>Endereço:</label><input id="endereco" readonly></div>
+            <div class="info"><label>E-mail:</label><input id="email" readonly></div>
+            <div class="info"><label>Senha:</label><input id="senha" type="password" readonly></div>
+          </div>
 
-                        <div class="info">
-                            <label>Senha:</label>
-                            <input type="password" id="senha" readonly>
-                        </div>
-                    </div>
+          <div class="button">
+            <button id="editar-btn" class="btn-principal">EDITAR DADOS</button>
+            <button id="salvar-btn" style="display:none;">SALVAR DADOS</button>
+          </div>
+        </div>
+      `;
+    } else if (tela === 'acompanharChamado') {
+      conteudo = `<p>Em breve...</p>`;
+    }
 
-                    <div class="button">
-                        <button id="editar-btn" class="btn-principal">EDITAR DADOS</button>
-                        <button id="salvar-btn" style="display:none;">SALVAR DADOS</button>
-                    </div>
-                </div>
-                `;
-            } else if (tela === 'avaliacaoChamado') {
-                conteudo = `kakakakka`;
-            }
+    // ✅ Corrigido: fechamento do bloco principal
+    area.innerHTML = conteudo;
 
-            area.innerHTML = conteudo;
-        }
+    // Inicializações específicas
+    if (tela === 'registrarChamado') inicializarRegistrarChamado();
+    if (tela === 'meusDados') inicializarMeusDados();
+  }
 
-        /**
-         * ! serve apenas para travar a tela que estou mexendo!!
-        **/ 
-        document.addEventListener("DOMContentLoaded", () => {
-            mostrarTela("meusDados");
-        });
+  // ================================================
+  // REGISTRAR CHAMADO - LÓGICA
+  // ================================================
+  function inicializarRegistrarChamado() {
+    const protocolo = document.getElementById('protocolo');
+    const data = document.getElementById('data');
+    const categoria = document.getElementById('categoria');
+    const urgencia = document.getElementById('urgencia');
+    const dropArea = document.getElementById('drop-area');
 
-    </script>
-    <script src="../js/registrarChamado.js"></script>
-    <script src="../js/meusDados.js"></script>
+    // Gerar protocolo e data
+    protocolo.textContent = 'PRT' + Math.floor(Math.random() * 1000000);
+    data.textContent = new Date().toLocaleDateString('pt-BR');
+
+    // Atualizar urgência conforme categoria
+    categoria.addEventListener('change', () => {
+      let nivel = '';
+      switch (categoria.value) {
+        case 'Equipamentos':
+        case 'Servidores':
+          nivel = 'Alta';
+          break;
+        case 'Redes e Internet':
+        case 'Sistemas e Maquininhas':
+          nivel = 'Média';
+          break;
+        case 'Impressoras e Periféricos':
+        case 'Instalação/Atualização':
+          nivel = 'Baixa';
+          break;
+        default:
+          nivel = '';
+      }
+      urgencia.value = nivel;
+    });
+
+    // Drag and drop básico
+    if (dropArea) {
+      dropArea.addEventListener('dragover', e => {
+        e.preventDefault();
+        dropArea.classList.add('ativo');
+      });
+      dropArea.addEventListener('dragleave', () => dropArea.classList.remove('ativo'));
+      dropArea.addEventListener('drop', e => {
+        e.preventDefault();
+        dropArea.classList.remove('ativo');
+        console.log('Arquivos enviados:', e.dataTransfer.files);
+      });
+    }
+  }
+
+  // ================================================
+  // FUNÇÃO DE ENVIO DE CHAMADO
+  // ================================================
+  function enviarChamado() {
+    // Seleciona os campos
+    const titulo = document.getElementById('titulo');
+    const categoria = document.getElementById('categoria');
+    const descricao = document.getElementById('descricao');
+
+    // Limpa mensagens de erro anteriores
+    document.querySelectorAll('.erro-msg').forEach(e => e.remove());
+
+    let valido = true;
+
+    // --- Validação do título ---
+    if (!titulo.value.trim()) {
+      mostrarErro(titulo, 'O título é obrigatório.');
+      valido = false;
+    }
+
+    // --- Validação da categoria ---
+    if (!categoria.value) {
+      mostrarErro(categoria, 'Selecione uma categoria.');
+      valido = false;
+    }
+
+    // --- Validação da descrição ---
+    if (!descricao.value.trim()) {
+      mostrarErro(descricao, 'A descrição é obrigatória.');
+      valido = false;
+    } else if (descricao.value.trim().length < 10) {
+      mostrarErro(descricao, 'A descrição deve ter pelo menos 10 caracteres.');
+      valido = false;
+    }
+
+    if (!valido) return; // Para se houver algum erro
+
+    // Se passou nas validações
+    alert('Chamado enviado com sucesso!');
+
+    // Aqui você pode adicionar lógica para salvar o chamado no backend ou localStorage
+    // Exemplo: console.log({ titulo
+  }
+
+  // Função auxiliar para mostrar mensagens de erro
+  function mostrarErro(elemento, mensagem) {
+    const erro = document.createElement('small');
+    erro.classList.add('erro-msg');
+    erro.style.color = 'red';
+    erro.textContent = mensagem;
+    elemento.parentElement.appendChild(erro);
+  }
+
+  // ================================================
+  // MEUS DADOS - LÓGICA
+  // ================================================
+  function inicializarMeusDados() {
+    const inputs = document.querySelectorAll(".user-info input");
+    const editarBtn = document.getElementById("editar-btn");
+    const salvarBtn = document.getElementById("salvar-btn");
+
+    // Carrega dados do localStorage
+    inputs.forEach(input => input.value = localStorage.getItem(input.id) || '');
+
+    editarBtn.addEventListener('click', () => {
+      inputs.forEach(i => i.removeAttribute('readonly'));
+      editarBtn.style.display = 'none';
+      salvarBtn.style.display = 'inline-block';
+    });
+
+    salvarBtn.addEventListener('click', () => {
+      inputs.forEach(i => {
+        i.setAttribute('readonly', true);
+        localStorage.setItem(i.id, i.value);
+      });
+      salvarBtn.style.display = 'none';
+      editarBtn.style.display = 'inline-block';
+      alert('Dados atualizados com sucesso!');
+    });
+  }
+
+  // ================================================
+  // TELA INICIAL PADRÃO
+  // ================================================
+  document.addEventListener('DOMContentLoaded', () => {
+    mostrarTela('meusDados');
+  });
+</script>
+
 </body>
 </html>

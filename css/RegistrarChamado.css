@@ -39,12 +39,12 @@
   color: #fff;
   background-color: #303133;
   height: 2rem;
+  padding: 0 5px;
 }
 
 .container-registrar textarea {
   height: 70px;
   resize: none;
-  margin-bottom: 20px;
 }
 
 .container-registrar .info-direita {
@@ -63,6 +63,7 @@
 
 .container-registrar .info-bottom {
   display: flex;
+  margin-top: 20px;
 }
 
 .container-registrar .info-bottom svg {

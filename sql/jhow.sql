@@ -29,7 +29,7 @@ CREATE TABLE chamados (
     protocolo VARCHAR(50) NOT NULL UNIQUE,
     titulo VARCHAR(30) NOT NULL,
     categoria VARCHAR(40) NOT NULL CHECK (categoria IN ('Sistemas e Maquininhas', 'Equipamentos', 'Redes e Internet', 'Impressoras e Periféricos', 'Instalação/Atualização')),
-    urgencia VARCHAR(10) NOT NULL CHECK (urgencia IN ('baixa', 'média', 'alta')),
+    urgencia VARCHAR(10) NOT NULL CHECK (urgencia IN ('Baixa', 'Média', 'Alta')),
     descricao TEXT NOT NULL,
     anexos TEXT,
     status VARCHAR(20) NOT NULL CHECK (status IN ('aberto', 'em andamento', 'finalizado')) DEFAULT 'aberto',

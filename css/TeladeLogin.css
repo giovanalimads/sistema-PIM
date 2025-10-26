@@ -50,9 +50,10 @@ span {
 .form-group input {
   color: #fff;
   background-color: #303133;
-  width: 100%;
+  width: 95%;
   padding: 8px;
   border-radius: 8px;
+  border: none;
 }
 
 .button > button {
@@ -93,4 +94,34 @@ span {
   font-size: 0.9em;
   display: block;
   margin-top: 4px;
+}
+
+/* função mostrar senha */
+.senha-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #6799CE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.toggle-password:hover {
+  color: #4654C0;
+}
+
+.icon {
+  width: 22px;
+  height: 22px;
+  transition: background 0.3s ease;
 }

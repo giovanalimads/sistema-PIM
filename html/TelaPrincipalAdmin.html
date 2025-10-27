@@ -29,7 +29,7 @@
                     stroke-linejoin="round" 
                     d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                     </svg>
-                    <p id="nome-usuario">Giovana Lima Oliveira</p>
+                    <p id="nome-usuario"></p>
                 </div>
                 <div class="acessos">
                     <p id="data-acesso"></p>
@@ -37,15 +37,15 @@
                 </div>
             </div>
 
-            <hr style="width: 100%; border: 0; border-top: 1px solid #ccc; margin: 15px 0;">
+            <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 15px 0;">
 
             <div class="menu">
                 <button id="btn-relatorios" onclick="mostrarTela('relatorios')">Relatórios</button>
-                <hr style="width: 100%; border: 0; border-top: 1px solid #ccc; margin: 5px 0;">
+                <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 5px 0;">
                 <button id="btn-gerencFuncionarios" onclick="mostrarTela('gerencFuncionarios')">Gerenciar<br>Funcionários</button>
-                <hr style="width: 100%; border: 0; border-top: 1px solid #ccc; margin: 5px 0;">
+                <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 5px 0;">
                 <button id="btn-gerencChamados" onclick="mostrarTela('gerencChamados')">Gerenciar<br>Chamados</button>
-                <hr style="width: 100%; border: 0; border-top: 1px solid #ccc; margin: 5px 0;">
+                <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 5px 0;">
                 <button id="btn-meusDadosAdmin" onclick="mostrarTela('meusDadosAdmin')">Meus Dados</button>
             </div>
 
@@ -84,10 +84,13 @@
                 conteudo = `
                 <div class="container-Funcionarios">
                     <h2>Funcionários</h2>
-                    <hr>
+
+                    <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 10px 0 20px 0;">
+
                     <div class="barra-pesquisa">
-                        <input type="text" id="pesquisa" placeholder="Digite o nome ou -mail do funcionário...">
+                    <input type="text" id="pesquisa" placeholder="Digite o nome ou e-mail do funcionário...">
                     </div>
+
                     <table>
                     <thead>
                         <tr>
@@ -98,39 +101,47 @@
                         </tr>
                     </thead>
                     <tbody id="tabela-chamados">
-                        <!-- Os dados abaixo são apenas placeholders -->
                         <tr>
                         <td>Técnico</td>
                         <td>Ricardo Dantas</td>
                         <td>ricardinho@gmail.com</td>
-                        <td><button class="btn-acao" onclick="visualizarChamado('001')">Dados</button></td>
-                        </tr>
-                        <tr>
-                        <td>Técnico</td>
-                        <td>Jhonatan Afonso</td>
-                        <td>jhow@gmail.com</td>
-                        <td><button class="btn-acao" onclick="visualizarChamado('001')">Dados</button></td>
-                        </tr>
-                        <tr>
-                        <td>Técnico</td>
-                        <td>Guilherme Gomes</td>
-                        <td>guilhermegomes@gmail.com</td>
-                        <td><button class="btn-acao" onclick="visualizarChamado('002')">Dados</button></td>
-                        </tr>
-                        <tr>
-                        <td>Técnico</td>
-                        <td>João Vitor Soares</td>
-                        <td>joaosoares@gmail.com</td>
-                        <td><button class="btn-acao" onclick="visualizarChamado('003')">Dados</button></td>
+                        <td class="td-acao">
+                            <button class="btn-acao">Dados</button>
+                            <button class="btn-acao">Excluir</button>
+                        </td>
                         </tr>
                         <tr>
                         <td>Administrador</td>
                         <td>Giovana Lima Oliveira</td>
                         <td>gigi@gmail.com</td>
-                        <td><button class="btn-acao" onclick="visualizarChamado('003')">Dados</button></td>
+                        <td class="td-acao">
+                            <button class="btn-acao">Dados</button>
+                            <button class="btn-acao">Excluir</button>
+                        </td>
                         </tr>
                     </tbody>
                     </table>
+
+                    <div class="menu-flutuante">
+                    <div class="opcoes">
+                        <button class="opcao">Cadastrar Técnico</button>
+                        <button class="opcao">Cadastrar Admin</button>
+                    </div>
+
+                    <button id="toggle-btn" class="toggle-btn">
+                        <svg id="icone-mais" xmlns="http://www.w3.org/2000/svg" fill="none" 
+                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" 
+                                d="M12 4.5v15m7.5-7.5h-15" />
+                        </svg>
+
+                        <svg id="icone-x" xmlns="http://www.w3.org/2000/svg" fill="none" 
+                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" 
+                                d="M6 18 18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                    </div>
                 </div>
             `;
             } else if (tela === 'gerencChamados') {

@@ -21,18 +21,17 @@
                 }
             }
         });
-    });
 
-    // vizualizar dados do funcionário 
+        // vizualizar dados do funcionário 
     
-    // excluir funcionário
+        // excluir funcionário
 
-    // botões + e x
+        // botões + e x
+        const toggleBtn = document.getElementById("toggle-btn");
+        const opcoes = document.querySelector(".opcoes");
 
-    const toggleBtn = document.getElementById("toggle-btn");
-  const opcoes = document.querySelector(".opcoes");
-
-  toggleBtn.addEventListener("click", () => {
-    toggleBtn.classList.toggle("ativo");
-    opcoes.classList.toggle("mostrar");
-  });
+        toggleBtn.addEventListener("click", () => {
+            toggleBtn.classList.toggle("ativo");
+            opcoes.classList.toggle("mostrar");
+        });
+    });

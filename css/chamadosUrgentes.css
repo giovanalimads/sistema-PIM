@@ -3,10 +3,6 @@
     text-align: center;
 }
 
-hr {
-    border: #6A6E72 solid 1px;
-}
-
 .container-Urgentes table {
     width: 100%;
     border-collapse: collapse;
@@ -26,11 +22,14 @@ hr {
     font-weight: bold;
 }
 
-.container-Funcionarios .button {
-    text-align: right;
+.container-Urgentes .button {
+    position: fixed;
+    bottom: 65px;
+    right: 71px;
+    z-index: 1000;
 }
   
-.container-Funcionarios .button > button {
+.container-Urgentes .button > button {
     padding: 12px;
     border: none;
     color: white;
@@ -40,17 +39,12 @@ hr {
     transition: background 0.3s ease;
 }
 
-.container-Funcionarios .button > button:hover {
-    background-color: #004fa2;
-    color: white;
-}
-
-.container-Funcionarios .button > .btn-principal {
-    background-color: #007bff;
+.container-Urgentes .button > .btn-principal {
+    background-color: #6799CE;
     color: #fff;
 }
 
-.container-Funcionarios .button > .btn-secundario {
-    background-color: white;
-    color: #007bff;
+.container-Urgentes .button > .btn-principal:hover {
+    background-color: #4654C0;
+    color: white;
 }

@@ -65,6 +65,17 @@
         </div>
     </div>
 
+    <!-- Pop-up de confirmação de logout -->
+    <div id="popup-logout" class="popup-overlay">
+        <div class="popup-content">
+        <h3>Tem certeza que deseja deslogar do sistema?</h3>
+        <div class="botoes-popup">
+            <button id="cancelarLogout">CANCELAR</button>
+            <button id="confirmarLogout">TENHO CERTEZA</button>
+        </div>
+        </div>
+    </div>
+
     <script src="../js/dateTime_ip.js"></script>
     <script>
         function mostrarTela(tela) {
@@ -76,7 +87,7 @@
                 conteudo = `
                     <div class="container-meusChamados">
                         <h2>Tela Inicial</h2>
-                        <hr>
+                        <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 10px 0 20px 0;">
                         <p>Olá novamente, Técnico! Você possui:</p>
 
                         <div class="conteudo-chamados">

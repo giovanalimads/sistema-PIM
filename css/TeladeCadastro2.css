@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: Arial, sans-serif;
   background: #272A2D;
@@ -9,7 +13,7 @@ body {
 }
 
 .container {
-  background-color: #6A6E72;
+  background-color: #4E5054;
   padding: 10px 30px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -22,31 +26,34 @@ span {
 }
 
 .info-top {
-    color: #fff;
-    text-align: center;
-    display: flex;
-    gap: 120px;
-    margin-bottom: -15px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
-svg {
-    color: #fff;
-    font-size: bold;
-    width: 28px;
-    cursor: pointer;
-    transition: transform 0.2s ease;
+#voltar {
+  position: absolute;
+  left: 10px;
+  width: 28px;
+  height: 28px;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
-svg:hover {
-    color: #6799CE;
-    transform: scale(1.1);
+#voltar:hover {
+  color: #6799CE;
+  transform: scale(1.1);
 }
 
-#cadastroForm {
+#cadastroSegForm {
   display: flex;
   flex-direction: column;
   max-width: 1000px;
   margin: 0 auto;
+  gap: 1rem;
 }
 
 .form-group {
@@ -60,21 +67,16 @@ label {
   display: block;
   font-weight: 600;
   margin-bottom: -15px;
-  margin-top: 15px;
 }
 
 input {
-    color: #fff;
-    background-color: #303133;
-    width: 100%;
-    padding: 8px;
-    margin-bottom: -16px;
-    box-sizing: border-box;
-}
-
-hr {
-  margin-top: 25px;
-  margin-bottom: 10px;
+  color: #fff;
+  background-color: #303133;
+  width: 100%;
+  padding: 8px;
+  margin-bottom: -16px;
+  border: none;
+  border-radius: 8px;
 }
 
 a {
@@ -83,13 +85,12 @@ a {
 }
   
 .info-botton {
-    color: #fff;
+  color: #fff;
   font-size: 12px;
   text-align: center;
 }
 
 .button {
-  margin-top: 30px;
   text-align: center;
 }
   

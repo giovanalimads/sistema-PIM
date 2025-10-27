@@ -58,7 +58,7 @@ span {
 
 .form-group {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 1rem;
 }
 
@@ -110,9 +110,9 @@ a {
 }
 
 .button > .btn-principal {
-    background-color: #6799CE;
-    color: #fff;
-    width: 100%;
+  background-color: #6799CE;
+  color: #fff;
+  width: 100%;
 }
 
 /* Mensagem de erro */
@@ -121,4 +121,47 @@ a {
   font-size: 0.9em;
   display: block;
   margin-top: 4px;
+}
+
+/* ===== Mostrar Senha ===== */
+.senha-conteiner,
+.repetirSenha-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.senha-conteiner input,
+.repetirSenha-container input {
+  width: 100%;
+  padding-right: 40px; /* espaço pro botão do olho */
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 100%;
+  transform: translateY(-50%); /* corrige o alinhamento */
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: #6799CE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icone-senha {
+  width: 22px;
+  height: 22px;
+}
+
+.toggle-password:hover {
+  color: #86b4e9;
+}
+
+#eye-open1,
+#eye-open2 {
+  display: none;
 }

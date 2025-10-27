@@ -23,7 +23,16 @@
         });
     });
 
-    // Exemplo de função do botão "Dados"
-    function visualizarChamado(id) {
-        alert("Exibindo dados do funcionário com ID: " + id);
-    }
+    // vizualizar dados do funcionário 
+    
+    // excluir funcionário
+
+    // botões + e x
+
+    const toggleBtn = document.getElementById("toggle-btn");
+  const opcoes = document.querySelector(".opcoes");
+
+  toggleBtn.addEventListener("click", () => {
+    toggleBtn.classList.toggle("ativo");
+    opcoes.classList.toggle("mostrar");
+  });

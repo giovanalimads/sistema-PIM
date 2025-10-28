@@ -62,21 +62,80 @@
     </div>
   </div>
 
+  <!-- Pop-up ao trocar de tela -->
+  <div id="popup-sair" class="popup-overlay">
+    <div class="popup-content">
+      <h3>Tem certeza que deseja sair? Seu chamado não será salvo.</h3>
+      <div class="botoes-popup">
+        <button id="cancelar">CANCELAR</button>
+        <button id="confirmar">TENHO CERTEZA</button>
+      </div>
+    </div>
+  </div>
+
   <script src="../js/dateTime_ip.js"></script>
 
   <script>
   // ================================================
-  // FUNÇÃO PRINCIPAL DE TROCA DE TELAS
+  // VARIÁVEL GLOBAL PARA A TELA DE DESTINO
+  // Necessária para saber para onde ir após a confirmação do pop-up.
+  // ================================================
+  let telaDestino = '';
+
+  // ================================================
+  // FUNÇÃO DE VERIFICAÇÃO DE FORMULÁRIO PREENCHIDO
+  // ================================================
+  function formularioPreenchido() {
+    // Verifica se a TELA ATUAL é 'registrarChamado'
+    const area = document.getElementById('area');
+    if (!area.innerHTML.includes('container-registrar')) {
+      return false; // Não está na tela de chamado, não precisa verificar
+    }
+
+    // Pega os campos do formulário (que DEVEM existir se o container existir)
+    const titulo = document.getElementById('titulo');
+    const categoria = document.getElementById('categoria');
+    const descricao = document.getElementById('descricao');
+
+    // Retorna true se QUALQUER campo tiver valor
+    if (titulo && titulo.value.trim() !== '') return true;
+    if (descricao && descricao.value.trim() !== '') return true;
+    if (categoria && categoria.value !== '') return true; // Verifica se uma opção foi selecionada
+
+    return false;
+  }
+  
+  // ================================================
+  // FUNÇÃO PRINCIPAL DE TROCA DE TELAS (COM VALIDAÇÃO)
   // ================================================
   function mostrarTela(tela) {
+    // 1. Verifica se o usuário está abandonando um formulário preenchido
+    if (formularioPreenchido() && tela !== 'registrarChamado') {
+      // Armazena o destino e mostra o pop-up
+      telaDestino = tela;
+      document.getElementById('popup-sair').classList.add('ativo');
+      return; // IMPEDE a troca imediata
+    }
+
+    // 2. Troca de tela normal (se formulário vazio ou se está indo para a mesma tela)
+    trocarConteudoTela(tela);
+  }
+
+  // ================================================
+  // FUNÇÃO QUE REALMENTE TROCA O CONTEÚDO DA TELA
+  // ================================================
+  // Esta função é chamada pela mostrarTela (se não houver aviso) ou 
+  // pelo botão 'TENHO CERTEZA' do pop-up.
+  function trocarConteudoTela(tela) {
     const area = document.getElementById('area');
     let conteudo = '';
 
+    // NOTE: O HTML do pop-up (#popup-sair) NÃO DEVE ESTAR AQUI, 
+    // pois ele está fixo no <body> (o que é correto para a solução).
     if (tela === 'registrarChamado') {
       conteudo = `
         <div class="container-registrar">
           <h2>REGISTRAR CHAMADO</h2>
-
           <div class="form-row">
             <div class="form-group">
               <label for="titulo">Título do chamado<span>*</span></label>
@@ -143,7 +202,6 @@
       conteudo = `
         <div class="container-meusDados">
           <h2>MEUS DADOS</h2>
-
           <div class="user-profile">
             <svg class="profile-icon" xmlns="http://www.w3.org/2000/svg" fill="none"
               viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -181,7 +239,7 @@
   }
 
   // ================================================
-  // REGISTRAR CHAMADO - LÓGICA
+  // REGISTRAR CHAMADO - LÓGICA (Mantido)
   // ================================================
   function inicializarRegistrarChamado() {
     const protocolo = document.getElementById('protocolo');
@@ -232,15 +290,13 @@
   }
 
   // ================================================
-  // FUNÇÃO DE ENVIO DE CHAMADO
+  // FUNÇÃO DE ENVIO DE CHAMADO (Mantido)
   // ================================================
   function enviarChamado() {
-    // Seleciona os campos
     const titulo = document.getElementById('titulo');
     const categoria = document.getElementById('categoria');
     const descricao = document.getElementById('descricao');
 
-    // Limpa mensagens de erro anteriores
     document.querySelectorAll('.erro-msg').forEach(e => e.remove());
 
     let valido = true;
@@ -266,16 +322,13 @@
       valido = false;
     }
 
-    if (!valido) return; // Para se houver algum erro
+    if (!valido) return; 
 
     // Se passou nas validações
     alert('Chamado enviado com sucesso!');
-
-    // Aqui você pode adicionar lógica para salvar o chamado no backend ou localStorage
-    // Exemplo: console.log({ titulo
   }
 
-  // Função auxiliar para mostrar mensagens de erro
+  // Função auxiliar para mostrar mensagens de erro (Mantido)
   function mostrarErro(elemento, mensagem) {
     const erro = document.createElement('small');
     erro.classList.add('erro-msg');
@@ -285,7 +338,7 @@
   }
 
   // ================================================
-  // MEUS DADOS - LÓGICA
+  // MEUS DADOS - LÓGICA (Mantido)
   // ================================================
   function inicializarMeusDados() {
     const inputs = document.querySelectorAll(".user-info input");
@@ -313,10 +366,31 @@
   }
 
   // ================================================
-  // TELA INICIAL PADRÃO
+  // INICIALIZAÇÃO DA PÁGINA E LÓGICA DO POP-UP
   // ================================================
   document.addEventListener('DOMContentLoaded', () => {
-    mostrarTela('meusDados');
+    // Define a tela inicial.
+    mostrarTela('registrarChamado'); // Inicia corretamente na tela de registro
+
+    // Anexa listeners ao pop-up de saída (que está fixo no HTML)
+    const popupSair = document.getElementById('popup-sair');
+    if (popupSair) {
+      // Botão CANCELAR: Apenas fecha o pop-up
+      document.getElementById('cancelar').addEventListener('click', () => {
+        popupSair.classList.remove('ativo');
+        telaDestino = '';
+      });
+
+      // Botão TENHO CERTEZA: Confirma a saída e troca de tela
+      document.getElementById('confirmar').addEventListener('click', () => {
+        popupSair.classList.remove('ativo');
+        if(telaDestino) {
+          // Usa a função auxiliar para trocar a tela
+          trocarConteudoTela(telaDestino);
+        }
+        telaDestino = '';
+      });
+    }
   });
 </script>
 

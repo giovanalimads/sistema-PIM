@@ -40,26 +40,27 @@ document.addEventListener('DOMContentLoaded', () => {
   } 
   
   // === Drag and Drop de arquivos (estrutura base) === 
-  const dropArea = document.getElementById("drop-area"); 
-  if (dropArea) { 
-    dropArea.addEventListener("dragover", (e) => { 
-      e.preventDefault(); 
-      
-      dropArea.classList.add("ativo"); 
-    }); 
-    
-    dropArea.addEventListener("dragleave", () => { 
-      dropArea.classList.remove("ativo"); 
-    }); 
-    
-    dropArea.addEventListener("drop", (e) => { 
-      e.preventDefault(); 
-      
-      dropArea.classList.remove("ativo"); 
-      
-      const arquivos = e.dataTransfer.files; 
-      
-      console.log("Arquivos enviados:", arquivos); // Aqui você pode enviar os arquivos para o servidor futuramente 
-    }); 
-  } 
+  
+  // Trocar de tela sem enviar o registro
+  const btnLogout = document.getElementById("btnLogout");
+  const popup = document.getElementById("popup-logout");
+  const confirmar = document.getElementById("confirmarLogout");
+  const cancelar = document.getElementById("cancelarLogout");
+
+  // abre o pop-up
+  btnLogout.addEventListener("click", () => {
+    popup.style.display = "flex";
+  });
+
+  // confirma logout
+  confirmar.addEventListener("click", () => {
+    localStorage.clear();
+    sessionStorage.clear();
+    window.location.href = "../html/TeladeLogin.html";
+  });
+
+  // cancela logout
+  cancelar.addEventListener("click", () => {
+    popup.style.display = "none";
+  });
 });

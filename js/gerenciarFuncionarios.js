@@ -1,7 +1,7 @@
 // Função que faz a busca na tabela
     document.addEventListener('DOMContentLoaded', () => {
         const inputPesquisa = document.getElementById('pesquisa');
-        const tabela = document.getElementById('tabela-chamados');
+        const tabela = document.getElementById('tabela-funcionarios');
         const linhas = tabela.getElementsByTagName('tr');
 
         inputPesquisa.addEventListener('keyup', function () {

@@ -111,7 +111,7 @@
                         <th>Ação</th>
                         </tr>
                     </thead>
-                    <tbody id="tabela-chamados">
+                    <tbody id="tabela-funcionarios">
                         <tr>
                         <td>Técnico</td>
                         <td>Ricardo Dantas</td>
@@ -130,12 +130,21 @@
                             <button class="btn-acao">Excluir</button>
                         </td>
                         </tr>
+                        <tr>
+                        <td>Técnico</td>
+                        <td>Ronaldo Dantas</td>
+                        <td>ronaldinho@gmail.com</td>
+                        <td class="td-acao">
+                            <button class="btn-acao">Dados</button>
+                            <button class="btn-acao">Excluir</button>
+                        </td>
+                        </tr>
                     </tbody>
                     </table>
 
                     <div class="menu-flutuante">
                     <div class="opcoes">
-                        <button class="opcao">Cadastrar Técnico</button>
+                        <button class="opcao" id="btnCadTec">Cadastrar Técnico</button>
                         <button class="opcao">Cadastrar Admin</button>
                     </div>
 
@@ -155,6 +164,85 @@
                     </div>
                 </div>
             `;
+            } 
+            // Subtela - Cadastrar Tecnico
+            else if (tela === 'subtelaCadTec') {
+                conteudo = `
+                <div class="container" id="cadastro-screen">
+                    <div class="info-top">
+                        <svg 
+                        id="voltar"
+                        xmlns="http://www.w3.org/2000/svg" 
+                        fill="none" 
+                        viewBox="0 0 24 24" 
+                        stroke-width="1.5" 
+                        stroke="currentColor" 
+                        class="size-6">
+                            <path 
+                            stroke-linecap="round" 
+                            stroke-linejoin="round" 
+                            d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                        </svg>
+                        <h2>CADASTRAR TÉCNICO</h2>
+                    </div>
+
+                    <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 10px 0 20px 0;">
+
+                    <form id="cadastroTecForm">
+                        <!--Campo: Nome-->
+                        <div class="form-group row">
+                            <div class="form-field">
+                                <label for="nome" class="input-nome">Nome completo<span>*</span></label>
+                                <input class="input-nome" type="text" id="nome">
+                                <small class="erro" id="erroNome"></small>
+                            </div>
+                            <div class="form-field">
+                                <label for="id">ID<span>*</span></label>
+                                <input type="text" name="" id="id">
+                                <small class="erro" id="erroId"></small>
+                            </div>
+                        </div>
+
+                        <!--Campo: CPF e Telefone-->
+                        <div class="form-group row">
+                            <div class="form-field">
+                                <label for="cpf">CPF<span>*</span></label>
+                                <input type="text" name="" id="cpf">
+                                <small class="erro" id="erroCpf"></small>
+                            </div>
+                            <div class="form-field">
+                                <label for="telefone">Telefone<span>*</span></label>
+                                <input type="tel" id="telefone">
+                                <small class="erro" id="erroTelefone"></small>
+                            </div>
+                        </div>
+
+                        <!--Campos: Área de especialização e nível de experiência-->
+                        <div class="form-group row">
+                            <div class="form-field">
+                                <label for="areaEspecializacao">Área de Especilização<span>*</span></label>
+                                <input type="text" id="areaEspecializacao">
+                                <small class="erro" id="erroArea"></small>
+                            </div>
+                            <div class="form-field">
+                                <label for="nivelExperiencia">Nível de Experiência<span>*</span></label>
+                                <input type="text" id="nivelExperiencia">
+                                <small class="erro" id="erroNivel"></small>
+                            </div>
+                        </div
+
+                        <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 10px 0 20px 0;">
+
+                        <div class="button">
+                            <button type="submit" class="btn-principal">AVANÇAR</button>
+                        </div>
+                    </form>
+                </div>
+                `;
+            } 
+            // Subtela - Cadastrar Admin
+            else if (tela === 'subtelaCadAdmin') {
+                conteudo = ``;
             } else if (tela === 'gerencChamados') {
                 conteudo = `
                 <div class="container-Chamados">
@@ -253,13 +341,32 @@
             }
 
             area.innerHTML = conteudo;
+
+            // Adiciona os eventos depois que o HTML foi injetado
+            if (tela === 'gerencFuncionarios') {
+                const btnCadTec = document.getElementById('btnCadTec');
+                if (btnCadTec) {
+                    btnCadTec.addEventListener('click', () => {
+                        mostrarTela('subtelaCadTec');
+                    });
+                }
+            }
+
+            if (tela === 'subtelaUrgentes') {
+                const btnCadAdmin = document.getElementById('btnCadAdmin');
+                if (btnCadAdmin) {
+                    btnCadAdmin.addEventListener('click', () => {
+                        mostrarTela('subtelaCadAdmin');
+                    });
+                }
+            }
         }
 
         /**
          * ! serve apenas para travar a tela que estou mexendo!!
         **/ 
         document.addEventListener("DOMContentLoaded", () => {
-            mostrarTela("gerencFuncionarios");
+            mostrarTela("subtelaCadTec");
         });
     </script>
 

@@ -255,7 +255,7 @@
             // Subtela - Parte 2 do cadastro do técnico
             else if (tela === 'subtelaCadTec2') {
                 conteudo = `
-                <div class=".container-cadTec" id="cadastro-tec2">
+                <div class="container-cadTec2" id="cadastro-tec2">
                     <div class="info-top">
                         <svg 
                         id="voltar"
@@ -449,27 +449,27 @@
                 const avancarCadastro = document.getElementById('btnAvancar');
                 if (avancarCadastro) {
                     avancarCadastro.addEventListener('click', () => {
-                        mostrarTela('subtelaCadTec2')
-                    })
+                        mostrarTela('subtelaCadTec2');
+                    });
                 }
             }
 
             if (tela === 'gerencFuncionarios') {
-        const inputPesquisa = document.getElementById('pesquisa');
-        const tabela = document.getElementById('tabela-funcionarios');
-        const linhas = tabela.getElementsByTagName('tr');
+            const inputPesquisa = document.getElementById('pesquisa');
+            const tabela = document.getElementById('tabela-funcionarios');
+            const linhas = tabela.getElementsByTagName('tr');
 
-        inputPesquisa.addEventListener('keyup', function () {
-            const termo = inputPesquisa.value.toLowerCase();
-            for (let i = 0; i < linhas.length; i++) {
-                const colunas = linhas[i].getElementsByTagName('td');
-                if (colunas.length > 0) {
-                    const nome = colunas[1].textContent.toLowerCase();
-                    const email = colunas[2].textContent.toLowerCase();
-                    linhas[i].style.display = (nome.includes(termo) || email.includes(termo)) ? '' : 'none';
+            inputPesquisa.addEventListener('keyup', function () {
+                const termo = inputPesquisa.value.toLowerCase();
+                for (let i = 0; i < linhas.length; i++) {
+                    const colunas = linhas[i].getElementsByTagName('td');
+                    if (colunas.length > 0) {
+                        const nome = colunas[1].textContent.toLowerCase();
+                        const email = colunas[2].textContent.toLowerCase();
+                        linhas[i].style.display = (nome.includes(termo) || email.includes(termo)) ? '' : 'none';
+                    }
                 }
-            }
-        });
+            });
 
         const toggleBtn = document.getElementById('toggle-btn');
         const opcoes = document.querySelector('.opcoes');
@@ -478,7 +478,6 @@
             opcoes.classList.toggle('mostrar');
         });
 
-        // ✅ Agora ambos os botões funcionam
         document.getElementById('btnCadTec').addEventListener('click', () => mostrarTela('subtelaCadTec'));
         document.getElementById('btnCadAdmin').addEventListener('click', () => mostrarTela('subtelaCadAdmin'));
     }

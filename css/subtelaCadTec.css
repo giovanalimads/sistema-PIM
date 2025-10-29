@@ -1,21 +1,15 @@
-.container-cadTec  * {
+.container-cadTec  *,
+.container-cadTec2 * {
   box-sizing: border-box;
 }
 
-.container-cadTec .container {
-  background-color: #4E5054;
-  padding: 10px 30px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  max-width: 400px;
-  width: 100%;
-}
-
-.container-cadTec span {
+.container-cadTec span,
+.container-cadTec2 span {
   color: red;
 }
 
-.container-cadTec .info-top {
+.container-cadTec .info-top, 
+.container-cadTec2 .info-top {
   color: #fff;
   display: flex;
   align-items: center;
@@ -23,7 +17,8 @@
   position: relative;
 }
 
-.container-cadTec #voltar {
+.container-cadTec #voltar,
+.container-cadTec2 #voltar  {
   position: absolute;
   left: 10px;
   width: 28px;
@@ -33,12 +28,14 @@
   transition: transform 0.2s ease;
 }
 
-.container-cadTec #voltar:hover {
+.container-cadTec #voltar:hover,
+.container-cadTec2 #voltar:hover {
   color: #6799CE;
   transform: scale(1.1);
 }
 
-.container-cadTec #cadastroTecForm {
+.container-cadTec #cadastroTecForm,
+.container-cadTec2 #cadastroTecForm {
   display: flex;
   flex-direction: column;
   max-width: 1000px;
@@ -52,13 +49,19 @@
   gap: 20px;
 }
 
-.form-group.row .form-field {
+.container-cadTec2 .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.container-cadTec .form-group.row .form-field {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-.container-cadTec label {
+.container-cadTec label,
+.container-cadTec2 label {
   color: #fff;
   display: block;
   font-weight: 600;
@@ -66,6 +69,7 @@
 }
 
 .container-cadTec input,
+.container-cadTec2 input,
 .container-cadTec select {
   color: #fff;
   background-color: #303133;
@@ -75,11 +79,13 @@
   border-radius: 8px;
 }
 
-.container-cadTec .button {
+.container-cadTec .button,
+.container-cadTec2 .button {
   text-align: center;
 }
   
-.container-cadTec .button > button {
+.container-cadTec .button > button,
+.container-cadTec2 .button > button {
   padding: 12px;
   border: none;
   color: white;
@@ -89,19 +95,22 @@
   transition: background 0.3s ease;
 }
 
-.container-cadTec .button > button:hover {
+.container-cadTec .button > button:hover,
+.container-cadTec2 .button > button:hover {
   background-color: #4654C0;
   color: white;
 }
 
-.container-cadTec .button > .btn-avancar {
+.container-cadTec .button > .btn-avancar,
+.container-cadTec2 .button > .btn-cadastrar {
   background-color: #6799CE;
   color: #fff;
   width: 100%;
 }
 
 /* Mensagem de erro */
-.container-cadTec .erro {
+.container-cadTec .erro,
+.container-cadTec2 .erro {
   color: red;
   font-size: 0.9em;
   display: block;

@@ -1,97 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/TelaPrincipal.css">
-    <link rel="stylesheet" href="../css/gerencFuncionarios.css">
-    <link rel="stylesheet" href="../css/gerencChamados.css">
-    <link rel="stylesheet" href="../css/subtelaCadTec.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/TelaPrincipal.css" />
+    <link rel="stylesheet" href="../css/gerencFuncionarios.css" />
+    <link rel="stylesheet" href="../css/gerencChamados.css" />
+    <link rel="stylesheet" href="../css/subtelaCadTec.css" />
     <title>Tela Principal - Admin</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container-tela">
-        
-        <!-- Coluna lateral esquerda -->
-        <div class="conteudo-lateral">
-            <div class="perfil">
-                <div class="perfil-top">
-                    <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    fill="none" 
-                    viewBox="0 0 24 24" 
-                    stroke-width="1.5" 
-                    stroke="currentColor" 
-                    class="size-6">
-                    <path 
-                    stroke-linecap="round" 
-                    stroke-linejoin="round" 
-                    d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                    </svg>
-                    <p id="nome-usuario"></p>
-                </div>
-                <div class="acessos">
-                    <p id="data-acesso"></p>
-                    <p id="ip-acesso"></p>
-                </div>
-            </div>
-
-            <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 15px 0;">
-
-            <div class="menu">
-                <button id="btn-relatorios" onclick="mostrarTela('relatorios')">Relatórios</button>
-                <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 5px 0;">
-                <button id="btn-gerencFuncionarios" onclick="mostrarTela('gerencFuncionarios')">Gerenciar<br>Funcionários</button>
-                <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 5px 0;">
-                <button id="btn-gerencChamados" onclick="mostrarTela('gerencChamados')">Gerenciar<br>Chamados</button>
-                <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 5px 0;">
-                <button id="btn-meusDadosAdmin" onclick="mostrarTela('meusDadosAdmin')">Meus Dados</button>
-            </div>
-
-            <div class="log-out" id="btnLogout">
-                <svg   
-                xmlns="http://www.w3.org/2000/svg" 
-                fill="none" 
-                viewBox="0 0 24 24" 
-                stroke-width="1.5" 
-                stroke="currentColor" 
-                class="size-6">
-                <path 
-                stroke-linecap="round" 
-                stroke-linejoin="round" 
-                d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
-                </svg>
-            </div>
+      <!-- Coluna lateral esquerda -->
+      <div class="conteudo-lateral">
+        <div class="perfil">
+          <div class="perfil-top">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="size-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+              />
+            </svg>
+            <p id="nome-usuario"></p>
+          </div>
+          <div class="acessos">
+            <p id="data-acesso"></p>
+            <p id="ip-acesso"></p>
+          </div>
         </div>
 
-        <div class="tela-central" id="area">
-            <!--retorna todas as quatro telas de acorddo com o botão que a pessoa clica-->
+        <hr
+          style="
+            width: 100%;
+            border: 0;
+            border-top: 1px solid #6a6e72;
+            margin: 15px 0;
+          "
+        />
+
+        <div class="menu">
+          <button id="btn-relatorios" onclick="mostrarTela('relatorios')">
+            Relatórios
+          </button>
+          <hr
+            style="
+              width: 100%;
+              border: 0;
+              border-top: 1px solid #6a6e72;
+              margin: 5px 0;
+            "
+          />
+          <button
+            id="btn-gerencFuncionarios"
+            onclick="mostrarTela('gerencFuncionarios')"
+          >
+            Gerenciar<br />Funcionários
+          </button>
+          <hr
+            style="
+              width: 100%;
+              border: 0;
+              border-top: 1px solid #6a6e72;
+              margin: 5px 0;
+            "
+          />
+          <button
+            id="btn-gerencChamados"
+            onclick="mostrarTela('gerencChamados')"
+          >
+            Gerenciar<br />Chamados
+          </button>
+          <hr
+            style="
+              width: 100%;
+              border: 0;
+              border-top: 1px solid #6a6e72;
+              margin: 5px 0;
+            "
+          />
+          <button
+            id="btn-meusDadosAdmin"
+            onclick="mostrarTela('meusDadosAdmin')"
+          >
+            Meus Dados
+          </button>
         </div>
+
+        <div class="log-out" id="btnLogout">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"
+            />
+          </svg>
+        </div>
+      </div>
+
+      <div class="tela-central" id="area">
+        <!--retorna todas as quatro telas de acorddo com o botão que a pessoa clica-->
+      </div>
     </div>
 
     <!-- Pop-up de confirmação de logout -->
     <div id="popup-logout" class="popup-overlay">
-        <div class="popup-content">
+      <div class="popup-content">
         <h3>Tem certeza que deseja deslogar do sistema?</h3>
         <div class="botoes-popup">
-            <button id="cancelarLogout">CANCELAR</button>
-            <button id="confirmarLogout">TENHO CERTEZA</button>
+          <button id="cancelarLogout">CANCELAR</button>
+          <button id="confirmarLogout">TENHO CERTEZA</button>
         </div>
-        </div>
+      </div>
     </div>
 
     <script src="../js/dateTime_ip.js"></script>
     <script>
-        // troca as tela da área principal
-        function mostrarTela(tela) {
-            const area = document.getElementById('area');
-            let conteudo = '';
+      // troca as tela da área principal
+      function mostrarTela(tela) {
+        const area = document.getElementById("area");
+        let conteudo = "";
 
-            if (tela === 'relatorios') {
-                conteudo = `
+        if (tela === "relatorios") {
+          conteudo = `
                 `;
-            } else if (tela === 'gerencFuncionarios') {
-                conteudo = `
+        } else if (tela === "gerencFuncionarios") {
+          conteudo = `
                 <div class="container-Funcionarios">
                     <h2>Funcionários</h2>
 
@@ -163,10 +211,10 @@
                     </div>
                 </div>
             `;
-            } 
-            // Subtela - Cadastrar Tecnico
-            else if (tela === 'subtelaCadTec') {
-                conteudo = `
+        }
+        // Subtela - Cadastrar Tecnico
+        else if (tela === "subtelaCadTec") {
+          conteudo = `
                 <div class="container-cadTec" id="cadastro-tec">
                     <div class="info-top">
                         <svg 
@@ -251,10 +299,10 @@
                     </form>
                 </div>
                 `;
-            } 
-            // Subtela - Parte 2 do cadastro do técnico
-            else if (tela === 'subtelaCadTec2') {
-                conteudo = `
+        }
+        // Subtela - Parte 2 do cadastro do técnico
+        else if (tela === "subtelaCadTec2") {
+          conteudo = `
                 <div class="container-cadTec2" id="cadastro-tec2">
                     <div class="info-top">
                         <svg 
@@ -337,12 +385,12 @@
                     </form>
                 </div>
                 `;
-            } 
-            // Subtela - Cadastrar Admin
-            else if (tela === 'subtelaCadAdmin') {
-                conteudo = ``;
-            } else if (tela === 'gerencChamados') {
-                conteudo = `
+        }
+        // Subtela - Cadastrar Admin
+        else if (tela === "subtelaCadAdmin") {
+          conteudo = ``;
+        } else if (tela === "gerencChamados") {
+          conteudo = `
                 <div class="container-Chamados">
                     <h2>Chamados</h2>
 
@@ -420,78 +468,132 @@
                     </table>
                 </div>
                 `;
-            } else if (tela === 'meusDadosAdmin') {
-                conteudo = `kakakakka`;
-            }
-
-            area.innerHTML = conteudo;
-
-            // Adiciona os eventos depois que o HTML foi injetado
-            if (tela === 'gerencFuncionarios') {
-                const btnCadTec = document.getElementById('btnCadTec');
-                if (btnCadTec) {
-                    btnCadTec.addEventListener('click', () => {
-                        mostrarTela('subtelaCadTec');
-                    });
-                }
-            }
-
-            if (tela === 'subtelaUrgentes') {
-                const btnCadAdmin = document.getElementById('btnCadAdmin');
-                if (btnCadAdmin) {
-                    btnCadAdmin.addEventListener('click', () => {
-                        mostrarTela('subtelaCadAdmin');
-                    });
-                }
-            }
-
-            if (tela === 'subtelaCadTec') {
-                const avancarCadastro = document.getElementById('btnAvancar');
-                if (avancarCadastro) {
-                    avancarCadastro.addEventListener('click', () => {
-                        mostrarTela('subtelaCadTec2');
-                    });
-                }
-            }
-
-            if (tela === 'gerencFuncionarios') {
-            const inputPesquisa = document.getElementById('pesquisa');
-            const tabela = document.getElementById('tabela-funcionarios');
-            const linhas = tabela.getElementsByTagName('tr');
-
-            inputPesquisa.addEventListener('keyup', function () {
-                const termo = inputPesquisa.value.toLowerCase();
-                for (let i = 0; i < linhas.length; i++) {
-                    const colunas = linhas[i].getElementsByTagName('td');
-                    if (colunas.length > 0) {
-                        const nome = colunas[1].textContent.toLowerCase();
-                        const email = colunas[2].textContent.toLowerCase();
-                        linhas[i].style.display = (nome.includes(termo) || email.includes(termo)) ? '' : 'none';
-                    }
-                }
-            });
-
-        const toggleBtn = document.getElementById('toggle-btn');
-        const opcoes = document.querySelector('.opcoes');
-        toggleBtn.addEventListener('click', () => {
-            toggleBtn.classList.toggle('ativo');
-            opcoes.classList.toggle('mostrar');
-        });
-
-        document.getElementById('btnCadTec').addEventListener('click', () => mostrarTela('subtelaCadTec'));
-        document.getElementById('btnCadAdmin').addEventListener('click', () => mostrarTela('subtelaCadAdmin'));
-    }
+        } else if (tela === "meusDadosAdmin") {
+          conteudo = `kakakakka`;
         }
 
-        /**
-         * ! serve apenas para travar a tela que estou mexendo!!
-        **/ 
-        document.addEventListener("DOMContentLoaded", () => {
-            mostrarTela("subtelaCadTec2");
+        area.innerHTML = conteudo;
+
+        // Adiciona os eventos depois que o HTML foi injetado
+        if (tela === "gerencFuncionarios") {
+          const btnCadTec = document.getElementById("btnCadTec");
+          if (btnCadTec) {
+            btnCadTec.addEventListener("click", () => {
+              mostrarTela("subtelaCadTec");
+            });
+          }
+        }
+
+        if (tela === "subtelaUrgentes") {
+          const btnCadAdmin = document.getElementById("btnCadAdmin");
+          if (btnCadAdmin) {
+            btnCadAdmin.addEventListener("click", () => {
+              mostrarTela("subtelaCadAdmin");
+            });
+          }
+        }
+
+        if (tela === "subtelaCadTec") {
+          const avancarCadastro = document.getElementById("btnAvancar");
+          if (avancarCadastro) {
+            avancarCadastro.addEventListener("click", () => {
+              mostrarTela("subtelaCadTec2");
+            });
+          }
+        }
+
+        if (tela === "gerencFuncionarios") {
+          const inputPesquisa = document.getElementById("pesquisa");
+          const tabela = document.getElementById("tabela-funcionarios");
+          const linhas = tabela.getElementsByTagName("tr");
+
+          inputPesquisa.addEventListener("keyup", function () {
+            const termo = inputPesquisa.value.toLowerCase();
+            for (let i = 0; i < linhas.length; i++) {
+              const colunas = linhas[i].getElementsByTagName("td");
+              if (colunas.length > 0) {
+                const nome = colunas[1].textContent.toLowerCase();
+                const email = colunas[2].textContent.toLowerCase();
+                linhas[i].style.display =
+                  nome.includes(termo) || email.includes(termo) ? "" : "none";
+              }
+            }
+          });
+
+          const toggleBtn = document.getElementById("toggle-btn");
+          const opcoes = document.querySelector(".opcoes");
+          toggleBtn.addEventListener("click", () => {
+            toggleBtn.classList.toggle("ativo");
+            opcoes.classList.toggle("mostrar");
+          });
+
+          document
+            .getElementById("btnCadTec")
+            .addEventListener("click", () => mostrarTela("subtelaCadTec"));
+          document
+            .getElementById("btnCadAdmin")
+            .addEventListener("click", () => mostrarTela("subtelaCadAdmin"));
+        }
+
+        // função mostrar senha- olho 1
+        const senhaInput = document.getElementById("senha");
+        const togglePassword = document.getElementById("togglePassword1");
+        const eyeClosed = document.getElementById("eye-closed1");
+        const eyeOpen = document.getElementById("eye-open1");
+
+        togglePassword.addEventListener("click", () => {
+          const isPasswordVisible = senhaInput.type === "text";
+
+        
+          if (isPasswordVisible) {
+            senhaInput.type = "password";
+            eyeClosed.style.display = "block";
+            eyeOpen.style.display = "none";
+            togglePassword.setAttribute("aria-label", "Mostrar senha");
+            togglePassword.setAttribute("title", "Mostrar senha");
+          } else {
+            senhaInput.type = "text";
+            eyeClosed.style.display = "none";
+            eyeOpen.style.display = "block";
+            togglePassword.setAttribute("aria-label", "Ocultar senha");
+            togglePassword.setAttribute("title", "Ocultar senha");
+          }
         });
+
+        // função mostrar senha- olho 2
+        const repetirSenhaInput = document.getElementById("repetirSenha");
+        const togglePassword2 = document.getElementById("togglePassword2");
+        const eyeClosed2 = document.getElementById("eye-closed2");
+        const eyeOpen2 = document.getElementById("eye-open2");
+
+        togglePassword2.addEventListener("click", () => {
+          const isPasswordVisible = repetirSenhaInput.type === "text";
+
+        
+          if (isPasswordVisible) {
+            repetirSenhaInput.type = "password";
+            eyeClosed2.style.display = "block";
+            eyeOpen2.style.display = "none";
+            togglePassword2.setAttribute("aria-label", "Mostrar senha");
+            togglePassword2.setAttribute("title", "Mostrar senha");
+          } else {
+            repetirSenhaInput.type = "text";
+            eyeClosed2.style.display = "none";
+            eyeOpen2.style.display = "block";
+            togglePassword2.setAttribute("aria-label", "Ocultar senha");
+            togglePassword2.setAttribute("title", "Ocultar senha");
+          }
+        });
+      }
+
+      /**
+       * ! serve apenas para travar a tela que estou mexendo!!
+       **/
+      document.addEventListener("DOMContentLoaded", () => {
+        mostrarTela("subtelaCadTec2");
+      });
     </script>
 
-    
     <script src="../js/cadTecAdmin.js"></script>
-</body>
+  </body>
 </html>

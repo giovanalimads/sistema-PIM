@@ -157,35 +157,35 @@
             })
 
          // Função genérica para alternar visibilidade da senha
-    function configurarToggleSenha(inputId, btnId, eyeClosedId, eyeOpenId) {
-        const input = document.getElementById(inputId);
-        const toggle = document.getElementById(btnId);
-        const eyeClosed = document.getElementById(eyeClosedId);
-        const eyeOpen = document.getElementById(eyeOpenId);
+        function configurarToggleSenha(inputId, btnId, eyeClosedId, eyeOpenId) {
+            const input = document.getElementById(inputId);
+            const toggle = document.getElementById(btnId);
+            const eyeClosed = document.getElementById(eyeClosedId);
+            const eyeOpen = document.getElementById(eyeOpenId);
 
-        toggle.addEventListener('click', () => {
-            const isVisible = input.type === 'text';
+            toggle.addEventListener('click', () => {
+                const isVisible = input.type === 'text';
 
-            if (isVisible) {
-                input.type = 'password';
-                eyeClosed.style.display = 'block';
-                eyeOpen.style.display = 'none';
-                toggle.setAttribute('aria-label', 'Mostrar senha');
-                toggle.setAttribute('title', 'Mostrar senha');
-            } else {
-                input.type = 'text';
-                eyeClosed.style.display = 'none';
-                eyeOpen.style.display = 'block';
-                toggle.setAttribute('aria-label', 'Ocultar senha');
-                toggle.setAttribute('title', 'Ocultar senha');
-            }
-        });
-    }
+                if (isVisible) {
+                    input.type = 'password';
+                    eyeClosed.style.display = 'block';
+                    eyeOpen.style.display = 'none';
+                    toggle.setAttribute('aria-label', 'Mostrar senha');
+                    toggle.setAttribute('title', 'Mostrar senha');
+                } else {
+                    input.type = 'text';
+                    eyeClosed.style.display = 'none';
+                    eyeOpen.style.display = 'block';
+                    toggle.setAttribute('aria-label', 'Ocultar senha');
+                    toggle.setAttribute('title', 'Ocultar senha');
+                }
+            });
+        }
 
-    // Configurar os dois botões
-    configurarToggleSenha('senha', 'togglePassword1', 'eye-closed1', 'eye-open1');
-    configurarToggleSenha('repetirSenha', 'togglePassword2', 'eye-closed2', 'eye-open2');
-    })
+        // Configurar os dois botões
+        configurarToggleSenha('senha', 'togglePassword1', 'eye-closed1', 'eye-open1');
+        configurarToggleSenha('repetirSenha', 'togglePassword2', 'eye-closed2', 'eye-open2');
+        })
 
     </script>
 </body>

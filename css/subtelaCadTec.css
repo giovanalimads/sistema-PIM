@@ -1,0 +1,109 @@
+* {
+  box-sizing: border-box;
+}
+
+.container-cadTec .container {
+  background-color: #4E5054;
+  padding: 10px 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  max-width: 400px;
+  width: 100%;
+}
+
+.container-cadTec span {
+  color: red;
+}
+
+.container-cadTec .info-top {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.container-cadTec #voltar {
+  position: absolute;
+  left: 10px;
+  width: 28px;
+  height: 28px;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.container-cadTec #voltar:hover {
+  color: #6799CE;
+  transform: scale(1.1);
+}
+
+.container-cadTec #cadastroTecForm {
+  display: flex;
+  flex-direction: column;
+  max-width: 1000px;
+  margin: 0 auto;
+  gap: 1rem;
+}
+
+.container-cadTec .form-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.form-group.row .form-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.container-cadTec label {
+  color: #fff;
+  display: block;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.container-cadTec input,
+.container-cadTec select {
+  color: #fff;
+  background-color: #303133;
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+}
+
+.container-cadTec .button {
+  text-align: center;
+}
+  
+.container-cadTec .button > button {
+  padding: 12px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.container-cadTec .button > button:hover {
+  background-color: #4654C0;
+  color: white;
+}
+
+.container-cadTec .button > .btn-avancar {
+  background-color: #6799CE;
+  color: #fff;
+  width: 100%;
+}
+
+/* Mensagem de erro */
+.container-cadTec .erro {
+  color: red;
+  font-size: 0.9em;
+  display: block;
+  margin-top: 4px;
+}

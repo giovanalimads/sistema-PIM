@@ -47,7 +47,7 @@
       todo - fazer html e css (23/10)
       todo - fazer subtela gerenciar funcionários (24/10)
       todo - adicionar botão de + para cadastrar técnico/admin (27/10)
-     * ? todo - tela de cadastro de funcionário (28/10) 
+     * ? todo - tela de cadastro de funcionário (29/10) 
       todo - fazer subtela gerenciar chamados (24/10)
      * ? todo - fazer subtela meus dados (28/10)
      * 
@@ -70,4 +70,202 @@
 
                         <input type="file" id="upload-profile" accept="image/*" style="display:none">
     **/
+</script>
+
+<script>
+    /*
+    <div class="container-cadTec" id="cadastro-tec">
+                    <div class="info-top">
+                        <svg 
+                        id="voltar"
+                        xmlns="http://www.w3.org/2000/svg" 
+                        fill="none" 
+                        viewBox="0 0 24 24" 
+                        stroke-width="1.5" 
+                        stroke="currentColor" 
+                        class="size-6">
+                            <path 
+                            stroke-linecap="round" 
+                            stroke-linejoin="round" 
+                            d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                        </svg>
+                        <h2>CADASTRAR TÉCNICO</h2>
+                    </div>
+
+                    <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 10px 0 25px 0;">
+
+                    <form id="cadastroTecForm">
+                        <!--Campo: Nome-->
+                        <div class="form-group row">
+                            <div class="form-field">
+                                <label for="nome" class="input-nome">Nome completo<span>*</span></label>
+                                <input class="input-nome" type="text" id="nome">
+                                <small class="erro" id="erroNome"></small>
+                            </div>
+                            <div class="form-field">
+                                <label for="id">ID<span>*</span></label>
+                                <input type="text" name="" id="id">
+                                <small class="erro" id="erroId"></small>
+                            </div>
+                        </div>
+
+                        <!--Campo: CPF e Telefone-->
+                        <div class="form-group row">
+                            <div class="form-field">
+                                <label for="cpf">CPF<span>*</span></label>
+                                <input type="text" name="" id="cpf">
+                                <small class="erro" id="erroCpf"></small>
+                            </div>
+                            <div class="form-field">
+                                <label for="telefone">Telefone<span>*</span></label>
+                                <input type="tel" id="telefone">
+                                <small class="erro" id="erroTelefone"></small>
+                            </div>
+                        </div>
+
+                        <!--Campos: Área de especialização e nível de experiência-->
+                        <div class="form-group row">
+                            <div class="form-field">
+                                <label for="areaEspecializacao">Área de Especilização<span>*</span></label>
+                                <select id="areaEspecializacao">
+                                    <option value="">Selecione...</option>
+                                    <option value="sistemas">Sistemas e Maquininhas</option>
+                                    <option value="equipamentos">Equipamentos</option>
+                                    <option value="redes">Redes e Internet</option>
+                                    <option value="impressoras">Impressoras e Periféricos</option>
+                                    <option value="instalacao">Instalação / Atualização</option>
+                                </select>
+                                <small class="erro" id="erroArea"></small>
+                            </div>
+                            <div class="form-field">
+                                <label for="nivelExperiencia">Nível de Experiência<span>*</span></label>
+                                <select id="nivelExperiencia">
+                                    <option value="">Selecione...</option>
+                                    <option value="junior">Júnior</option>
+                                    <option value="pleno">Pleno</option>
+                                    <option value="senior">Sênior</option>
+                                    <option value="especialista">Especialista</option>
+                                </select>
+                                <small class="erro" id="erroNivel"></small>
+                            </div>
+                        </div>
+
+                        <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 10px 0 15px 0;">
+
+                        <div class="button">
+                            <button type="submit" class="btn-avancar">AVANÇAR</button>
+                        </div>
+                    </form>
+                </div>
+
+                * {/*
+  box-sizing: border-box;
+}
+
+.container-cadTec .container {
+  background-color: #4E5054;
+  padding: 10px 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  max-width: 400px;
+  width: 100%;
+}
+
+.container-cadTec span {
+  color: red;
+}
+
+.container-cadTec .info-top {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.container-cadTec #voltar {
+  position: absolute;
+  left: 10px;
+  width: 28px;
+  height: 28px;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.container-cadTec #voltar:hover {
+  color: #6799CE;
+  transform: scale(1.1);
+}
+
+.container-cadTec #cadastroTecForm {
+  display: flex;
+  flex-direction: column;
+  max-width: 1000px;
+  margin: 0 auto;
+  gap: 1rem;
+}
+
+.container-cadTec .form-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.form-group.row .form-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.container-cadTec label {
+  color: #fff;
+  display: block;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.container-cadTec input,
+.container-cadTec select {
+  color: #fff;
+  background-color: #303133;
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+}
+
+.container-cadTec .button {
+  text-align: center;
+}
+  
+.container-cadTec .button > button {
+  padding: 12px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.container-cadTec .button > button:hover {
+  background-color: #4654C0;
+  color: white;
+}
+
+.container-cadTec .button > .btn-avancar {
+  background-color: #6799CE;
+  color: #fff;
+  width: 100%;
+}
+
+/* Mensagem de erro */
+/*.container-cadTec .erro {
+  color: red;
+  font-size: 0.9em;
+  display: block;
+  margin-top: 4px;
+}
+    */
 </script>

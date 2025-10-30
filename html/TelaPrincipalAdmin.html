@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/gerencFuncionarios.css" />
     <link rel="stylesheet" href="../css/gerencChamados.css" />
     <link rel="stylesheet" href="../css/subtelaCadTec.css" />
+    <link rel="stylesheet" href="../css/meusDados.css">
     <title>Tela Principal - Admin</title>
   </head>
   <body>
@@ -136,12 +137,11 @@
         let conteudo = "";
 
         if (tela === "relatorios") {
-          conteudo = `
-                `;
+          conteudo = ``;
         } else if (tela === "gerencFuncionarios") {
           conteudo = `
                 <div class="container-Funcionarios">
-                    <h2>Funcionários</h2>
+                    <h2>FUNCIONÁRIOS</h2>
 
                     <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 10px 0 20px 0;">
 
@@ -168,34 +168,6 @@
                             <button class="btn-acao">Excluir</button>
                         </td>
                         </tr>
-                        <tr>
-                        <td>Técnico</td>
-                        <td>Ricardo Dantas</td>
-                        <td>ricardinho@gmail.com</td>
-                        <td class="td-acao">
-                            <button class="btn-acao">Dados</button>
-                            <button class="btn-acao">Excluir</button>
-                        </td>
-                        </tr>
-                        <tr>
-                        <td>Técnico</td>
-                        <td>Ricardo Dantas</td>
-                        <td>ricardinho@gmail.com</td>
-                        <td class="td-acao">
-                            <button class="btn-acao">Dados</button>
-                            <button class="btn-acao">Excluir</button>
-                        </td>
-                        </tr>
-                        <tr>
-                        <td>Técnico</td>
-                        <td>Ricardo Dantas</td>
-                        <td>ricardinho@gmail.com</td>
-                        <td class="td-acao">
-                            <button class="btn-acao">Dados</button>
-                            <button class="btn-acao">Excluir</button>
-                        </td>
-                        </tr>
-                        <tr>
                         <td>Administrador</td>
                         <td>Giovana Lima Oliveira</td>
                         <td>gigi@gmail.com</td>
@@ -639,7 +611,34 @@
                 </div>
                 `;
         } else if (tela === "meusDadosAdmin") {
-          conteudo = `kakakakka`;
+          conteudo = `
+              <div class="container-meusDados">
+                  <h2>MEUS DADOS</h2>
+                  <div class="user-profile">
+                    <svg class="profile-icon" xmlns="http://www.w3.org/2000/svg" fill="none"
+                      viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                    </svg>
+                  </div>
+
+                  <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 10px 0 20px 0;">
+
+                  <div class="user-info">
+                    <div class="info"><label>Nome:</label><input id="nome" readonly></div>
+                    <div class="info"><label>ID:</label><input id="idTecnico" readonly></div>
+                    <div class="info"><label>CPF:</label><input id="cpf" readonly></div>
+                    <div class="info"><label>Telefone:</label><input id="telefone" readonly></div>
+                    <div class="info"><label>E-mail:</label><input id="email" readonly></div>
+                    <div class="info"><label>Senha:</label><input id="senha" type="password" readonly></div>
+                  </div>
+
+                  <div class="button">
+                    <button id="editar-btn" class="btn-principal">EDITAR DADOS</button>
+                    <button id="salvar-btn" style="display:none;">SALVAR DADOS</button>
+                  </div>
+                </div>
+          `;
         }
 
         area.innerHTML = conteudo;
@@ -722,9 +721,11 @@
        * ! serve apenas para travar a tela que estou mexendo!!
        **/
       document.addEventListener("DOMContentLoaded", () => {
-        mostrarTela("subtelaCadAdmin");
+        mostrarTela("meusDadosAdmin");
       });
       
     </script>
+
+    <script src="../js/meusDados.js"></script>
   </body>
 </html>

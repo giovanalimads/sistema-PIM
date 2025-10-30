@@ -83,10 +83,10 @@
             let conteudo = '';
 
             // Tela principal - Meus Chamados
-            if (tela === 'meusChamados') {
+            if (tela === 'telaInicialTec') {
                 conteudo = `
                     <div class="container-meusChamados">
-                        <h2>Tela Inicial</h2>
+                        <h2>TELA INICIAL</h2>
                         <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 10px 0 20px 0;">
                         <p>Olá novamente, Técnico! Você possui:</p>
 
@@ -115,7 +115,7 @@
             else if (tela === 'subtelaUrgentes') {
                 conteudo = `
                     <div class="container-Urgentes">
-                        <h2>Chamados Urgentes</h2>
+                        <h2>CHAMADOS URGENTES</h2>
                         
                         <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 10px 0 20px 0;">
 
@@ -136,34 +136,21 @@
                             <td>Equipamento</td>
                             <td>01/04/2025</td>
                             <td>Urgente</td>
-                            <td><button class="btn-acao" onclick="visualizarChamado('001')">Atender</button></td>
+                            <td><button class="btn-acao" onclick="">Atender</button></td>
                             </tr>
                             <tr>
                             <td>002</td>
                             <td>Redes e Internet</td>
                             <td>28/03/2025</td>
                             <td>Urgente</td>
-                            <td><button class="btn-acao" onclick="visualizarChamado('002')">Atender</button></td>
+                            <td><button class="btn-acao" onclick="">Atender</button></td>
                             </tr>
                             <tr>
                             <td>003</td>
                             <td>Servidores</td>
                             <td>15/03/2025</td>
                             <td>Urgente</td>
-                            <td><button class="btn-acao" onclick="visualizarChamado('003')">Atender</button></td>
-                            </tr>
-                            <tr>
-                            <td>006</td>
-                            <td>Servidores</td>
-                            <td>11/07/2025</td>
-                            <td>Urgente</td>
-                            <td><button class="btn-acao" onclick="visualizarChamado('003')">Atender</button></td>
-                            </tr>
-                            <td>009</td>
-                            <td>Servidores</td>
-                            <td>01/10/2025</td>
-                            <td>Urgente</td>
-                            <td><button class="btn-acao" onclick="visualizarChamado('003')">Atender</button></td>
+                            <td><button class="btn-acao" onclick=")">Atender</button></td>
                             </tr>
                         </tbody>
                         </table>
@@ -174,6 +161,102 @@
                     </div>
                 `;
             } 
+            // Subtela - Chamados Finalizados
+            else if ( tela === 'subtelaFinalizados') {
+                conteudo = `
+                    <div class="container-Urgentes">
+                        <h2>CHAMADOS FINALIZADOS</h2>
+                        
+                        <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 10px 0 20px 0;">
+
+                        <table>
+                        <thead>
+                            <tr>
+                            <th>Protocolo</th>
+                            <th>Categoria</th>
+                            <th>Data</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela-chamados">
+                            <!-- Os dados abaixo são apenas placeholders -->
+                            <tr>
+                            <td>001</td>
+                            <td>Equipamento</td>
+                            <td>01/04/2025</td>
+                            <td>Finalizado</td>
+                            <td><button class="btn-acao" onclick="">Ver</button></td>
+                            </tr>
+                            <tr>
+                            <td>002</td>
+                            <td>Redes e Internet</td>
+                            <td>28/03/2025</td>
+                            <td>Finalizado</td>
+                            <td><button class="btn-acao" onclick="">Ver</button></td>
+                            </tr>
+                            <tr>
+                            <td>003</td>
+                            <td>Servidores</td>
+                            <td>15/03/2025</td>
+                            <td>Finalizado</td>
+                            <td><button class="btn-acao" onclick="">Ver</button></td>
+                            </tr>
+                        </tbody>
+                        </table>
+
+                        <div class="button">
+                            <button class="btn-principal" onclick="window.location.href='TelaPrincipalTec.html'">VOLTAR</button>
+                        </div>
+                    </div>
+                `;
+            }
+            // Subtela - Meus Chamados
+            else if ( tela === 'meusChamados') {
+                conteudo = `
+                        <div class="container-Urgentes">
+                        <h2>MEUS CHAMADOS</h2>
+                        
+                        <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 10px 0 20px 0;">
+
+                        <table>
+                        <thead>
+                            <tr>
+                            <th>Protocolo</th>
+                            <th>Categoria</th>
+                            <th>Data</th>
+                            <th>Nível</th>
+                            <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela-chamados">
+                            <!-- Os dados abaixo são apenas placeholders -->
+                            <tr>
+                            <td>001</td>
+                            <td>Equipamento</td>
+                            <td>01/04/2025</td>
+                            <td>Urgente</td>
+                            <td><button class="btn-acao" onclick="">Atender</button></td>
+                            </tr>
+                            <tr>
+                            <td>002</td>
+                            <td>Redes e Internet</td>
+                            <td>28/03/2025</td>
+                            <td>Alta</td>
+                            <td><button class="btn-acao" onclick="">Atender</button></td>
+                            </tr>
+                            <tr>
+                            <td>003</td>
+                            <td>Servidores</td>
+                            <td>15/03/2025</td>
+                            <td>Média</td>
+                            <td><button class="btn-acao" onclick="">Atender</button></td>
+                            </tr>
+                        </tbody>
+                        </table>
+                    </div>
+                `;
+            }
             // Tela Meus Dados
             else if (tela === 'meusDadosTec') {
                 conteudo = `
@@ -194,7 +277,7 @@
                             <div class="info"><label>ID:</label><input id="idTecnico" readonly></div>
                             <div class="info"><label>CPF:</label><input id="cpf" readonly></div>
                             <div class="info"><label>Telefone:</label><input id="telefone" readonly></div>
-                            <div class="info"><label>Área de Especialização:</label><input id="areaEspecializacao" readonly></div>
+                            <div class="info"><label>Especialização:</label><input id="areaEspecializacao" readonly></div>
                             <div class="info"><label>Nível de Experiência:</label><input id="nivelExperiencia" readonly></div>
                             <div class="info"><label>E-mail:</label><input id="email" readonly></div>
                             <div class="info"><label>Senha:</label><input id="senha" type="password" readonly></div>
@@ -212,7 +295,7 @@
             area.innerHTML = conteudo;
 
             // Adiciona os eventos depois que o HTML foi injetado
-            if (tela === 'meusChamados') {
+            if (tela === 'telaInicialTec') {
                 const btnUrgentes = document.getElementById('btnUrgentes');
                 if (btnUrgentes) {
                     btnUrgentes.addEventListener('click', () => {
@@ -221,18 +304,37 @@
                 }
             }
 
+            if (tela === 'telaInicialTec') {
+                const btnFinalizados = document.getElementById('btnFinalizados');
+                if (btnFinalizados) {
+                    btnFinalizados.addEventListener('click', () => {
+                        mostrarTela('subtelaFinalizados');
+                    });
+                }
+            }
+
             if (tela === 'subtelaUrgentes') {
                 const btnVoltar = document.getElementById('btnVoltar');
                 if (btnVoltar) {
                     btnVoltar.addEventListener('click', () => {
-                        mostrarTela('meusChamados');
+                        mostrarTela('telaInicialTec');
+                    });
+                }
+            }
+
+
+            if (tela === 'subtelaFinalizados') {
+                const btnVoltar = document.getElementById('btnVoltar');
+                if (btnVoltar) {
+                    btnVoltar.addEventListener('click', () => {
+                        mostrarTela('telaInicialTec');
                     });
                 }
             }
         }
 
         document.addEventListener("DOMContentLoaded", () => {
-            mostrarTela("meusDadosTec");
+            mostrarTela("telaInicialTec");
         });
     </script>
 

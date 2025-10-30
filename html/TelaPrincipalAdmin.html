@@ -219,7 +219,7 @@
                     <div class="menu-flutuante">
                     <div class="opcoes">
                         <button class="opcao" id="btnCadTec">Cadastrar Técnico</button>
-                        <button class="opcao">Cadastrar Admin</button>
+                        <button class="opcao" id="btnCadAdmin">Cadastrar Admin</button>
                     </div>
 
                     <button id="toggle-btn" class="toggle-btn">
@@ -272,7 +272,7 @@
                             </div>
                             <div class="form-field">
                                 <label for="id">ID<span>*</span></label>
-                                <input type="text" name="" id="id">
+                                <input type="text" name="" id="id" readonly>
                                 <small class="erro" id="erroId"></small>
                             </div>
                         </div>
@@ -353,7 +353,7 @@
                     <form id="cadastroTecForm">
                         <!--Campo: E-mail-->
                         <div class="form-group">
-                            <label for="email">E-mail:<span>*</span></label>
+                            <label for="email">E-mail Corporativo:<span>*</span></label>
                             <input type="text" id="email">
                             <small class="erro" id="erroEmail"></small>
                         </div>
@@ -383,7 +383,7 @@
 
                         <!--Campos: Repetir senha-->
                         <div class="form-group">
-                            <label for="repetirSenha">Repita sua senha:<span>*</span></label>
+                            <label for="repetirSenha">Repita a senha:<span>*</span></label>
                             <div class="repetirSenha-container">
                                 <input type="password" id="repetirSenha">
                                 <button type="button" class="toggle-password" id="togglePassword2" aria-label="Mostrar senha" aria-pressed="false" title="Mostrar senha">
@@ -415,11 +415,150 @@
         }
         // Subtela - Cadastrar Admin
         else if (tela === "subtelaCadAdmin") {
-          conteudo = ``;
+          conteudo = `
+            <div class="container-cadTec" id="cadastro-tec">
+                <div class="info-top">
+                    <svg 
+                    id="voltar"
+                    xmlns="http://www.w3.org/2000/svg" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke-width="1.5" 
+                    stroke="currentColor" 
+                    class="size-6">
+                        <path 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round" 
+                        d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                    </svg>
+                    <h2>CADASTRAR ADMINISTRADOR</h2>
+                </div>
+
+                <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 10px 0 25px 0;">
+
+                <form id="cadastroTecForm">
+                    <!--Campo: Nome-->
+                    <div class="form-group row">
+                        <div class="form-field">
+                            <label for="nome" class="input-nome">Nome completo<span>*</span></label>
+                            <input class="input-nome" type="text" id="nome">
+                            <small class="erro" id="erroNome"></small>
+                        </div>
+                        <div class="form-field">
+                            <label for="id">ID<span>*</span></label>
+                            <input type="text" name="" id="id" readonly>
+                            <small class="erro" id="erroId"></small>
+                        </div>
+                    </div>
+
+                    <!--Campo: CPF e Telefone-->
+                    <div class="form-group row">
+                        <div class="form-field">
+                            <label for="cpf">CPF<span>*</span></label>
+                            <input type="text" name="" id="cpf">
+                            <small class="erro" id="erroCpf"></small>
+                        </div>
+                        <div class="form-field">
+                            <label for="telefone">Telefone<span>*</span></label>
+                            <input type="tel" id="telefone">
+                            <small class="erro" id="erroTelefone"></small>
+                        </div>
+                    </div>
+
+                    <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 10px 0 15px 0;">
+
+                    <div class="button">
+                        <button type="submit" class="btn-avancar" id="btnAvancar">AVANÇAR</button>
+                    </div>
+                </form>
+            </div>
+          `;
         } 
         // Subtela - Cadastrar Admin
         else if (tela === "subtelaCadAdmin2") {
-          conteudo = ``;
+          conteudo = `
+          <div class="container-cadTec2" id="cadastro-tec2">
+                    <div class="info-top">
+                        <svg 
+                        id="voltar"
+                        xmlns="http://www.w3.org/2000/svg" 
+                        fill="none" 
+                        viewBox="0 0 24 24" 
+                        stroke-width="1.5" 
+                        stroke="currentColor" 
+                        class="size-6">
+                            <path 
+                            stroke-linecap="round" 
+                            stroke-linejoin="round" 
+                            d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                        </svg>
+                        <h2>CADASTRAR ADMINISTRADOR</h2>
+                    </div>
+                    
+                    <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 0 0 20px 0;">
+
+                    <form id="cadastroTecForm">
+                        <!--Campo: E-mail Corporativo-->
+                        <div class="form-group">
+                            <label for="email">E-mail Corporativo:<span>*</span></label>
+                            <input type="text" id="email">
+                            <small class="erro" id="erroEmail"></small>
+                        </div>
+
+                        <!--Campo: Senha-->
+                        <div class="form-group">
+                            <label for="password">Senha:<span>*</span></label>
+                            <div class="senha-conteiner">
+                                <input type="password" name="" id="senha">
+                                <button type="button" class="toggle-password" id="togglePassword1" aria-label="Mostrar senha" aria-pressed="false" title="Mostrar senha">
+                                    <!-- olho fechado -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" id="eye-closed1" class="icone-senha">
+                                        <path d="M3.53 2.47a.75.75 0 0 0-1.06 1.06l18 18a.75.75 0 1 0 1.06-1.06l-18-18ZM22.676 12.553a11.249 11.249 0 0 1-2.631 4.31l-3.099-3.099a5.25 5.25 0 0 0-6.71-6.71L7.759 4.577a11.217 11.217 0 0 1 4.242-.827c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113Z" />
+                                        <path d="M15.75 12c0 .18-.013.357-.037.53l-4.244-4.243A3.75 3.75 0 0 1 15.75 12ZM12.53 15.713l-4.243-4.244a3.75 3.75 0 0 0 4.244 4.243Z" />
+                                        <path d="M6.75 12c0-.619.107-1.213.304-1.764l-3.1-3.1a11.25 11.25 0 0 0-2.63 4.31c-.12.362-.12.752 0 1.114 1.489 4.467 5.704 7.69 10.675 7.69 1.5 0 2.933-.294 4.242-.827l-2.477-2.477A5.25 5.25 0 0 1 6.75 12Z" />
+                                    </svg>
+
+                                    <!-- olho aberto -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" id="eye-open1" class="icone-senha" style="display: none;">
+                                        <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                                        <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 0 1 0-1.113ZM17.25 12a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0Z" clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <small class="erro" id="erroSenha"></small>
+                        </div>
+
+                        <!--Campos: Repetir senha-->
+                        <div class="form-group">
+                            <label for="repetirSenha">Repita a senha:<span>*</span></label>
+                            <div class="repetirSenha-container">
+                                <input type="password" id="repetirSenha">
+                                <button type="button" class="toggle-password" id="togglePassword2" aria-label="Mostrar senha" aria-pressed="false" title="Mostrar senha">
+                                    <!-- olho fechado -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" id="eye-closed2" class="icone-senha">
+                                        <path d="M3.53 2.47a.75.75 0 0 0-1.06 1.06l18 18a.75.75 0 1 0 1.06-1.06l-18-18ZM22.676 12.553a11.249 11.249 0 0 1-2.631 4.31l-3.099-3.099a5.25 5.25 0 0 0-6.71-6.71L7.759 4.577a11.217 11.217 0 0 1 4.242-.827c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113Z" />
+                                        <path d="M15.75 12c0 .18-.013.357-.037.53l-4.244-4.243A3.75 3.75 0 0 1 15.75 12ZM12.53 15.713l-4.243-4.244a3.75 3.75 0 0 0 4.244 4.243Z" />
+                                        <path d="M6.75 12c0-.619.107-1.213.304-1.764l-3.1-3.1a11.25 11.25 0 0 0-2.63 4.31c-.12.362-.12.752 0 1.114 1.489 4.467 5.704 7.69 10.675 7.69 1.5 0 2.933-.294 4.242-.827l-2.477-2.477A5.25 5.25 0 0 1 6.75 12Z" />
+                                    </svg>
+
+                                    <!-- olho aberto -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" id="eye-open2" class="icone-senha" style="display: none;">
+                                        <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                                        <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 0 1 0-1.113ZM17.25 12a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0Z" clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <small class="erro" id="erroRepetirSenha"></small>
+                        </div>
+
+                        <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 5px 0 10px 0;">
+
+                        <div class="button">
+                            <button type="submit" class="btn-cadastrar">CADASTRAR</button>
+                        </div>
+                    </form>
+                </div>
+          `;
         } else if (tela === "gerencChamados") {
           conteudo = `
                 <div class="container-Chamados">
@@ -533,6 +672,15 @@
           }
         }
 
+        if (tela === "subtelaCadAdmin") {
+          const avancarCadastro = document.getElementById("btnAvancar");
+          if (avancarCadastro) {
+            avancarCadastro.addEventListener("click", () => {
+              mostrarTela("subtelaCadAdmin2");
+            });
+          }
+        }
+
         // barra de pesquisa para funcionários
         if (tela === "gerencFuncionarios") {
           const inputPesquisa = document.getElementById("pesquisa");
@@ -567,56 +715,6 @@
             .getElementById("btnCadAdmin")
             .addEventListener("click", () => mostrarTela("subtelaCadAdmin"));
         }
-
-        // função mostrar senha- olho 1
-        const senhaInput = document.getElementById("senha");
-        const togglePassword = document.getElementById("togglePassword1");
-        const eyeClosed = document.getElementById("eye-closed1");
-        const eyeOpen = document.getElementById("eye-open1");
-
-        togglePassword.addEventListener("click", () => {
-          const isPasswordVisible = senhaInput.type === "text";
-
-        
-          if (isPasswordVisible) {
-            senhaInput.type = "password";
-            eyeClosed.style.display = "block";
-            eyeOpen.style.display = "none";
-            togglePassword.setAttribute("aria-label", "Mostrar senha");
-            togglePassword.setAttribute("title", "Mostrar senha");
-          } else {
-            senhaInput.type = "text";
-            eyeClosed.style.display = "none";
-            eyeOpen.style.display = "block";
-            togglePassword.setAttribute("aria-label", "Ocultar senha");
-            togglePassword.setAttribute("title", "Ocultar senha");
-          }
-        });
-
-        // função mostrar senha- olho 2
-        const repetirSenhaInput = document.getElementById("repetirSenha");
-        const togglePassword2 = document.getElementById("togglePassword2");
-        const eyeClosed2 = document.getElementById("eye-closed2");
-        const eyeOpen2 = document.getElementById("eye-open2");
-
-        togglePassword2.addEventListener("click", () => {
-          const isPasswordVisible = repetirSenhaInput.type === "text";
-
-        
-          if (isPasswordVisible) {
-            repetirSenhaInput.type = "password";
-            eyeClosed2.style.display = "block";
-            eyeOpen2.style.display = "none";
-            togglePassword2.setAttribute("aria-label", "Mostrar senha");
-            togglePassword2.setAttribute("title", "Mostrar senha");
-          } else {
-            repetirSenhaInput.type = "text";
-            eyeClosed2.style.display = "none";
-            eyeOpen2.style.display = "block";
-            togglePassword2.setAttribute("aria-label", "Ocultar senha");
-            togglePassword2.setAttribute("title", "Ocultar senha");
-          }
-        });
         
       }
 
@@ -624,12 +722,9 @@
        * ! serve apenas para travar a tela que estou mexendo!!
        **/
       document.addEventListener("DOMContentLoaded", () => {
-        mostrarTela("subtelaCadTec");
+        mostrarTela("subtelaCadAdmin");
       });
       
     </script>
-
-    <script src="../js/cadTecAdmin.js"></script>
-    <script src="../js/validacaoCampos.js"></script>
   </body>
 </html>

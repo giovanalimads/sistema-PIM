@@ -22,12 +22,14 @@
 <img width="1363" height="603" alt="image" src="https://github.com/user-attachments/assets/b478ca28-20a1-4a71-a23f-9c9bc5cfdfef" />
 
 #### Tela inicial - Técnico
-<img width="1367" height="607" alt="image" src="https://github.com/user-attachments/assets/c6a15143-a862-46ed-afda-d05a50caadcd" />
-[falta "Meus Chamados"]
-[falta "Meus Dados"]
+<img width="1364" height="605" alt="image" src="https://github.com/user-attachments/assets/18cd337e-acc3-47e8-a44c-414ba8c9938d" />
+<img width="1364" height="606" alt="image" src="https://github.com/user-attachments/assets/92d7f6f7-2307-48cc-a9a3-74cb4ebb9a27" />
+<img width="1364" height="606" alt="image" src="https://github.com/user-attachments/assets/bd9eb33c-7030-4e4d-bb15-28342416df6c" />
+<img width="1366" height="609" alt="image" src="https://github.com/user-attachments/assets/415b6da9-00ba-473d-b017-8bb993de6c15" />
+<img width="1364" height="606" alt="image" src="https://github.com/user-attachments/assets/4a3107a1-6995-4c96-8f63-1f139da01d68" />
 
 #### Tela inicial - Admin
 [falta "Relatórios"]
-<img width="1367" height="607" alt="image" src="https://github.com/user-attachments/assets/3f1405ae-d409-4958-a5f2-d860f0bf063c" />
-<img width="1367" height="607" alt="image" src="https://github.com/user-attachments/assets/505e2b6d-5ba7-4be5-9b95-e4042b9b2a96" />
+<img width="1364" height="608" alt="image" src="https://github.com/user-attachments/assets/01f3b2f3-b042-45dd-9fc0-9ef8931db093" />
+<img width="1367" height="609" alt="image" src="https://github.com/user-attachments/assets/4217bb4d-ec0a-42e8-bcba-faeb57c024dd" />
 [falta "Meus Dados"]

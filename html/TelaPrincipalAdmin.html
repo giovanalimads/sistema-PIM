@@ -169,6 +169,33 @@
                         </td>
                         </tr>
                         <tr>
+                        <td>Técnico</td>
+                        <td>Ricardo Dantas</td>
+                        <td>ricardinho@gmail.com</td>
+                        <td class="td-acao">
+                            <button class="btn-acao">Dados</button>
+                            <button class="btn-acao">Excluir</button>
+                        </td>
+                        </tr>
+                        <tr>
+                        <td>Técnico</td>
+                        <td>Ricardo Dantas</td>
+                        <td>ricardinho@gmail.com</td>
+                        <td class="td-acao">
+                            <button class="btn-acao">Dados</button>
+                            <button class="btn-acao">Excluir</button>
+                        </td>
+                        </tr>
+                        <tr>
+                        <td>Técnico</td>
+                        <td>Ricardo Dantas</td>
+                        <td>ricardinho@gmail.com</td>
+                        <td class="td-acao">
+                            <button class="btn-acao">Dados</button>
+                            <button class="btn-acao">Excluir</button>
+                        </td>
+                        </tr>
+                        <tr>
                         <td>Administrador</td>
                         <td>Giovana Lima Oliveira</td>
                         <td>gigi@gmail.com</td>
@@ -389,6 +416,10 @@
         // Subtela - Cadastrar Admin
         else if (tela === "subtelaCadAdmin") {
           conteudo = ``;
+        } 
+        // Subtela - Cadastrar Admin
+        else if (tela === "subtelaCadAdmin2") {
+          conteudo = ``;
         } else if (tela === "gerencChamados") {
           conteudo = `
                 <div class="container-Chamados">
@@ -502,6 +533,7 @@
           }
         }
 
+        // barra de pesquisa para funcionários
         if (tela === "gerencFuncionarios") {
           const inputPesquisa = document.getElementById("pesquisa");
           const tabela = document.getElementById("tabela-funcionarios");
@@ -520,6 +552,7 @@
             }
           });
 
+          // redirecionamento para as telas e cadastro
           const toggleBtn = document.getElementById("toggle-btn");
           const opcoes = document.querySelector(".opcoes");
           toggleBtn.addEventListener("click", () => {
@@ -584,16 +617,19 @@
             togglePassword2.setAttribute("title", "Ocultar senha");
           }
         });
+        
       }
 
       /**
        * ! serve apenas para travar a tela que estou mexendo!!
        **/
       document.addEventListener("DOMContentLoaded", () => {
-        mostrarTela("subtelaCadTec2");
+        mostrarTela("subtelaCadTec");
       });
+      
     </script>
 
     <script src="../js/cadTecAdmin.js"></script>
+    <script src="../js/validacaoCampos.js"></script>
   </body>
 </html>

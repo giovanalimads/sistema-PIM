@@ -1,13 +1,22 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const sql = require("mssql");
+const sql = require("mssql/msnodesqlv8"); // driver para Windows Authentication
 const cors = require("cors");
 const bcrypt = require("bcryptjs");
-const dbConfig = require("./dbConfig");
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+
+// 🔹 Configuração do banco
+const dbConfig = {
+  server: 'localhost', // instância padrão
+  database: 'suporteDB',
+  driver: 'msnodesqlv8',
+  options: {
+    trustedConnection: true // Windows Authentication
+  }
+};
 
 // 🔌 Testar conexão
 sql.connect(dbConfig)
@@ -16,20 +25,28 @@ sql.connect(dbConfig)
   })
   .catch(err => console.error("❌ Erro na conexão:", err));
 
-// 🧍‍♂️ Rota de cadastro de usuário
+// 🧍‍♂️ Cadastro de usuário
 app.post("/cadastro", async (req, res) => {
   const { nome, cpf, telefone, endereco, email, senha, tipo } = req.body;
 
   try {
     const pool = await sql.connect(dbConfig);
 
-    // Criptografa a senha antes de salvar
+    // Criptografa a senha
     const senhaHash = await bcrypt.hash(senha, 10);
 
-    await pool.request().query(`
-      INSERT INTO usuarios (nome, cpf, telefone, endereco, email, senha, tipo)
-      VALUES ('${nome}', '${cpf}', '${telefone}', '${endereco}', '${email}', '${senhaHash}', '${tipo || "usuario"}')
-    `);
+    await pool.request()
+      .input('nome', sql.NVarChar, nome)
+      .input('cpf', sql.NVarChar, cpf)
+      .input('telefone', sql.NVarChar, telefone)
+      .input('endereco', sql.NVarChar, endereco)
+      .input('email', sql.NVarChar, email)
+      .input('senha', sql.NVarChar, senhaHash)
+      .input('tipo', sql.NVarChar, tipo || "usuario")
+      .query(`
+        INSERT INTO usuarios (nome, cpf, telefone, endereco, email, senha, tipo)
+        VALUES (@nome, @cpf, @telefone, @endereco, @email, @senha, @tipo)
+      `);
 
     res.status(200).send({ message: "✅ Usuário cadastrado com sucesso!" });
   } catch (err) {
@@ -38,25 +55,21 @@ app.post("/cadastro", async (req, res) => {
   }
 });
 
-// 🔐 Rota de login
+// 🔐 Login
 app.post("/login", async (req, res) => {
   const { email, senha } = req.body;
 
   try {
     const pool = await sql.connect(dbConfig);
-    const result = await pool.request().query(`
-      SELECT * FROM usuarios WHERE email = '${email}'
-    `);
+    const result = await pool.request()
+      .input('email', sql.NVarChar, email)
+      .query(`SELECT * FROM usuarios WHERE email = @email`);
 
     const usuario = result.recordset[0];
-    if (!usuario) {
-      return res.status(404).send({ error: "Usuário não encontrado." });
-    }
+    if (!usuario) return res.status(404).send({ error: "Usuário não encontrado." });
 
     const senhaCorreta = await bcrypt.compare(senha, usuario.senha);
-    if (!senhaCorreta) {
-      return res.status(401).send({ error: "Senha incorreta." });
-    }
+    if (!senhaCorreta) return res.status(401).send({ error: "Senha incorreta." });
 
     res.send({
       message: "✅ Login realizado com sucesso!",
@@ -72,7 +85,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-// 📋 Rota para listar chamados
+// 📋 Listar chamados
 app.get("/chamados", async (req, res) => {
   try {
     const pool = await sql.connect(dbConfig);
@@ -89,16 +102,24 @@ app.get("/chamados", async (req, res) => {
   }
 });
 
-// 🆕 Rota para abrir um novo chamado
+// 🆕 Abrir novo chamado
 app.post("/chamados", async (req, res) => {
   const { protocolo, titulo, categoria, urgencia, descricao, id_usuario } = req.body;
 
   try {
     const pool = await sql.connect(dbConfig);
-    await pool.request().query(`
-      INSERT INTO chamados (protocolo, titulo, categoria, urgencia, descricao, id_usuario)
-      VALUES ('${protocolo}', '${titulo}', '${categoria}', '${urgencia}', '${descricao}', ${id_usuario})
-    `);
+    await pool.request()
+      .input('protocolo', sql.NVarChar, protocolo)
+      .input('titulo', sql.NVarChar, titulo)
+      .input('categoria', sql.NVarChar, categoria)
+      .input('urgencia', sql.NVarChar, urgencia)
+      .input('descricao', sql.NVarChar, descricao)
+      .input('id_usuario', sql.Int, id_usuario)
+      .query(`
+        INSERT INTO chamados (protocolo, titulo, categoria, urgencia, descricao, id_usuario)
+        VALUES (@protocolo, @titulo, @categoria, @urgencia, @descricao, @id_usuario)
+      `);
+
     res.send({ message: "✅ Chamado aberto com sucesso!" });
   } catch (err) {
     console.error(err);

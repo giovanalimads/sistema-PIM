@@ -12,7 +12,7 @@ const dbConfig = {
     server: "localhost",
     database: "SistemaPIM",
     options: {
-        trustedConnection: true,
+        encrypt: false,
         trustServerCertificate: true
     }
 };

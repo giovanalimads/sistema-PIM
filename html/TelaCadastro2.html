@@ -93,100 +93,122 @@
     </div>
 
     <script>
-        // validações dos campos
-        document.addEventListener('DOMContentLoaded', () => {
-            const form = document.getElementById('cadastroSegForm');
-            const email = document.getElementById("email");
-            const senha = document.getElementById("senha");
-            const confirmacao = document.getElementById("repetirSenha");
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('cadastroSegForm');
+    const email = document.getElementById("email");
+    const senha = document.getElementById("senha");
+    const confirmacao = document.getElementById("repetirSenha");
 
-            // variáveis de erro
-            const erroEmail = document.getElementById("erroEmail");
-            const erroSenha = document.getElementById("erroSenha");
-            const erroRepetirSenha = document.getElementById("erroRepetirSenha");
+    const erroEmail = document.getElementById("erroEmail");
+    const erroSenha = document.getElementById("erroSenha");
+    const erroRepetirSenha = document.getElementById("erroRepetirSenha");
+    const btnVoltar = document.getElementById("voltar");
 
-            const btnVoltar = document.getElementById("voltar");
+    // Voltar mantendo os dados
+    btnVoltar.addEventListener("click", () => {
+        window.location.href = "TelaCadastro.html";
+    });
 
-            // voltar para a página anterior mantendo os dados em localStorage
-            btnVoltar.addEventListener("click", () => {
-                window.location.href = "TelaCadastro.html";
-            })
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
+        // limpa erros
+        erroEmail.textContent = "";
+        erroSenha.textContent = "";
+        erroRepetirSenha.textContent = "";
 
-                erroEmail.textContent = "";
-                erroSenha.textContent = "";
-                erroRepetirSenha.textContent = "";
+        let valido = true;
+        const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-                let valido = true;
-
-                const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                 if (email.value.trim() === "") {
-                    erroEmail.textContent = "Digite seu e-mail.";
-                    valido = false;
-                } else if (!regexEmail.test(email.value)) {
-                    erroEmail.textContent = "Digite um e-mail válido (ex: exemplo@email.com).";
-                    valido = false;
-                }
-
-                 // validação da senha
-                if (senha.value.trim() === "") {
-                    erroSenha.textContent = "Digite uma senha.";
-                    valido = false;
-                } else if (senha.value.length < 8) {
-                    erroSenha.textContent = "A senha deve ter pelo menos 8 caracteres.";
-                    valido = false;
-                }
-
-                 // validação da confirmação de senha
-                if (confirmacao.value.trim() === "") {
-                    erroRepetirSenha.textContent = "Repita sua senha.";
-                    valido = false;
-                } else if (senha.value !== confirmacao.value) {
-                    erroRepetirSenha.textContent = "As senhas não coincidem.";
-                    valido = false;
-                }
-
-                // se estiver tudo certo
-                if (valido) {
-                    alert("Cadastro concluído com sucesso! Vá para a tela de login.");
-                    // redirecionamento ou envio ao backend
-                    // window.location.href = "pagina_inicial.html";
-                }
-            })
-
-         // Função genérica para alternar visibilidade da senha
-        function configurarToggleSenha(inputId, btnId, eyeClosedId, eyeOpenId) {
-            const input = document.getElementById(inputId);
-            const toggle = document.getElementById(btnId);
-            const eyeClosed = document.getElementById(eyeClosedId);
-            const eyeOpen = document.getElementById(eyeOpenId);
-
-            toggle.addEventListener('click', () => {
-                const isVisible = input.type === 'text';
-
-                if (isVisible) {
-                    input.type = 'password';
-                    eyeClosed.style.display = 'block';
-                    eyeOpen.style.display = 'none';
-                    toggle.setAttribute('aria-label', 'Mostrar senha');
-                    toggle.setAttribute('title', 'Mostrar senha');
-                } else {
-                    input.type = 'text';
-                    eyeClosed.style.display = 'none';
-                    eyeOpen.style.display = 'block';
-                    toggle.setAttribute('aria-label', 'Ocultar senha');
-                    toggle.setAttribute('title', 'Ocultar senha');
-                }
-            });
+        if (email.value.trim() === "") {
+            erroEmail.textContent = "Digite seu e-mail.";
+            valido = false;
+        } else if (!regexEmail.test(email.value)) {
+            erroEmail.textContent = "Digite um e-mail válido.";
+            valido = false;
         }
 
-        // Configurar os dois botões
-        configurarToggleSenha('senha', 'togglePassword1', 'eye-closed1', 'eye-open1');
-        configurarToggleSenha('repetirSenha', 'togglePassword2', 'eye-closed2', 'eye-open2');
-        })
+        if (senha.value.trim() === "") {
+            erroSenha.textContent = "Digite uma senha.";
+            valido = false;
+        } else if (senha.value.length < 8) {
+            erroSenha.textContent = "A senha deve ter pelo menos 8 caracteres.";
+            valido = false;
+        }
 
-    </script>
+        if (confirmacao.value.trim() === "") {
+            erroRepetirSenha.textContent = "Repita sua senha.";
+            valido = false;
+        } else if (senha.value !== confirmacao.value) {
+            erroRepetirSenha.textContent = "As senhas não coincidem.";
+            valido = false;
+        }
+
+        if (!valido) return;
+
+        try {
+            // 🔹 Recupera dados da Etapa 1
+            const nome = localStorage.getItem('nome');
+            const cpf = localStorage.getItem('cpf');
+            const telefone = localStorage.getItem('telefone');
+            const cep = localStorage.getItem('cep');
+            const endereco = localStorage.getItem('endereco');
+            const bairro = localStorage.getItem('bairro');
+            const complemento = localStorage.getItem('complemento');
+
+            // 🔹 Monta o objeto final para envio
+            const dados = {
+                nome,
+                cpf,
+                telefone,
+                endereco: `${endereco}, ${bairro}, ${complemento}, CEP: ${cep}`,
+                email: email.value,
+                senha: senha.value,
+                tipo: "usuario"
+            };
+
+            // 🔹 Envia ao backend
+            const resposta = await fetch('http://127.0.0.1:3000/cadastro', {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(dados)
+            });
+
+            const msg = await resposta.text();
+            alert(msg);
+
+        } catch (err) {
+            alert('❌ Erro ao enviar dados: ' + err.message);
+        }
+
+        
+    });
+
+    // 🔐 alternar visibilidade da senha
+    function configurarToggleSenha(inputId, btnId, eyeClosedId, eyeOpenId) {
+        const input = document.getElementById(inputId);
+        const toggle = document.getElementById(btnId);
+        const eyeClosed = document.getElementById(eyeClosedId);
+        const eyeOpen = document.getElementById(eyeOpenId);
+
+        toggle.addEventListener('click', () => {
+            const isVisible = input.type === 'text';
+            if (isVisible) {
+                input.type = 'password';
+                eyeClosed.style.display = 'block';
+                eyeOpen.style.display = 'none';
+            } else {
+                input.type = 'text';
+                eyeClosed.style.display = 'none';
+                eyeOpen.style.display = 'block';
+            }
+        });
+    }
+
+    configurarToggleSenha('senha', 'togglePassword1', 'eye-closed1', 'eye-open1');
+    configurarToggleSenha('repetirSenha', 'togglePassword2', 'eye-closed2', 'eye-open2');
+});
+</script>
+
 </body>
 </html>

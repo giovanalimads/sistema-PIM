@@ -12,12 +12,24 @@ body {
   margin: 0;
 }
 
+.container-tela {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+}
+
+.logo-empresa {
+    margin-bottom: 10px; /* Mantém a margem inferior original */
+}
+
 .container {
   background-color: #4E5054;
-  padding: 20px 30px;
+  padding: 05px 30px 20px 30px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  max-width: 400px;
+  max-width: 900px;
   width: 100%;
 }
 

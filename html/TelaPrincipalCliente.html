@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../css/TelaPrincipal.css">
   <link rel="stylesheet" href="../css/meusDados.css">
+  <link rel="stylesheet" href="../css/chamadosUrgentes.css">
   <link rel="stylesheet" href="../css/registrarChamado.css">
   <title>Tela Principal - Cliente</title>
 </head>
@@ -28,22 +29,25 @@
         </div>
       </div>
 
-      <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 10px 0 20px 0;">
+      <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 5px 0 15px 0;">
 
       <div class="menu">
         <button onclick="mostrarTela('registrarChamado')">Registrar Chamado</button>
-        <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 10px 0;">
+        <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 5px 0;">
         <button onclick="mostrarTela('acompanharChamado')">Acompanhar<br>Chamado</button>
-        <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 10px 0;">
+        <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 5px 0;">
         <button onclick="mostrarTela('meusDados')">Meus Dados</button>
       </div>
 
-      <div class="log-out" id="btnLogout">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-          stroke-width="1.5" stroke="currentColor" class="size-6">
-          <path stroke-linecap="round" stroke-linejoin="round"
-            d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
-        </svg>
+      <div class="copy-logOut">
+        <div class="log-out" id="btnLogout">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+            stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
+          </svg>
+        </div>
+        <span class="copyright"> © 2025 Forward Solutions. Todos os direitos reservados.</span>
       </div>
     </div>
 
@@ -196,6 +200,50 @@
           </div>
         </div>
       `;
+    } else if (tela === 'acompanharChamado') {
+      conteudo = `
+        <div class="container-Urgentes">
+          <h2>MEUS CHAMADOS</h2>
+          
+          <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 10px 0 20px 0;">
+
+          <table>
+          <thead>
+              <tr>
+              <th>Protocolo</th>
+              <th>Categoria</th>
+              <th>Data</th>
+              <th>Status</th>
+              <th>Ações</th>
+              </tr>
+          </thead>
+          <tbody id="tabela-chamados">
+              <!-- Os dados abaixo são apenas placeholders -->
+              <tr>
+              <td>001</td>
+              <td>Equipamento</td>
+              <td>01/04/2025</td>
+              <td>Em andamento</td>
+              <td><button class="btn-acao" onclick="">Acompanhar</button></td>
+              </tr>
+              <tr>
+              <td>002</td>
+              <td>Redes e Internet</td>
+              <td>28/03/2025</td>
+              <td>Finalizado</td>
+              <td><button style="margin-right: 10px" class="btn-acao" onclick="">Ver</button><button class="btn-acao" onclick="">Avaliar</button></td>
+              </tr>
+              <tr>
+              <td>003</td>
+              <td>Servidores</td>
+              <td>15/03/2025</td>
+              <td>Em andamento</td>
+              <td><button class="btn-acao" onclick="">Acompanhar</button></td>
+              </tr>
+          </tbody>
+          </table>
+      </div>
+      `
     } else if (tela === 'meusDados') {
       conteudo = `
         <div class="container-meusDados">
@@ -225,8 +273,6 @@
           </div>
         </div>
       `;
-    } else if (tela === 'acompanharChamado') {
-      conteudo = `<p>Em breve...</p>`;
     }
 
     area.innerHTML = conteudo;

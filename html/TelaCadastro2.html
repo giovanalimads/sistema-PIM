@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             // 🔹 Envia ao backend
-            const resposta = await fetch('http://localhost:3000/cadastro', {
+            const resposta = await fetch('http://localhost:1433/cadastro', {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(dados)

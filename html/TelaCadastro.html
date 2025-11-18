@@ -1,212 +1,281 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Seus CSS originais -->
     <link rel="stylesheet" href="../css/TeladeCadastro.css">
 
-    <!--API - CONSULTA CEP-->
-     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <title>Primeira etapa do Cadastro</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <title>Cadastro em 2 Etapas</title>
+
+    <style>
+        /* Aparece apenas a etapa ativa */
+        .step {
+            display: none;
+        }
+        .step.active {
+            display: block;
+        }
+
+        /* botão voltar da etapa 2 */
+        #voltar {
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-  <div class="container-tela">
-    <img style="width: 300px" class="logo-empresa" src="../assets/Logo PRINCIPAL.png" alt="Logo da empresa">
-    <div class="container" id="cadastro-screen">
-        <h2>CADASTRAR</h2>
 
-        <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 10px 0 20px 0;">
+<div class="container-tela">
+    <img style="width: 300px" class="logo-empresa" src="../assets/Logo PRINCIPAL.png">
 
-        <form id="cadastroForm">
-            <!--Campo: Nome-->
-            <div class="form-group">
-                <label for="nome" class="input-nome">Nome completo<span>*</span></label>
-                <input class="input-nome" type="text" id="nome">
-                <small class="erro" id="erroNome"></small>
-            </div>
+    <div class="container">
 
-            <!--Campo: CPF e Telefone-->
-            <div class="form-group row">
-                <div class="form-field">
-                    <label for="cpf">CPF<span>*</span></label>
-                    <input type="text" name="" id="cpf">
-                    <small class="erro" id="erroCpf"></small>
-                </div>
-                <div class="form-field">
-                    <label for="telefone">Telefone<span>*</span></label>
-                    <input type="tel" id="telefone">
-                    <small class="erro" id="erroTelefone"></small>
-                </div>
-            </div>
+        <!-- ======================== ETAPA 1 ======================== -->
+        <div id="etapa1" class="step active">
 
-            <!--Campos: CEP e Endereço-->
-            <div class="form-group row">
-                <div class="form-field">
-                    <label for="cep">CEP<span>*</span></label>
-                    <input type="text" id="cep">
-                    <small class="erro" id="erroCep"></small>
-                </div>
-                <div class="form-field">
-                    <label for="endereco">Endereço<span>*</span></label>
-                    <input type="text" id="endereco" readonly>
-                </div>
-            </div>
+            <h2>CADASTRAR</h2>
+            <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 10px 0 20px 0;">
 
-            <!--Campos: Bairro e Complemento-->
-            <div class="form-group row">
-                <div class="form-field">
-                    <label for="bairro">Bairro<span>*</span></label>
-                    <input type="text" id="bairro" readonly>
+            <form id="formEtapa1">
+
+                <div class="form-group">
+                    <label>Nome completo<span>*</span></label>
+                    <input type="text" id="nome">
+                    <small class="erro" id="erroNome"></small>
                 </div>
-                <div class="form-field">
-                    <label for="complemento">Complemento</label>
-                    <input type="text" id="complemento" placeholder="Apto, bloco, casa, etc.">
+
+                <div class="form-group row">
+                    <div class="form-field">
+                        <label>CPF<span>*</span></label>
+                        <input type="text" id="cpf">
+                        <small class="erro" id="erroCpf"></small>
+                    </div>
+                    <div class="form-field">
+                        <label>Telefone<span>*</span></label>
+                        <input type="text" id="telefone">
+                        <small class="erro" id="erroTelefone"></small>
+                    </div>
                 </div>
+
+                <div class="form-group row">
+                    <div class="form-field">
+                        <label>CEP<span>*</span></label>
+                        <input type="text" id="cep">
+                        <small class="erro" id="erroCep"></small>
+                    </div>
+                    <div class="form-field">
+                        <label>Endereço<span>*</span></label>
+                        <input type="text" id="endereco" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="form-field">
+                        <label>Bairro<span>*</span></label>
+                        <input type="text" id="bairro" readonly>
+                    </div>
+                    <div class="form-field">
+                        <label>Complemento</label>
+                        <input type="text" id="complemento">
+                    </div>
+                </div>
+
+                <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 10px 0 20px 0;">
+
+                <div class="button">
+                    <button class="btn-principal" id="btnEtapa1">AVANÇAR</button>
+                </div>
+            </form>
+
+        </div>
+
+        <!-- ======================== ETAPA 2 ======================== -->
+        <div id="etapa2" class="step">
+
+            <div class="info-top">
+                <svg id="voltar" xmlns="http://www.w3.org/2000/svg" fill="none"
+                     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"/>
+                </svg>
+                <h2>CADASTRAR</h2>
             </div>
 
             <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 10px 0 20px 0;">
 
-            <div class="button">
-                <button type="submit" class="btn-principal">AVANÇAR</button>
-            </div>
-        </form>
-        <div class="info-botton">
-          <p class="fir">Já possui conta? <a href="TeladeLogin.html">Faça seu login!</a></p>
+            <form id="formEtapa2">
+
+                <div class="form-group">
+                    <label>E-mail<span>*</span></label>
+                    <input type="text" id="email">
+                    <small class="erro" id="erroEmail"></small>
+                </div>
+
+                <div class="form-group">
+                    <label>Senha<span>*</span></label>
+                    <input type="password" id="senha">
+                    <small class="erro" id="erroSenha"></small>
+                </div>
+
+                <div class="form-group">
+                    <label>Repita a senha<span>*</span></label>
+                    <input type="password" id="repetirSenha">
+                    <small class="erro" id="erroRepetirSenha"></small>
+                </div>
+
+                <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 10px 0 20px 0;">
+
+                <div class="button">
+                    <button class="btn-principal" id="btnCadastrar">CADASTRAR</button>
+                </div>
+
+            </form>
+
         </div>
+
     </div>
-  </div>
+</div>
 
-    <!-- código fonte da api -->
-    <script src="../js/api_cep.js"></script>
+<script>
+/* ============================================================
+   ETAPA 1 – Validação e troca para etapa 2
+   ============================================================ */
+document.getElementById("btnEtapa1").addEventListener("click", (e) => {
+    e.preventDefault();
 
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const form = document.getElementById('cadastroForm');
-      const nome = document.getElementById("nome");
-      const cpf = document.getElementById("cpf");
-      const telefone = document.getElementById("telefone");
-      const cep = document.getElementById("cep");
-      const endereco = document.getElementById("endereco");
-      const bairro = document.getElementById("bairro");
-      const complemento = document.getElementById("complemento");
+    const nome = document.getElementById("nome");
+    const cpf = document.getElementById("cpf");
+    const telefone = document.getElementById("telefone");
+    const cep = document.getElementById("cep");
+    const endereco = document.getElementById("endereco");
+    const bairro = document.getElementById("bairro");
+    const complemento = document.getElementById("complemento");
 
-      const erroNome = document.getElementById("erroNome");
-      const erroCpf = document.getElementById("erroCpf");
-      const erroTelefone = document.getElementById("erroTelefone");
-      const erroCep = document.getElementById("erroCep");
+    const erroNome = document.getElementById("erroNome");
+    const erroCpf = document.getElementById("erroCpf");
+    const erroTelefone = document.getElementById("erroTelefone");
+    const erroCep = document.getElementById("erroCep");
 
-      // --- Pré-preenche os campos caso haja valores salvos
-      nome.value = localStorage.getItem('nome') || '';
-      cpf.value = localStorage.getItem('cpf') || '';
-      telefone.value = localStorage.getItem('telefone') || '';
-      cep.value = localStorage.getItem('cep') || '';
-      endereco.value = localStorage.getItem('endereco') || '';
-      bairro.value = localStorage.getItem('bairro') || '';
-      complemento.value = localStorage.getItem('complemento') || '';
+    erroNome.textContent = "";
+    erroCpf.textContent = "";
+    erroTelefone.textContent = "";
+    erroCep.textContent = "";
 
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
+    let valido = true;
 
-        // reseta mensagens de erro
-        erroNome.textContent = "";
-        erroCpf.textContent = "";
-        erroTelefone.textContent = "";
-        erroCep.textContent = "";
+    if (nome.value.trim() === "") {
+        erroNome.textContent = "Digite um nome.";
+        valido = false;
+    }
 
-        let valido = true;
+    const cpfNum = cpf.value.replace(/\D/g, "");
+    if (cpfNum.length !== 11) {
+        erroCpf.textContent = "CPF inválido.";
+        valido = false;
+    }
 
-        // Validação do nome (apenas letras)
-        const regexNome = /^[A-Za-zÀ-ÿ\s]+$/;
-        if (nome.value.trim() === "") {
-          erroNome.textContent = "Digite um nome.";
-          valido = false;
-        } else if (!regexNome.test(nome.value)) {
-          erroNome.textContent = "Este campo deve conter apenas letras.";
-          valido = false;
-        }
+    const telNum = telefone.value.replace(/\D/g, "");
+    if (telNum.length < 10 || telNum.length > 11) {
+        erroTelefone.textContent = "Telefone inválido.";
+        valido = false;
+    }
 
-        // Remove caracteres que não são números
-        const cpfNumeros = cpf.value.replace(/\D/g, '');
-        const telefoneNumeros = telefone.value.replace(/\D/g, '');
-        const cepNumeros = cep.value.replace(/\D/g, '');
+    const cepNum = cep.value.replace(/\D/g, "");
+    if (cepNum.length !== 8) {
+        erroCep.textContent = "CEP inválido.";
+        valido = false;
+    }
 
-        // Validação do CPF (11 números)
-        if (cpfNumeros === "") {
-          erroCpf.textContent = "Digite seu CPF.";
-          valido = false;
-        } else if (cpfNumeros.length !== 11) {
-          erroCpf.textContent = "CPF inválido. Deve conter 11 números.";
-          valido = false;
-        }
+    if (!valido) return;
 
-        // Validação do telefone (11 dígitos)
-        if (telefoneNumeros === "") {
-          erroTelefone.textContent = "Digite seu telefone.";
-          valido = false;
-        } else if (telefoneNumeros.length < 10 || telefoneNumeros.length > 11) {
-          erroTelefone.textContent = "Telefone inválido. Deve conter 11 dígitos.";
-          valido = false;
-        }
+    localStorage.setItem("nome", nome.value);
+    localStorage.setItem("cpf", cpfNum);
+    localStorage.setItem("telefone", telefone.value);
+    localStorage.setItem("cep", cep.value);
+    localStorage.setItem("endereco", endereco.value);
+    localStorage.setItem("bairro", bairro.value);
+    localStorage.setItem("complemento", complemento.value);
 
-        // Validação do CEP (8 dígitos)
-        if (cepNumeros === "") {
-          erroCep.textContent = "Digite seu CEP.";
-          valido = false;
-        } else if (cepNumeros.length !== 8) {
-          erroCep.textContent = "CEP inválido. Deve conter 8 números.";
-          valido = false;
-        }
-
-        if (valido) {
-          // Aqui você pode enviar o formulário ou redirecionar
-
-          // --- Salva os dados no localStorage
-          localStorage.setItem('nome', nome.value);
-          localStorage.setItem('cpf', cpf.value);
-          localStorage.setItem('telefone', telefone.value);
-          localStorage.setItem('cep', cep.value);
-          localStorage.setItem('endereco', endereco.value);
-          localStorage.setItem('bairro', bairro.value);
-          localStorage.setItem('complemento', complemento.value);
-
-          window.location.href = "TelaCadastro2.html"; 
-        }
-      });
-    });
-  </script>
-
-  <script src="../js/serve.js"></script>
-<!--
-    <script>
-document.querySelector(".btn-principal").addEventListener("click", async (e) => {
-  e.preventDefault();
-
-  const dados = {
-    nome: document.getElementById("nome").value,
-    cpf: document.getElementById("cpf").value,
-    telefone: document.getElementById("telefone").value,
-    cep: document.getElementById("cep").value,
-    endereco: document.getElementById("endereco").value,
-    bairro: document.getElementById("bairro").value,
-    complemento: document.getElementById("complemento").value
-  };
-
-  try {
-    const resposta = await fetch("http://localhost:3000/cadastro", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(dados)
-    });
-
-    const resultado = await resposta.json();
-    alert(resultado.message || "Erro ao cadastrar.");
-  } catch (erro) {
-    console.error(erro);
-    alert("Falha na conexão com o servidor.");
-  }
+    document.getElementById("etapa1").classList.remove("active");
+    document.getElementById("etapa2").classList.add("active");
 });
-  </script>
--->
+
+/* ============================================================
+   ETAPA 2 – Validar e enviar ao servidor
+   ============================================================ */
+document.getElementById("btnCadastrar").addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById("email");
+    const senha = document.getElementById("senha");
+    const repetir = document.getElementById("repetirSenha");
+
+    const erroEmail = document.getElementById("erroEmail");
+    const erroSenha = document.getElementById("erroSenha");
+    const erroRepetirSenha = document.getElementById("erroRepetirSenha");
+
+    erroEmail.textContent = "";
+    erroSenha.textContent = "";
+    erroRepetirSenha.textContent = "";
+
+    let valido = true;
+
+    if (!email.value.includes("@")) {
+        erroEmail.textContent = "Email inválido.";
+        valido = false;
+    }
+
+    if (senha.value.length < 8) {
+        erroSenha.textContent = "Senha deve ter 8+ caracteres.";
+        valido = false;
+    }
+
+    if (senha.value !== repetir.value) {
+        erroRepetirSenha.textContent = "Senhas diferentes.";
+        valido = false;
+    }
+
+    if (!valido) return;
+
+    const dados = {
+        nome: localStorage.getItem("nome"),
+        cpf: localStorage.getItem("cpf"),
+        telefone: localStorage.getItem("telefone"),
+        endereco: `${localStorage.getItem("endereco")}, ${localStorage.getItem("bairro")}, ${localStorage.getItem("complemento")}, CEP ${localStorage.getItem("cep")}`,
+        email: email.value,
+        senha: senha.value,
+        tipo: "usuario"
+    };
+
+    try {
+        const r = await fetch("http://localhost:3000/cadastro", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(dados)
+        });
+
+        const txt = await r.text();
+        alert(txt);
+    } catch (err) {
+        alert("Erro ao cadastrar: " + err.message);
+    }
+});
+
+/* ============================================================
+   BOTÃO VOLTAR PARA ETAPA 1
+   ============================================================ */
+document.getElementById("voltar").addEventListener("click", () => {
+    document.getElementById("etapa2").classList.remove("active");
+    document.getElementById("etapa1").classList.add("active");
+});
+</script>
+
+<!-- API ViaCEP (se usar) -->
+<script src="../js/api_cep.js"></script>
+<script src="../js/script.js"></script>
 </body>
 </html>

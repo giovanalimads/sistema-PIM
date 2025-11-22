@@ -204,8 +204,9 @@ document.getElementById("btnEtapa1").addEventListener("click", (e) => {
     document.getElementById("etapa2").classList.add("active");
 });
 
+
 /* ============================================================
-   ETAPA 2 – Validar e enviar ao servidor
+   ETAPA 2 – Validação final + FETCH
    ============================================================ */
 document.getElementById("btnCadastrar").addEventListener("click", async (e) => {
     e.preventDefault();
@@ -241,27 +242,39 @@ document.getElementById("btnCadastrar").addEventListener("click", async (e) => {
 
     if (!valido) return;
 
+    // criar os dados depois da validação
     const dados = {
         nome: localStorage.getItem("nome"),
         cpf: localStorage.getItem("cpf"),
         telefone: localStorage.getItem("telefone"),
-        endereco: `${localStorage.getItem("endereco")}, ${localStorage.getItem("bairro")}, ${localStorage.getItem("complemento")}, CEP ${localStorage.getItem("cep")}`,
+        endereco: localStorage.getItem("endereco"),
         email: email.value,
         senha: senha.value,
+
+        // campos opcionais esperados pela API:
+        especializacao: null,
+        nivel_experiencia: null,
+        email_corporativo: null,
+
         tipo: "usuario"
     };
 
+     console.log("Dados que serão enviados:", dados);
+     
     try {
-        const r = await fetch("http://localhost:3000/cadastro", {
+        const resposta = await fetch("http://localhost:5030/api/usuarios", {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
+            headers: {
+                "Content-Type": "application/json"
+            },
             body: JSON.stringify(dados)
         });
 
-        const txt = await r.text();
-        alert(txt);
-    } catch (err) {
-        alert("Erro ao cadastrar: " + err.message);
+        const r = await resposta.text();
+        alert("Resposta bruta da API: " + r);
+
+    } catch (erro) {
+        alert("Erro ao enviar: " + erro.message);
     }
 });
 

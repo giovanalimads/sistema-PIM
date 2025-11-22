@@ -1,3 +1,4 @@
+/*
 // status: conectado ao banco
 
 const express = require('express');
@@ -121,3 +122,4 @@ app.post("/cadastro/admin", async (req, res) => {
 app.listen(3000, () => {
     console.log("🚀 Servidor rodando em http://localhost:3000");
 });
+*/

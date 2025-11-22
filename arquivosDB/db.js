@@ -1,5 +1,6 @@
-// cria a conexão
-const sql = require('mssql'); // bilbioteca que permite a comunicação entre servidor e MSSQL
+ /**
+  *  // cria a conexão
+// const sql = require('mssql'); // bilbioteca que permite a comunicação entre servidor e MSSQL
 
 // credenciais e parâmetros que o mssql usará para localizar e autenticar no bd
 const config = {
@@ -28,3 +29,4 @@ module.exports = {
     sql,
     poolPromise
 };
+ */

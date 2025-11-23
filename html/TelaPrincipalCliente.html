@@ -78,6 +78,7 @@
   </div>
 
   <script src="../js/dateTime_ip.js"></script>
+  <script src="../js/api.js"></script>
 
   <script>
   // ================================================
@@ -128,11 +129,11 @@
   // ================================================
   // FUNÇÃO QUE REALMENTE TROCA O CONTEÚDO DA TELA
   // ================================================
-  // Esta função é chamada pela mostrarTela (se não houver aviso) ou 
-  // pelo botão 'TENHO CERTEZA' do pop-up.
-  function trocarConteudoTela(tela) {
+  async function trocarConteudoTela(tela) {
     const area = document.getElementById('area');
     let conteudo = '';
+
+    area.innerHTML = '<div style="text-align:center; padding: 50px;">Carregando...</div>';
 
     if (tela === 'registrarChamado') {
       conteudo = `
@@ -200,6 +201,8 @@
           </div>
         </div>
       `;
+      area.innerHTML = conteudo;
+      inicializarRegistrarChamado();
     } else if (tela === 'acompanharChamado') {
       conteudo = `
         <div class="container-Urgentes">
@@ -243,7 +246,9 @@
           </tbody>
           </table>
       </div>
-      `
+      `;
+      conteudo = await carregarHistoricoChamados(ID_CLIENTE_LOGADO); 
+      area.innerHTML = conteudo;
     } else if (tela === 'meusDados') {
       conteudo = `
         <div class="container-meusDados">
@@ -273,14 +278,164 @@
           </div>
         </div>
       `;
+      conteudo = await carregarMeusDados(ID_CLIENTE_LOGADO);
+      area.innerHTML = conteudo;
+      inicializarMeusDados();
     }
 
     area.innerHTML = conteudo;
-
-    // Inicializações específicas
-    if (tela === 'registrarChamado') inicializarRegistrarChamado();
-    if (tela === 'meusDados') inicializarMeusDados();
   }
+
+  // ----------------------------------------------------
+// NOVO: Função para carregar Meus Dados (GET API)
+// ----------------------------------------------------
+async function carregarMeusDados(clienteId) {
+    try {
+        // 🚨 USANDO A FUNÇÃO DO SEU api.js 🚨
+        const dados = await getUsuarioById(clienteId); 
+
+        // Retorna a string HTML com os dados preenchidos
+        return `
+            <div class="container-meusDados">
+              <h2>MEUS DADOS</h2>
+              <div class="user-profile">
+                <svg class="profile-icon" xmlns="http://www.w3.org/2000/svg" fill="none"
+                  viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                </svg>
+              </div>
+
+              <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 10px 0 20px 0;">
+
+              <div class="user-info">
+                <div class="info"><label>Nome:</label><input id="nome" value="${dados.nome || ''}" readonly></div>
+                <div class="info"><label>CPF:</label><input id="cpf" value="${dados.cpf || ''}" readonly></div>
+                <div class="info"><label>Telefone:</label><input id="telefone" value="${dados.telefone || ''}" readonly></div>
+                <div class="info"><label>Endereço:</label><input id="endereco" value="${dados.endereco || ''}" readonly></div>
+                <div class="info"><label>E-mail:</label><input id="email" value="${dados.email || ''}" readonly></div>
+                <div class="info"><label>Senha:</label><input id="senha" type="password" value="******" readonly></div>
+              </div>
+
+              <div class="button">
+                <button id="editar-btn" class="btn-principal">EDITAR DADOS</button>
+                <button id="salvar-btn" style="display:none;">SALVAR DADOS</button>
+              </div>
+            </div>
+        `;
+    } catch (error) {
+        console.error("Erro ao carregar dados pessoais:", error);
+        return `<div class="erro-api"><h2>Erro ao carregar dados</h2><p>Não foi possível buscar seus dados. ${error.message}</p></div>`;
+    }
+}
+
+// ----------------------------------------------------
+// NOVO: Função para carregar Histórico de Chamados (GET API)
+// ----------------------------------------------------
+async function carregarHistoricoChamados(clienteId) {
+    try {
+        // 🚨 USANDO A FUNÇÃO DO SEU api.js 🚨
+        // Nota: Idealmente a API deve filtrar pelo clienteId
+        const todosChamados = await getChamados(); 
+
+        // Simulação de filtragem por cliente ID
+        // Você pode remover essa linha se o seu endpoint getChamados já filtrar
+        const meusChamados = todosChamados.filter(c => c.clienteId == clienteId); 
+
+        let linhasTabela = '';
+        if (meusChamados.length > 0) {
+            linhasTabela = meusChamados.map(chamado => `
+                <tr>
+                    <td>${chamado.protocolo}</td>
+                    <td>${chamado.categoria}</td>
+                    <td>${new Date(chamado.dataCriacao).toLocaleDateString('pt-BR')}</td>
+                    <td>${chamado.status}</td>
+                    <td>
+                      <button style="margin-right: 10px" class="btn-acao" onclick="verDetalhesChamado(${chamado.id})">Ver</button>
+                      ${chamado.status === 'Finalizado' ? '<button class="btn-acao" onclick="avaliarChamado(' + chamado.id + ')">Avaliar</button>' : ''}
+                    </td>
+                </tr>
+            `).join('');
+        } else {
+            linhasTabela = `<tr><td colspan="5" style="text-align: center;">Nenhum chamado encontrado.</td></tr>`;
+        }
+        
+        // Retorna a string HTML completa da tela
+        return `
+            <div class="container-Urgentes">
+              <h2>MEUS CHAMADOS</h2>
+              <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 10px 0 20px 0;">
+              <table>
+              <thead>
+                <tr>
+                  <th>Protocolo</th>
+                  <th>Categoria</th>
+                  <th>Data</th>
+                  <th>Status</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="tabela-chamados">
+                ${linhasTabela}
+              </tbody>
+              </table>
+            </div>
+        `;
+
+    } catch (error) {
+        console.error("Erro ao carregar histórico:", error);
+        return `<div class="erro-api"><h2>Erro</h2><p>Não foi possível carregar o histórico de chamados. ${error.message}</p></div>`;
+    }
+}
+
+// ----------------------------------------------------
+// FUNÇÃO DE ENVIO DE CHAMADO ATUALIZADA (POST API)
+// ----------------------------------------------------
+async function enviarChamado() {
+    const titulo = document.getElementById('titulo');
+    const categoria = document.getElementById('categoria');
+    const descricao = document.getElementById('descricao');
+    const protocolo = document.getElementById('protocolo').textContent; // Pega o protocolo gerado
+
+    document.querySelectorAll('.erro-msg').forEach(e => e.remove());
+
+    let valido = true;
+
+    // ... (suas validações de formulário permanecem aqui) ...
+    // Se não for válido, retorna (return;)
+
+    if (!valido) return; // Se a validação falhar
+
+    const dadosChamado = {
+        titulo: titulo.value,
+        categoria: categoria.value,
+        descricao: descricao.value,
+        protocolo: protocolo,
+        urgencia: document.getElementById('urgencia').value, // Adiciona o campo de urgência
+        clienteId: ID_CLIENTE_LOGADO,
+        status: 'Aberto'
+        // Você pode adicionar mais campos aqui, como anexos
+    };
+
+    try {
+        // 🚨 USANDO A FUNÇÃO DO SEU api.js 🚨
+        const resultado = await criarChamado(dadosChamado);
+        
+        // Se o POST for bem-sucedido
+        alert(`Chamado (${resultado.protocolo}) registrado com sucesso!`);
+        
+        // Opcional: Limpar formulário ou ir para a tela de histórico
+        titulo.value = '';
+        categoria.value = '';
+        descricao.value = '';
+        document.getElementById('urgencia').value = '';
+        trocarConteudoTela('acompanharChamado'); // Leva para o histórico
+        
+    } catch (error) {
+        console.error("Erro no envio do chamado:", error);
+        alert(`Falha ao registrar chamado: ${error.message || 'Erro de conexão com a API.'}`);
+    }
+}
 
   // ================================================
   // REGISTRAR CHAMADO - LÓGICA (Mantido)
@@ -317,20 +472,6 @@
       }
       urgencia.value = nivel;
     });
-
-    // Drag and drop básico
-    if (dropArea) {
-      dropArea.addEventListener('dragover', e => {
-        e.preventDefault();
-        dropArea.classList.add('ativo');
-      });
-      dropArea.addEventListener('dragleave', () => dropArea.classList.remove('ativo'));
-      dropArea.addEventListener('drop', e => {
-        e.preventDefault();
-        dropArea.classList.remove('ativo');
-        console.log('Arquivos enviados:', e.dataTransfer.files);
-      });
-    }
   }
 
   // ================================================

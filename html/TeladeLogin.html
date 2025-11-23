@@ -104,11 +104,18 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
+      // 🔥 SALVA O ID DO USUÁRIO LOGADO
+      sessionStorage.setItem("usuarioId", usuarioEncontrado.id);
+
+      // 🔥 (Opcional) Salvar o tipo e nome do usuário para outros usos
+      sessionStorage.setItem("usuarioTipo", usuarioEncontrado.tipo);
+      sessionStorage.setItem("usuarioNome", usuarioEncontrado.nome);
+
       switch (usuarioEncontrado.tipo) {
-        case "cliente":
+        case "usuario":
           window.location.href = "TelaPrincipalCliente.html";
           break;
-        case "admin":
+        case "administrador":
           window.location.href = "TelaPrincipalAdmin.html";
           break;
         case "tecnico":
@@ -116,8 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
           break;
         default:
           alert("Tipo de usuário desconhecido!");
-      }
-
+        }
     } catch (error) {
       console.error("Erro ao conectar à API:", error);
       erroUsuario.textContent = "Erro ao conectar ao servidor.";

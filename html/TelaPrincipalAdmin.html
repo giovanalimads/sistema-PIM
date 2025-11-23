@@ -119,9 +119,7 @@
         const area = document.getElementById("area");
         let conteudo = "";
 
-        if (tela === "relatorios") {
-          conteudo = ``;
-        } else if (tela === "gerencFuncionarios") {
+        if (tela === "gerencFuncionarios") {
           conteudo = `
                 <div class="container-Funcionarios">
                     <h2>FUNCIONÁRIOS</h2>
@@ -141,34 +139,8 @@
                         <th>Ação</th>
                         </tr>
                     </thead>
-                    <tbody id="tabela-funcionarios">
-                        <tr>
-                        <td>Técnico</td>
-                        <td>Ricardo Dantas</td>
-                        <td>ricardinho@gmail.com</td>
-                        <td class="td-acao">
-                            <button class="btn-acao">Dados</button>
-                            <button class="btn-acao">Excluir</button>
-                        </td>
-                        </tr>
-                        <td>Administrador</td>
-                        <td>Giovana Lima Oliveira</td>
-                        <td>gigi@gmail.com</td>
-                        <td class="td-acao">
-                            <button class="btn-acao">Dados</button>
-                            <button class="btn-acao">Excluir</button>
-                        </td>
-                        </tr>
-                        <tr>
-                        <td>Técnico</td>
-                        <td>Ronaldo Dantas</td>
-                        <td>ronaldinho@gmail.com</td>
-                        <td class="td-acao">
-                            <button class="btn-acao">Dados</button>
-                            <button class="btn-acao">Excluir</button>
-                        </td>
-                        </tr>
-                    </tbody>
+
+                    <tbody id="tabela-funcionarios"></tbody>
                     </table>
 
                     <div class="menu-flutuante">
@@ -193,6 +165,8 @@
                     </div>
                 </div>
             `;
+            setTimeout(() => carregarFuncionarios(), 50);
+
         }
         // Subtela - Cadastrar Tecnico
         else if (tela === "subtelaCadTec") {
@@ -531,54 +505,11 @@
                         <th>Ações</th>
                         </tr>
                     </thead>
-                    <tbody id="tabela-chamados">
-                        <!-- Os dados abaixo são apenas placeholders -->
-                        <tr>
-                        <td>001</td>
-                        <td>Equipamento</td>
-                        <td>01/04/2025</td>
-                        <td>Finalizado</td>
-                        <td><button class="btn-acao" onclick="visualizarChamado('001')">Visualizar</button></td>
-                        </tr>
-                        <tr>
-                        <td>004</td>
-                        <td>Servidores</td>
-                        <td>15/09/2025</td>
-                        <td>Finalizado</td>
-                        <td><button class="btn-acao" onclick="visualizarChamado('003')">Visualizar</button></td>
-                        </tr>
-                        <tr>
-                        <td>005</td>
-                        <td>Servidores</td>
-                        <td>21/06/2025</td>
-                        <td>Em aberto</td>
-                        <td><button class="btn-acao" onclick="visualizarChamado('003')">Visualizar</button></td>
-                        </tr>
-                        <tr>
-                        <td>006</td>
-                        <td>Servidores</td>
-                        <td>11/07/2025</td>
-                        <td>Finalizado</td>
-                        <td><button class="btn-acao" onclick="visualizarChamado('003')">Visualizar</button></td>
-                        </tr>
-                        <tr>
-                        <td>007</td>
-                        <td>Servidores</td>
-                        <td>10/05/2025</td>
-                        <td>Finalizado</td>
-                        <td><button class="btn-acao" onclick="visualizarChamado('003')">Visualizar</button></td>
-                        </tr>
-                        <tr>
-                        <td>008</td>
-                        <td>Servidores</td>
-                        <td>26/07/2025</td>
-                        <td>Em aberto</td>
-                        <td><button class="btn-acao" onclick="visualizarChamado('003')">Visualizar</button></td>
-                        </tr>
-                    </tbody>
+                    <tbody id="tabela-chamados"></tbody>
                     </table>
                 </div>
                 `;
+                setTimeout(() => carregarChamados(), 50);
         } else if (tela === "meusDadosAdmin") {
           conteudo = `
               <div class="container-meusDados">
@@ -608,6 +539,12 @@
                   </div>
                 </div>
           `;
+          setTimeout(() => carregarMeusDados(), 50);
+          setTimeout(() => {
+              document.getElementById("editar-btn").addEventListener("click", habilitarEdicao);
+              document.getElementById("salvar-btn").addEventListener("click", salvarDadosAdmin);
+          }, 100);
+
         }
 
         area.innerHTML = conteudo;
@@ -695,6 +632,319 @@
       
     </script>
 
-    <script src="../js/meusDados.js"></script>
+
+    /**
+    * ! funções para consumir api
+    **/
+    <script>
+      // LISTA OS FUNCIONÁRIOS
+      async function carregarFuncionarios() {
+      const tabela = document.getElementById("tabela-funcionarios");
+      tabela.innerHTML = "<tr><td colspan='4'>Carregando...</td></tr>";
+
+      try {
+          const response = await fetch("http://localhost:5030/api/usuarios");
+          const usuarios = await response.json();
+
+          // filtrar apenas tecnico e administrador
+          const filtrados = usuarios.filter(u =>
+              u.tipo === "tecnico" || u.tipo === "administrador"
+          );
+
+          tabela.innerHTML = "";
+
+          filtrados.forEach(user => {
+              const tr = document.createElement("tr");
+              tr.innerHTML = `
+                  <td>${user.tipo}</td>
+                  <td>${user.nome}</td>
+                  <td>${user.email}</td>
+                  <td class="td-acao">
+                      <button class="btn-acao" onclick="verDadosFuncionario('${user.id}')">Dados</button>
+                      <button class="btn-acao" onclick="excluirFuncionario('${user.id}')">Excluir</button>
+                  </td>
+              `;
+              tabela.appendChild(tr);
+          });
+
+          if (filtrados.length === 0) {
+              tabela.innerHTML = "<tr><td colspan='4'>Nenhum funcionário encontrado.</td></tr>";
+          }
+
+      } catch (error) {
+          console.error(error);
+          tabela.innerHTML = "<tr><td colspan='4'>Erro ao carregar funcionários.</td></tr>";
+      }
+    }
+
+    // LISTA OS CHAMADOS
+    async function carregarChamados() {
+    const tabela = document.getElementById("tabela-chamados");
+    tabela.innerHTML = "<tr><td colspan='5'>Carregando...</td></tr>";
+
+    try {
+        const response = await fetch("http://localhost:5030/api/chamados");
+        const chamados = await response.json();
+
+        tabela.innerHTML = "";
+
+        chamados.forEach(c => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+                <td>${c.protocolo}</td>
+                <td>${c.categoria}</td>
+                <td>${c.dataAbertura}</td>
+                <td>${c.status}</td>
+                <td><button class="btn-acao" onclick="visualizarChamado('${c.protocolo}')">Visualizar</button></td>
+            `;
+            tabela.appendChild(tr);
+        });
+
+    } catch {
+        tabela.innerHTML = "<tr><td colspan='5'>Erro ao carregar chamados.</td></tr>";
+    }
+  }
+
+    // PUXA OAS INFORMAÇÕES DO CHAMADO EPLO PROTOCOLO
+    async function visualizarChamado(protocolo) {
+      const response = await fetch(`/api/chamados/${protocolo}`);
+      const chamado = await response.json();
+
+      alert(`
+        Protocolo: ${chamado.protocolo}
+        Cliente: ${chamado.cliente}
+        Descrição: ${chamado.descricao}
+        Status: ${chamado.status}
+      `);
+    }
+
+    // CARREGA DADOS DO ADMINISTRADOR
+    async function carregarMeusDados() {
+
+    const id = sessionStorage.getItem("usuarioId");
+
+    if (!id) {
+        console.warn("Nenhum usuário logado encontrado no sessionStorage.");
+        return;
+    }
+
+    try {
+        const response = await fetch(`http://localhost:5030/api/usuarios/${id}`);
+        const user = await response.json();
+
+        document.getElementById("nome").value = user.nome;
+        document.getElementById("idTecnico").value = user.id;
+        document.getElementById("cpf").value = user.cpf;
+        document.getElementById("telefone").value = user.telefone;
+        document.getElementById("email").value = user.email;
+        document.getElementById("senha").value = user.senha;
+
+        // senha normalmente não vem — coloque se sua API retornar
+        if (user.senha) {
+            document.getElementById("senha").value = user.senha;
+        }
+
+    } catch (error) {
+        console.error("Erro ao carregar meus dados:", error);
+    }
+  }
+
+    // HABILITAR E DESABILITAR EDIÇÃO EM MEUS DADOS
+    function habilitarEdicao() {
+    document.getElementById("nome").removeAttribute("readonly");
+    document.getElementById("cpf").removeAttribute("readonly");
+    document.getElementById("telefone").removeAttribute("readonly");
+    document.getElementById("email").removeAttribute("readonly");
+    document.getElementById("senha").removeAttribute("readonly");
+
+    // mostra o botão SALVAR
+    document.getElementById("salvar-btn").style.display = "block";
+
+    // esconde o EDITAR
+    document.getElementById("editar-btn").style.display = "none";
+}
+
+    function desabilitarEdicao() {
+        document.getElementById("nome").setAttribute("readonly", true);
+        document.getElementById("cpf").setAttribute("readonly", true);
+        document.getElementById("telefone").setAttribute("readonly", true);
+        document.getElementById("email").setAttribute("readonly", true);
+        document.getElementById("senha").setAttribute("readonly", true);
+
+        document.getElementById("salvar-btn").style.display = "none";
+        document.getElementById("editar-btn").style.display = "block";
+    }
+
+    // SALVAR NOVOS DADOS NO BANCO
+    async function salvarDadosAdmin() {
+    const id = sessionStorage.getItem("usuarioId");
+
+    const dadosAtualizados = {
+        nome: document.getElementById("nome").value,
+        cpf: document.getElementById("cpf").value,
+        telefone: document.getElementById("telefone").value,
+        email: document.getElementById("email").value,
+        senha: document.getElementById("senha").value,
+    };
+
+    try {
+        const response = await fetch(`http://localhost:5030/api/usuarios/${id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(dadosAtualizados)
+        });
+
+        if (!response.ok) {
+            alert("Erro ao salvar dados.");
+            return;
+        }
+
+        alert("Dados atualizados com sucesso!");
+
+        // Recarrega os dados da API
+        carregarMeusDados();
+
+        // Desabilita edição novamente
+        desabilitarEdicao();
+
+    } catch (error) {
+        console.error("Erro ao salvar dados:", error);
+        alert("Erro ao salvar dados. Verifique o console.");
+    }
+}
+
+    // VALIDAÇÃO DA PRIMEIRA ETAPA DO CADTEC
+    function validarPrimeiraEtapa() {
+    let valido = true;
+
+    const nome = document.getElementById("nome").value.trim();
+    const cpf = document.getElementById("cpf").value.trim();
+    const telefone = document.getElementById("telefone").value.trim();
+    const area = document.getElementById("areaEspecializacao").value;
+    const nivel = document.getElementById("nivelExperiencia").value;
+
+    // Resetar erros
+    document.getElementById("erroNome").innerText = "";
+    document.getElementById("erroCpf").innerText = "";
+    document.getElementById("erroTelefone").innerText = "";
+    document.getElementById("erroArea").innerText = "";
+    document.getElementById("erroNivel").innerText = "";
+
+    if (!nome) {
+        document.getElementById("erroNome").innerText = "Informe o nome.";
+        valido = false;
+    }
+
+    const cpfRegex = /^\d{11}$/; // somente números
+    if (!cpfRegex.test(cpf)) {
+        document.getElementById("erroCpf").innerText = "CPF inválido. Use 11 números.";
+        valido = false;
+    }
+
+    const telRegex = /^\d{10,11}$/; // telefone fixo ou celular
+    if (!telRegex.test(telefone)) {
+        document.getElementById("erroTelefone").innerText = "Telefone inválido.";
+        valido = false;
+    }
+
+    if (!area) {
+        document.getElementById("erroArea").innerText = "Selecione a área de especialização.";
+        valido = false;
+    }
+
+    if (!nivel) {
+        document.getElementById("erroNivel").innerText = "Selecione o nível de experiência.";
+        valido = false;
+    }
+
+    return valido;
+}
+
+// Listener do botão Avançar
+document.addEventListener("click", function(e){
+    if(e.target && e.target.id === "btnAvancar"){
+        e.preventDefault();
+        if(validarPrimeiraEtapa()){
+            sessionStorage.setItem("cadastroTec", JSON.stringify({
+                nome: document.getElementById("nome").value.trim(),
+                cpf: document.getElementById("cpf").value.trim(),
+                telefone: document.getElementById("telefone").value.trim(),
+                area: document.getElementById("areaEspecializacao").value,
+                nivel: document.getElementById("nivelExperiencia").value
+            }));
+            mostrarTela("subtelaCadTec2");
+        }
+    }
+});
+
+function validarSegundaEtapa() {
+    let valido = true;
+
+    const email = document.getElementById("email").value.trim();
+    const senha = document.getElementById("senha").value;
+    const repetirSenha = document.getElementById("repetirSenha").value;
+
+    // Resetar erros
+    document.getElementById("erroEmail").innerText = "";
+    document.getElementById("erroSenha").innerText = "";
+    document.getElementById("erroRepetirSenha").innerText = "";
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        document.getElementById("erroEmail").innerText = "Email inválido.";
+        valido = false;
+    }
+
+    if (senha.length < 6) {
+        document.getElementById("erroSenha").innerText = "Senha deve ter pelo menos 6 caracteres.";
+        valido = false;
+    }
+
+    if (senha !== repetirSenha) {
+        document.getElementById("erroRepetirSenha").innerText = "As senhas não coincidem.";
+        valido = false;
+    }
+
+    return valido;
+}
+
+document.addEventListener("click", function(e){
+    if(e.target && e.target.classList.contains("btn-cadastrar")){
+        e.preventDefault();
+
+        if(!validarSegundaEtapa()) return;
+
+        const dadosEtapa1 = JSON.parse(sessionStorage.getItem("cadastroTec") || "{}");
+
+        const dadosCadastro = {
+            ...dadosEtapa1,
+            email: document.getElementById("email").value.trim(),
+            senha: document.getElementById("senha").value,
+            tipo: "tecnico"
+        };
+
+        fetch("http://localhost:5030/api/usuarios", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(dadosCadastro)
+        })
+        .then(async response => {
+            if(!response.ok){
+                const erro = await response.text();
+                alert("Erro ao cadastrar técnico: " + erro);
+                return;
+            }
+            alert("Técnico cadastrado com sucesso!");
+            sessionStorage.removeItem("cadastroTec");
+            mostrarTela("gerencFuncionarios");
+        })
+        .catch(error => {
+            console.error("Erro ao cadastrar técnico:", error);
+            alert("Erro ao cadastrar técnico. Veja o console.");
+        });
+    }
+});
+
+    </script>
   </body>
 </html>

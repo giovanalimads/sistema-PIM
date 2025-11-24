@@ -220,6 +220,11 @@
                         </div>
                     </div>
                 `;
+                setTimeout(() => carregarMeusDados(), 50);
+                setTimeout(() => {
+                    document.getElementById("editar-btn").addEventListener("click", habilitarEdicao);
+                    document.getElementById("salvar-btn").addEventListener("click", salvarDadosAdmin);
+                }, 100);
             }
 
             // Atualiza o conteúdo da área
@@ -409,7 +414,95 @@
     }
 
         // CARREGA DADOS DO TECNICO
+async function carregarMeusDados() {
+    const id = sessionStorage.getItem("usuarioId");
 
+    if (!id) {
+        console.warn("Nenhum usuário logado encontrado no sessionStorage.");
+        return;
+    }
+
+    try {
+        const response = await fetch(`http://localhost:5030/api/usuarios/${id}`);
+        const tecnico = await response.json();
+
+        document.getElementById("nome").value = tecnico.nome || "";
+        document.getElementById("idTecnico").value = tecnico.id || "";
+        document.getElementById("cpf").value = tecnico.cpf || "";
+        document.getElementById("telefone").value = tecnico.telefone || "";
+        document.getElementById("areaEspecializacao").value = tecnico.especializacao || "";
+        document.getElementById("nivelExperiencia").value = tecnico.nivel_experiencia || "";
+        document.getElementById("email").value = tecnico.email_corporativo || "";
+        document.getElementById("senha").value = tecnico.senha || "";
+
+    } catch (e) {
+        console.error("Erro ao carregar dados do técnico:", e);
+    }
+}
+
+// HABILITAR E DESABILITAR EDIÇÃO EM MEUS DADOS
+    function habilitarEdicao() {
+    document.getElementById("nome").removeAttribute("readonly");
+    document.getElementById("cpf").removeAttribute("readonly");
+    document.getElementById("telefone").removeAttribute("readonly");
+    document.getElementById("email").removeAttribute("readonly");
+    document.getElementById("senha").removeAttribute("readonly");
+
+    // mostra o botão SALVAR
+    document.getElementById("salvar-btn").style.display = "block";
+
+    // esconde o EDITAR
+    document.getElementById("editar-btn").style.display = "none";
+}
+
+    function desabilitarEdicao() {
+        document.getElementById("nome").setAttribute("readonly", true);
+        document.getElementById("cpf").setAttribute("readonly", true);
+        document.getElementById("telefone").setAttribute("readonly", true);
+        document.getElementById("email").setAttribute("readonly", true);
+        document.getElementById("senha").setAttribute("readonly", true);
+
+        document.getElementById("salvar-btn").style.display = "none";
+        document.getElementById("editar-btn").style.display = "block";
+    }
+
+    // SALVAR NOVOS DADOS NO BANCO
+    async function salvarDadosAdmin() {
+    const id = sessionStorage.getItem("usuarioId");
+
+    const dadosAtualizados = {
+        nome: document.getElementById("nome").value,
+        cpf: document.getElementById("cpf").value,
+        telefone: document.getElementById("telefone").value,
+        email: document.getElementById("email").value,
+        senha: document.getElementById("senha").value,
+    };
+
+    try {
+        const response = await fetch(`http://localhost:5030/api/usuarios/${id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(dadosAtualizados)
+        });
+
+        if (!response.ok) {
+            alert("Erro ao salvar dados.");
+            return;
+        }
+
+        alert("Dados atualizados com sucesso!");
+
+        // Recarrega os dados da API
+        carregarMeusDados();
+
+        // Desabilita edição novamente
+        desabilitarEdicao();
+
+    } catch (error) {
+        console.error("Erro ao salvar dados:", error);
+        alert("Erro ao salvar dados. Verifique o console.");
+    }
+}
     </script>
 </body>
 </html>

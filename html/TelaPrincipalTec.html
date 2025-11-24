@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/meusDados.css">
     <link rel="stylesheet" href="../css/meusChamados.css">
     <link rel="stylesheet" href="../css/chamadosUrgentes.css">
+    <link rel="stylesheet" href="../css/atenderChamado.css">
     <title>Tela Principal - Tecnico</title>
 </head>
 <body>
@@ -90,7 +91,6 @@
                             <div class="chamadosUrgentes">
                                 <div class="icon-quantidade">
                                     <img src="../assets/sino 2.svg" alt="Chamados Urgentes">
-                                    <p id="quantidadeChamdosUrgentes"></p>
                                 </div>
                                 <h4>URGENTES</h4>
                                 <button id="btnUrgentes">VERIFICAR URGENTES</button>
@@ -98,7 +98,6 @@
                             <div class="chamadosFinalizados">
                                 <div class="icon-quantidade">
                                     <img src="../assets/sino 1.svg" alt="Chamados Finalizados">
-                                    <p id="quantidadeChamdosFinalizados"></p>
                                 </div>
                                 <h4>FINALIZADOS</h4>
                                 <button id="btnFinalizados">VER FINALIZADOS</button>
@@ -134,7 +133,6 @@
                     </div>
                 `;
                 setTimeout(() => carregarChamadosUrgentes(), 50);
-
             } 
             // Subtela - Chamados Finalizados
             else if ( tela === 'subtelaFinalizados') {
@@ -187,6 +185,50 @@
                     </div>
                 `;
                 setTimeout(() => carregarChamadosAbertos(), 50);
+            }
+            // tela Atender Chamado
+            else if (tela === 'atenderChamado') {
+                conteudo = `
+                    <div class="container-atendimento">
+                        <div class="header-atendimento">
+                            <svg 
+                        id="voltar"
+                        xmlns="http://www.w3.org/2000/svg" 
+                        fill="none" 
+                        viewBox="0 0 24 24" 
+                        stroke-width="1.5" 
+                        stroke="currentColor" 
+                        class="size-6">
+                            <path 
+                            stroke-linecap="round" 
+                            stroke-linejoin="round" 
+                            d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                        </svg>
+                            <h2>ATENDIMENTO DO CHAMADO</h2>
+                            <span id="urgencia-atendimento" class="urgencia-indicador"></span>
+                        </div>
+
+                        <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 10px 0 20px 0;">
+
+                        <div class="info-chamado">
+                            <p><strong>Protocolo:</strong> <span id="proto"></span></p>
+                            <p><strong>Categoria:</strong> <span id="categoria"></span></p>
+                            <p><strong>Data de Abertura:</strong> <span id="data"></span></p>
+                            <p><strong>Descrição do pedido:</strong></p>
+                            <p id="descricao"></p>
+                        </div>
+
+                        <h3>Resposta do Técnico:</h3>
+                        <textarea id="respostaTecnico" placeholder="Digite aqui sua resposta..."></textarea>
+
+                        <div class="acoes-atendimento">
+                            <button class="btn-finalizar" onclick="encerrarChamado()">ENCERRAR CHAMADO</button>
+                            <button class="btn-salvar" onclick="salvarResposta()">SALVAR DADOS</button>
+                        </div>
+                    </div>
+                `;
+
+                setTimeout(() => carregarDadosAtendimento(), 50);
             }
             // Tela Meus Dados
             else if (tela === 'meusDadosTec') {
@@ -269,7 +311,7 @@
         }
 
         document.addEventListener("DOMContentLoaded", () => {
-            mostrarTela("telaInicialTec");
+            mostrarTela("atenderChamado");
         });
     </script>
 
@@ -305,7 +347,7 @@
                             <td>${chamado.categoria}</td>
                             <td>${new Date(chamado.data_criacao).toLocaleDateString()}</td>
                             <td style="color:red; font-weight:bold;">URGENTE</td>
-                            <td><button class="btn-acao">Atender</button></td>
+                            <td><button class="btn-acao" onclick="atenderChamado(${chamado.id})">Atender</button></td>
                         </tr>
                     `;
                 });
@@ -503,6 +545,93 @@ async function carregarMeusDados() {
         alert("Erro ao salvar dados. Verifique o console.");
     }
 }
+    
+function atenderChamado(idChamado) {
+    sessionStorage.setItem("chamadoAtual", idChamado);
+    mostrarTela("atenderChamado");
+}
+
+async function carregarDadosAtendimento() {
+    const id = sessionStorage.getItem("chamadoAtual");
+
+    const resp = await fetch(`http://localhost:5030/api/chamados/${id}`);
+    const chamado = await resp.json();
+
+    document.getElementById("proto").textContent = chamado.protocolo;
+    document.getElementById("categoria").textContent = chamado.categoria;
+    document.getElementById("data").textContent = new Date(chamado.data_criacao).toLocaleString();
+    document.getElementById("descricao").textContent = chamado.descricao;
+
+    const urgDiv = document.getElementById("urgencia-atendimento");
+    urgDiv.textContent = "Urgência: " + chamado.urgencia;
+    urgDiv.classList.add(chamado.urgencia.toLowerCase()); // aplica cor
+}
+
+async function salvarResposta() {
+    const idChamado = sessionStorage.getItem("chamadoAtual");
+    const idTecnico = sessionStorage.getItem("usuarioId");
+    const texto = document.getElementById("respostaTecnico").value;
+
+    if (texto.trim() === "") {
+        alert("Digite uma resposta antes de salvar.");
+        return;
+    }
+
+    await fetch(`http://localhost:5030/api/historico`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            id_chamado: idChamado,
+            id_usuario: idTecnico,
+            acao: texto
+        })
+    });
+
+    // ALTERA O STATUS PARA "em andamento"
+    await fetch(`http://localhost:5030/api/chamados/${idChamado}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: "em andamento", id_tecnico: idTecnico })
+    });
+
+    alert("Resposta salva!");
+}
+
+async function encerrarChamado() {
+    const idChamado = sessionStorage.getItem("chamadoAtual");
+    const idTecnico = sessionStorage.getItem("usuarioId");
+    const texto = document.getElementById("respostaTecnico").value;
+
+    if (texto.trim() === "") {
+        alert("Digite uma resposta antes de encerrar o chamado.");
+        return;
+    }
+
+    // Salva histórico
+    await fetch(`http://localhost:5030/api/historico`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            id_chamado: idChamado,
+            id_usuario: idTecnico,
+            acao: texto
+        })
+    });
+
+    // Atualiza status
+    await fetch(`http://localhost:5030/api/chamados/${idChamado}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            status: "finalizado",
+            id_tecnico: idTecnico
+        })
+    });
+
+    alert("Chamado encerrado com sucesso!");
+    mostrarTela("meusChamados");
+}
+
     </script>
 </body>
 </html>

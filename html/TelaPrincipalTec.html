@@ -125,30 +125,7 @@
                             <th>Ações</th>
                             </tr>
                         </thead>
-                        <tbody id="tabela-chamados">
-                            <!-- Os dados abaixo são apenas placeholders -->
-                            <tr>
-                            <td>001</td>
-                            <td>Equipamento</td>
-                            <td>01/04/2025</td>
-                            <td>Urgente</td>
-                            <td><button class="btn-acao" onclick="">Atender</button></td>
-                            </tr>
-                            <tr>
-                            <td>002</td>
-                            <td>Redes e Internet</td>
-                            <td>28/03/2025</td>
-                            <td>Urgente</td>
-                            <td><button class="btn-acao" onclick="">Atender</button></td>
-                            </tr>
-                            <tr>
-                            <td>003</td>
-                            <td>Servidores</td>
-                            <td>15/03/2025</td>
-                            <td>Urgente</td>
-                            <td><button class="btn-acao" onclick=")">Atender</button></td>
-                            </tr>
-                        </tbody>
+                        <tbody id="tabela-chamados"></tbody>
                         </table>
 
                         <div class="button">
@@ -156,6 +133,8 @@
                         </div>
                     </div>
                 `;
+                setTimeout(() => carregarChamadosUrgentes(), 50);
+
             } 
             // Subtela - Chamados Finalizados
             else if ( tela === 'subtelaFinalizados') {
@@ -175,30 +154,7 @@
                             <th>Ações</th>
                             </tr>
                         </thead>
-                        <tbody id="tabela-chamados">
-                            <!-- Os dados abaixo são apenas placeholders -->
-                            <tr>
-                            <td>001</td>
-                            <td>Equipamento</td>
-                            <td>01/04/2025</td>
-                            <td>Finalizado</td>
-                            <td><button class="btn-acao" onclick="">Ver</button></td>
-                            </tr>
-                            <tr>
-                            <td>002</td>
-                            <td>Redes e Internet</td>
-                            <td>28/03/2025</td>
-                            <td>Finalizado</td>
-                            <td><button class="btn-acao" onclick="">Ver</button></td>
-                            </tr>
-                            <tr>
-                            <td>003</td>
-                            <td>Servidores</td>
-                            <td>15/03/2025</td>
-                            <td>Finalizado</td>
-                            <td><button class="btn-acao" onclick="">Ver</button></td>
-                            </tr>
-                        </tbody>
+                        <tbody id="tabela-chamados"></tbody>
                         </table>
 
                         <div class="button">
@@ -206,6 +162,7 @@
                         </div>
                     </div>
                 `;
+                setTimeout(() => carregarChamadosFinalizados(), 50);
             }
             // Subtela - Meus Chamados
             else if ( tela === 'meusChamados') {
@@ -225,33 +182,11 @@
                             <th>Ações</th>
                             </tr>
                         </thead>
-                        <tbody id="tabela-chamados">
-                            <!-- Os dados abaixo são apenas placeholders -->
-                            <tr>
-                            <td>001</td>
-                            <td>Equipamento</td>
-                            <td>01/04/2025</td>
-                            <td>Urgente</td>
-                            <td><button class="btn-acao" onclick="">Atender</button></td>
-                            </tr>
-                            <tr>
-                            <td>002</td>
-                            <td>Redes e Internet</td>
-                            <td>28/03/2025</td>
-                            <td>Alta</td>
-                            <td><button class="btn-acao" onclick="">Atender</button></td>
-                            </tr>
-                            <tr>
-                            <td>003</td>
-                            <td>Servidores</td>
-                            <td>15/03/2025</td>
-                            <td>Média</td>
-                            <td><button class="btn-acao" onclick="">Atender</button></td>
-                            </tr>
-                        </tbody>
+                        <tbody id="tabela-chamados"></tbody>
                         </table>
                     </div>
                 `;
+                setTimeout(() => carregarChamadosAbertos(), 50);
             }
             // Tela Meus Dados
             else if (tela === 'meusDadosTec') {
@@ -318,7 +253,6 @@
                 }
             }
 
-
             if (tela === 'subtelaFinalizados') {
                 const btnVoltar = document.getElementById('btnVoltar');
                 if (btnVoltar) {
@@ -334,6 +268,148 @@
         });
     </script>
 
-    <script src="../js/meusDados.js"></script>
+
+    <!-- FUNÇÕES PARA CONSUMIR API -->
+    <script>
+        // LISTA CHAMADOS URGENTES
+        async function carregarChamadosUrgentes() {
+            const tabela = document.getElementById("tabela-chamados");
+            if (!tabela) return;
+
+            try {
+                const response = await fetch(`http://localhost:5030/api/chamados`);
+                const chamados = await response.json();
+
+                const urgentes = chamados.filter(c =>
+                    c.urgencia === "Alta"
+                );
+
+                if (urgentes.length === 0) {
+                    tabela.innerHTML = `
+                        <tr><td colspan="5" style="text-align:center;">Nenhum chamado urgente</td></tr>
+                    `;
+                    return;
+                }
+
+                tabela.innerHTML = "";
+
+                urgentes.forEach(chamado => {
+                    tabela.innerHTML += `
+                        <tr>
+                            <td>${chamado.protocolo}</td>
+                            <td>${chamado.categoria}</td>
+                            <td>${new Date(chamado.data_criacao).toLocaleDateString()}</td>
+                            <td style="color:red; font-weight:bold;">URGENTE</td>
+                            <td><button class="btn-acao">Atender</button></td>
+                        </tr>
+                    `;
+                });
+
+            } catch (e) {
+                tabela.innerHTML = `
+                    <tr><td colspan="5" style="text-align:center;color:red;">Erro ao carregar urgentes</td></tr>
+                `;
+            }
+        }
+
+        // LISTA CHAMADOS FINALIZADOS
+        async function carregarChamadosFinalizados() {
+            const tabela = document.getElementById("tabela-chamados");
+            if (!tabela) return;
+
+            try {
+                const response = await fetch(`http://localhost:5030/api/chamados`);
+                const chamados = await response.json();
+
+                const finalizados = chamados.filter(c =>
+                    c.status?.toLowerCase() === "finalizado"
+                );
+
+                if (finalizados.length === 0) {
+                    tabela.innerHTML = `
+                        <tr><td colspan="5" style="text-align:center;">Nenhum chamado finalizado</td></tr>
+                    `;
+                    return;
+                }
+
+                tabela.innerHTML = "";
+
+                finalizados.forEach(chamado => {
+                    tabela.innerHTML += `
+                        <tr>
+                            <td>${chamado.protocolo}</td>
+                            <td>${chamado.categoria}</td>
+                            <td>${new Date(chamado.data_criacao).toLocaleDateString()}</td>
+                            <td>Finalizado</td>
+                            <td><button class="btn-acao">Ver</button></td>
+                        </tr>
+                    `;
+                });
+
+            } catch (e) {
+                tabela.innerHTML = `
+                    <tr><td colspan="5" style="text-align:center;color:red;">Erro ao carregar finalizados</td></tr>
+                `;
+            }
+        }
+
+        // LISTA TODOS OS CHAMADOS ABERTOS
+        async function carregarChamadosAbertos() {
+        const tabela = document.getElementById("tabela-chamados");
+        const tecnicoId = sessionStorage.getItem("usuarioId");
+
+        if (!tabela) return;
+
+        try {
+            const response = await fetch(`http://localhost:5030/api/chamados`);
+            const chamados = await response.json();
+
+            console.log("🔍 Dados crus retornados pela API:", chamados);
+
+
+            console.log("Chamados recebidos:", chamados);
+            console.log("ID do técnico logado:", tecnicoId);
+
+            // Corrigido: campo certo é id_tecnico
+            const meusChamados = chamados.filter(c =>
+                (c.id_tecnico === null || c.id_tecnico === Number(tecnicoId)) &&
+                c.status.toLowerCase() === "aberto"
+            );
+
+            console.log("🔍 Técnico logado:", Number(tecnicoId));
+            console.log("🔍 Chamados filtrados:", meusChamados);
+
+            if (meusChamados.length === 0) {
+                tabela.innerHTML = `
+                    <tr><td colspan="5" style="text-align:center;">Nenhum chamado em aberto</td></tr>
+                `;
+                return;
+            }
+
+            tabela.innerHTML = ""; 
+
+            meusChamados.forEach(chamado => {
+                tabela.innerHTML += `
+                    <tr>
+                        <td>${chamado.protocolo}</td>
+                        <td>${chamado.categoria}</td>
+                        <td>${new Date(chamado.data_criacao).toLocaleDateString()}</td>
+                        <td>${chamado.urgencia}</td>
+                        <td><button class="btn-acao" onclick="atenderChamado(${chamado.id})">Atender</button></td>
+                    </tr>
+                `;
+            });
+
+        } catch (error) {
+            console.error("Erro ao carregar chamados:", error);
+            tabela.innerHTML = `
+                <tr><td colspan="5" style="text-align:center;color:red;">Erro ao carregar chamados</td></tr>
+            `;
+        }
+    }
+
+        // CARREGA DADOS DO TECNICO
+
+    </script>
 </body>
 </html>

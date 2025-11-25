@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/meusChamados.css">
     <link rel="stylesheet" href="../css/chamadosUrgentes.css">
     <link rel="stylesheet" href="../css/atenderChamado.css">
+    <link rel="stylesheet" href="../css/verChamado.css">
     <title>Tela Principal - Tecnico</title>
 </head>
 <body>
@@ -148,6 +149,7 @@
                             <th>Protocolo</th>
                             <th>Categoria</th>
                             <th>Data</th>
+                            <th>Nível</th>
                             <th>Status</th>
                             <th>Ações</th>
                             </tr>
@@ -161,6 +163,42 @@
                     </div>
                 `;
                 setTimeout(() => carregarChamadosFinalizados(), 50);
+            }
+            // tela Ver Chamado
+            else if (tela === 'verChamado') {
+                conteudo = `
+                    <div class="container-Urgentes">
+                        <div class="header-detalhes">
+                             <svg 
+                            id="voltar"
+                            onclick="mostrarTela('subtelaFinalizados')"
+                            xmlns="http://www.w3.org/2000/svg" 
+                            fill="none" 
+                            viewBox="0 0 24 24" 
+                            stroke-width="1.5" 
+                            stroke="currentColor" 
+                            class="size-6">
+                                <path 
+                                stroke-linecap="round" 
+                                stroke-linejoin="round" 
+                                d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                            </svg>
+                            <h2>DETALHES DO CHAMADO</h2>
+                        </div>
+
+                        <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 10px 0 20px 0;">
+
+                        <div class="chamado-detalhes">
+                            <p><strong>Protocolo:</strong> <span id="detProtocolo"></span></p>
+                            <p><strong>Nível:</strong> <span id="detNivel"></span></p>
+                            <p><strong>Título:</strong> <span id="detTitulo"></span></p>
+                            <p><strong>Descrição:</strong><br><span id="detDescricao"></span></p>
+                            <p><strong>Data de Abertura:</strong> <span id="detData"></span></p>
+                            <p><strong>Resposta do Técnico:</strong><br><span id="detResposta"></span></p>
+                        </div>
+                    </div>
+                `;
+                setTimeout(() => carregarChamadoVisualizacao(), 50);
             }
             // Subtela - Meus Chamados
             else if ( tela === 'meusChamados') {
@@ -186,7 +224,7 @@
                 `;
                 setTimeout(() => carregarChamadosAbertos(), 50);
             }
-            // tela Atender Chamado
+            // subtela Atender Chamado
             else if (tela === 'atenderChamado') {
                 conteudo = `
                     <div class="container-atendimento">
@@ -227,7 +265,6 @@
                         </div>
                     </div>
                 `;
-
                 setTimeout(() => carregarDadosAtendimento(), 50);
             }
             // Tela Meus Dados
@@ -311,7 +348,7 @@
         }
 
         document.addEventListener("DOMContentLoaded", () => {
-            mostrarTela("atenderChamado");
+            mostrarTela("telaInicialTec");
         });
     </script>
 
@@ -328,8 +365,10 @@
                 const chamados = await response.json();
 
                 const urgentes = chamados.filter(c =>
-                    c.urgencia === "Alta"
+                    c.urgencia === "Alta" &&
+                    c.status?.toLowerCase() !== "finalizado"
                 );
+
 
                 if (urgentes.length === 0) {
                     tabela.innerHTML = `
@@ -387,8 +426,9 @@
                             <td>${chamado.protocolo}</td>
                             <td>${chamado.categoria}</td>
                             <td>${new Date(chamado.data_criacao).toLocaleDateString()}</td>
+                            <td>${chamado.nivel}</td>
                             <td>Finalizado</td>
-                            <td><button class="btn-acao">Ver</button></td>
+                            <td><button class="btn-acao"  onclick="verChamado('${chamado.id}')">Ver</button></td>
                         </tr>
                     `;
                 });
@@ -456,7 +496,7 @@
     }
 
         // CARREGA DADOS DO TECNICO
-async function carregarMeusDados() {
+    async function carregarMeusDados() {
     const id = sessionStorage.getItem("usuarioId");
 
     if (!id) {
@@ -482,7 +522,7 @@ async function carregarMeusDados() {
     }
 }
 
-// HABILITAR E DESABILITAR EDIÇÃO EM MEUS DADOS
+    // HABILITAR E DESABILITAR EDIÇÃO EM MEUS DADOS
     function habilitarEdicao() {
     document.getElementById("nome").removeAttribute("readonly");
     document.getElementById("cpf").removeAttribute("readonly");
@@ -546,12 +586,13 @@ async function carregarMeusDados() {
     }
 }
     
-function atenderChamado(idChamado) {
-    sessionStorage.setItem("chamadoAtual", idChamado);
-    mostrarTela("atenderChamado");
-}
+    // ATENDER CHAMADO
+    function atenderChamado(idChamado) {
+        sessionStorage.setItem("chamadoAtual", idChamado);
+        mostrarTela("atenderChamado");
+    }
 
-async function carregarDadosAtendimento() {
+    async function carregarDadosAtendimento() {
     const id = sessionStorage.getItem("chamadoAtual");
 
     const resp = await fetch(`http://localhost:5030/api/chamados/${id}`);
@@ -563,11 +604,12 @@ async function carregarDadosAtendimento() {
     document.getElementById("descricao").textContent = chamado.descricao;
 
     const urgDiv = document.getElementById("urgencia-atendimento");
-    urgDiv.textContent = "Urgência: " + chamado.urgencia;
+    urgDiv.textContent = "Nível: " + chamado.urgencia;
     urgDiv.classList.add(chamado.urgencia.toLowerCase()); // aplica cor
 }
 
-async function salvarResposta() {
+    // SALVA RESPOSTA ( STATUS: EM ANDAMENTO )
+    async function salvarResposta() {
     const idChamado = sessionStorage.getItem("chamadoAtual");
     const idTecnico = sessionStorage.getItem("usuarioId");
     const texto = document.getElementById("respostaTecnico").value;
@@ -577,7 +619,12 @@ async function salvarResposta() {
         return;
     }
 
-    await fetch(`http://localhost:5030/api/historico`, {
+    // pega dados atuais do chamado
+    const resp = await fetch(`http://localhost:5030/api/chamados/${idChamado}`);
+    const chamado = await resp.json();
+
+    // registra histórico
+    await fetch(`http://localhost:5030/api/historicochamados`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -587,17 +634,22 @@ async function salvarResposta() {
         })
     });
 
-    // ALTERA O STATUS PARA "em andamento"
+    // atualiza chamado completo
     await fetch(`http://localhost:5030/api/chamados/${idChamado}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status: "em andamento", id_tecnico: idTecnico })
+        body: JSON.stringify({
+            ...chamado,
+            status: "em andamento",
+            id_tecnico: idTecnico
+        })
     });
 
     alert("Resposta salva!");
 }
 
-async function encerrarChamado() {
+    // ENCERRA CHAMADO ( STATUS: FINALIZADO )
+    async function encerrarChamado() {
     const idChamado = sessionStorage.getItem("chamadoAtual");
     const idTecnico = sessionStorage.getItem("usuarioId");
     const texto = document.getElementById("respostaTecnico").value;
@@ -607,8 +659,12 @@ async function encerrarChamado() {
         return;
     }
 
-    // Salva histórico
-    await fetch(`http://localhost:5030/api/historico`, {
+    // pega dados atuais
+    const resp = await fetch(`http://localhost:5030/api/chamados/${idChamado}`);
+    const chamado = await resp.json();
+
+    // salva histórico
+    await fetch(`http://localhost:5030/api/historicochamados`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -618,11 +674,12 @@ async function encerrarChamado() {
         })
     });
 
-    // Atualiza status
+    // atualiza chamado completo
     await fetch(`http://localhost:5030/api/chamados/${idChamado}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+            ...chamado,
             status: "finalizado",
             id_tecnico: idTecnico
         })
@@ -631,6 +688,60 @@ async function encerrarChamado() {
     alert("Chamado encerrado com sucesso!");
     mostrarTela("meusChamados");
 }
+
+function verChamado(idChamado) {
+    sessionStorage.setItem("chamadoVisualizacao", idChamado);
+    mostrarTela("verChamado");
+}
+
+    // ABRE OS DETALHES DO CHAMADO
+async function carregarChamadoVisualizacao() {
+    const id = sessionStorage.getItem("chamadoVisualizacao");
+    if (!id) return;
+
+    try {
+        // 1) Buscar chamado
+        const resp = await fetch(`http://localhost:5030/api/chamados/${id}`);
+        if (!resp.ok) throw new Error(`Erro ao buscar chamado: ${resp.status}`);
+        const chamado = await resp.json();
+
+        // 2) Buscar histórico
+        const respHistorico = await fetch(`http://localhost:5030/api/historicochamados`);
+        if (!respHistorico.ok) throw new Error(`Erro ao buscar histórico: ${respHistorico.status}`);
+        const historico = await respHistorico.json();
+
+        // 3) Encontrar entradas do histórico deste chamado
+        // Pode haver várias entradas -> vamos pegar a última (mais recente)
+        const historicoDoChamado = historico
+            .filter(h => String(h.id_chamado) === String(id))
+            .sort((a, b) => new Date(b.data_criacao || b.data || 0) - new Date(a.data_criacao || a.data || 0)); // segura
+
+        const ultimaEntrada = historicoDoChamado[0];
+
+        // 4) Resposta: seu payload do histórico salva o texto em 'acao' (conforme POST que você usa)
+        const respostaTecnico = ultimaEntrada?.acao || "—";
+
+        // 5) Preencher a tela (verificando existência dos elementos)
+        const setText = (elId, text) => {
+            const el = document.getElementById(elId);
+            if (el) el.textContent = text;
+        };
+
+        setText("detProtocolo", chamado.protocolo || "—");
+        setText("detNivel", chamado.urgencia || chamado.nivel || "—"); // tenta 'urgencia' ou 'nivel'
+        setText("detTitulo", chamado.titulo || "—");
+        setText("detDescricao", chamado.descricao || "—");
+        setText("detData", chamado.data_criacao ? new Date(chamado.data_criacao).toLocaleDateString() : "—");
+        setText("detResposta", respostaTecnico);
+
+    } catch (e) {
+        console.error("Erro ao carregar chamado:", e);
+        alert("Erro ao carregar detalhes. Veja o console para mais informações.");
+    }
+}
+
+
+
 
     </script>
 </body>

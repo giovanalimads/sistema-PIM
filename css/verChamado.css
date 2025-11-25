@@ -1,0 +1,59 @@
+.header-detalhes {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.container-Urgentes .header-detalhes svg {
+    width: 28px;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+    color: #fff;
+}
+
+.container-Urgentes .header-detalhes svg:hover {
+    color: #6799CE;
+    transform: scale(1.1);
+}
+
+.container-Urgentes .header-detalhes h2 {
+    font-weight: 700;
+    font-size: 24px;
+    color: #fff;
+    flex: 1;
+    text-align: center;
+}
+
+/* Área de detalhes */
+.chamado-detalhes {
+    margin-top: 20px;
+}
+
+.chamado-detalhes p {
+    margin: 4px 0;
+    color: #fff;
+    font-size: 16px;
+}
+
+/* Caixa da resposta (igual textarea das outras telas, mas só leitura) */
+.chamado-detalhes span {
+    display: inline-block;
+    margin-top: 5px;
+    color: #fff;
+}
+
+/* Botão voltar – já segue o seu padrão global */
+.btn-principal {
+    padding: 12px 18px;
+    background-color: #6799CE;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.btn-principal:hover {
+    background-color: #4654C0;
+}

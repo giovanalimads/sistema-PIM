@@ -77,9 +77,6 @@
     </div>
   </div>
 
-  <script src="../js/dateTime_ip.js"></script>
-  <script src="../js/api.js"></script>
-
   <script>
   // ================================================
   // VARIÁVEL GLOBAL PARA A TELA DE DESTINO
@@ -132,8 +129,6 @@
   async function trocarConteudoTela(tela) {
     const area = document.getElementById('area');
     let conteudo = '';
-
-    area.innerHTML = '<div style="text-align:center; padding: 50px;">Carregando...</div>';
 
     if (tela === 'registrarChamado') {
       conteudo = `
@@ -196,13 +191,14 @@
             </div>
 
             <div class="button">
+              <button id="btn-assistente" class="assistente-float" onclick="abrirAssistente()">
+                  <i class="fas fa-robot"></i> ASSISTENTE VIRTUAL
+              </button>
               <button class="btn-principal" onclick="enviarChamado()">ENVIAR CHAMADO</button>
             </div>
           </div>
         </div>
       `;
-      area.innerHTML = conteudo;
-      inicializarRegistrarChamado();
     } else if (tela === 'acompanharChamado') {
       conteudo = `
         <div class="container-Urgentes">
@@ -220,35 +216,11 @@
               <th>Ações</th>
               </tr>
           </thead>
-          <tbody id="tabela-chamados">
-              <!-- Os dados abaixo são apenas placeholders -->
-              <tr>
-              <td>001</td>
-              <td>Equipamento</td>
-              <td>01/04/2025</td>
-              <td>Em andamento</td>
-              <td><button class="btn-acao" onclick="">Acompanhar</button></td>
-              </tr>
-              <tr>
-              <td>002</td>
-              <td>Redes e Internet</td>
-              <td>28/03/2025</td>
-              <td>Finalizado</td>
-              <td><button style="margin-right: 10px" class="btn-acao" onclick="">Ver</button><button class="btn-acao" onclick="">Avaliar</button></td>
-              </tr>
-              <tr>
-              <td>003</td>
-              <td>Servidores</td>
-              <td>15/03/2025</td>
-              <td>Em andamento</td>
-              <td><button class="btn-acao" onclick="">Acompanhar</button></td>
-              </tr>
-          </tbody>
+          <tbody id="tabela-chamados"></tbody>
           </table>
       </div>
       `;
-      conteudo = await carregarHistoricoChamados(ID_CLIENTE_LOGADO); 
-      area.innerHTML = conteudo;
+      setTimeout(() => carregarChamadosUsuario(), 50);
     } else if (tela === 'meusDados') {
       conteudo = `
         <div class="container-meusDados">
@@ -278,165 +250,16 @@
           </div>
         </div>
       `;
-      conteudo = await carregarMeusDados(ID_CLIENTE_LOGADO);
-      area.innerHTML = conteudo;
-      inicializarMeusDados();
+      setTimeout(() => {
+        carregarDadosCliente();
+
+        document.getElementById("editar-btn").onclick = habilitarEdicaoCliente;
+        document.getElementById("salvar-btn").onclick = salvarDadosCliente;
+      }, 50);
     }
 
     area.innerHTML = conteudo;
   }
-
-  // ----------------------------------------------------
-// NOVO: Função para carregar Meus Dados (GET API)
-// ----------------------------------------------------
-async function carregarMeusDados(clienteId) {
-    try {
-        // 🚨 USANDO A FUNÇÃO DO SEU api.js 🚨
-        const dados = await getUsuarioById(clienteId); 
-
-        // Retorna a string HTML com os dados preenchidos
-        return `
-            <div class="container-meusDados">
-              <h2>MEUS DADOS</h2>
-              <div class="user-profile">
-                <svg class="profile-icon" xmlns="http://www.w3.org/2000/svg" fill="none"
-                  viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                </svg>
-              </div>
-
-              <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 10px 0 20px 0;">
-
-              <div class="user-info">
-                <div class="info"><label>Nome:</label><input id="nome" value="${dados.nome || ''}" readonly></div>
-                <div class="info"><label>CPF:</label><input id="cpf" value="${dados.cpf || ''}" readonly></div>
-                <div class="info"><label>Telefone:</label><input id="telefone" value="${dados.telefone || ''}" readonly></div>
-                <div class="info"><label>Endereço:</label><input id="endereco" value="${dados.endereco || ''}" readonly></div>
-                <div class="info"><label>E-mail:</label><input id="email" value="${dados.email || ''}" readonly></div>
-                <div class="info"><label>Senha:</label><input id="senha" type="password" value="******" readonly></div>
-              </div>
-
-              <div class="button">
-                <button id="editar-btn" class="btn-principal">EDITAR DADOS</button>
-                <button id="salvar-btn" style="display:none;">SALVAR DADOS</button>
-              </div>
-            </div>
-        `;
-    } catch (error) {
-        console.error("Erro ao carregar dados pessoais:", error);
-        return `<div class="erro-api"><h2>Erro ao carregar dados</h2><p>Não foi possível buscar seus dados. ${error.message}</p></div>`;
-    }
-}
-
-// ----------------------------------------------------
-// NOVO: Função para carregar Histórico de Chamados (GET API)
-// ----------------------------------------------------
-async function carregarHistoricoChamados(clienteId) {
-    try {
-        // 🚨 USANDO A FUNÇÃO DO SEU api.js 🚨
-        // Nota: Idealmente a API deve filtrar pelo clienteId
-        const todosChamados = await getChamados(); 
-
-        // Simulação de filtragem por cliente ID
-        // Você pode remover essa linha se o seu endpoint getChamados já filtrar
-        const meusChamados = todosChamados.filter(c => c.clienteId == clienteId); 
-
-        let linhasTabela = '';
-        if (meusChamados.length > 0) {
-            linhasTabela = meusChamados.map(chamado => `
-                <tr>
-                    <td>${chamado.protocolo}</td>
-                    <td>${chamado.categoria}</td>
-                    <td>${new Date(chamado.dataCriacao).toLocaleDateString('pt-BR')}</td>
-                    <td>${chamado.status}</td>
-                    <td>
-                      <button style="margin-right: 10px" class="btn-acao" onclick="verDetalhesChamado(${chamado.id})">Ver</button>
-                      ${chamado.status === 'Finalizado' ? '<button class="btn-acao" onclick="avaliarChamado(' + chamado.id + ')">Avaliar</button>' : ''}
-                    </td>
-                </tr>
-            `).join('');
-        } else {
-            linhasTabela = `<tr><td colspan="5" style="text-align: center;">Nenhum chamado encontrado.</td></tr>`;
-        }
-        
-        // Retorna a string HTML completa da tela
-        return `
-            <div class="container-Urgentes">
-              <h2>MEUS CHAMADOS</h2>
-              <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 10px 0 20px 0;">
-              <table>
-              <thead>
-                <tr>
-                  <th>Protocolo</th>
-                  <th>Categoria</th>
-                  <th>Data</th>
-                  <th>Status</th>
-                  <th>Ações</th>
-                </tr>
-              </thead>
-              <tbody id="tabela-chamados">
-                ${linhasTabela}
-              </tbody>
-              </table>
-            </div>
-        `;
-
-    } catch (error) {
-        console.error("Erro ao carregar histórico:", error);
-        return `<div class="erro-api"><h2>Erro</h2><p>Não foi possível carregar o histórico de chamados. ${error.message}</p></div>`;
-    }
-}
-
-// ----------------------------------------------------
-// FUNÇÃO DE ENVIO DE CHAMADO ATUALIZADA (POST API)
-// ----------------------------------------------------
-async function enviarChamado() {
-    const titulo = document.getElementById('titulo');
-    const categoria = document.getElementById('categoria');
-    const descricao = document.getElementById('descricao');
-    const protocolo = document.getElementById('protocolo').textContent; // Pega o protocolo gerado
-
-    document.querySelectorAll('.erro-msg').forEach(e => e.remove());
-
-    let valido = true;
-
-    // ... (suas validações de formulário permanecem aqui) ...
-    // Se não for válido, retorna (return;)
-
-    if (!valido) return; // Se a validação falhar
-
-    const dadosChamado = {
-        titulo: titulo.value,
-        categoria: categoria.value,
-        descricao: descricao.value,
-        protocolo: protocolo,
-        urgencia: document.getElementById('urgencia').value, // Adiciona o campo de urgência
-        clienteId: ID_CLIENTE_LOGADO,
-        status: 'Aberto'
-        // Você pode adicionar mais campos aqui, como anexos
-    };
-
-    try {
-        // 🚨 USANDO A FUNÇÃO DO SEU api.js 🚨
-        const resultado = await criarChamado(dadosChamado);
-        
-        // Se o POST for bem-sucedido
-        alert(`Chamado (${resultado.protocolo}) registrado com sucesso!`);
-        
-        // Opcional: Limpar formulário ou ir para a tela de histórico
-        titulo.value = '';
-        categoria.value = '';
-        descricao.value = '';
-        document.getElementById('urgencia').value = '';
-        trocarConteudoTela('acompanharChamado'); // Leva para o histórico
-        
-    } catch (error) {
-        console.error("Erro no envio do chamado:", error);
-        alert(`Falha ao registrar chamado: ${error.message || 'Erro de conexão com a API.'}`);
-    }
-}
-
   // ================================================
   // REGISTRAR CHAMADO - LÓGICA (Mantido)
   // ================================================
@@ -577,6 +400,233 @@ async function enviarChamado() {
       });
     }
   });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+  // === Data e hora de acesso ===
+  const dataAcesso = document.getElementById("data-acesso");
+  const agora = new Date();
+
+  const dataFormatada = agora.toLocaleDateString("pt-BR", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "2-digit",
+  });
+
+  const horaFormatada = agora.toLocaleTimeString("pt-BR", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
+  dataAcesso.textContent = `Acesso em: ${dataFormatada} às ${horaFormatada}`;
+
+  // === IP público ===
+  const ipAcesso = document.getElementById("ip-acesso");
+
+  fetch("https://api.ipify.org?format=json")
+    .then(response => response.json())
+    .then(data => {
+      ipAcesso.textContent = `IP de acesso: ${data.ip}`;
+    })
+    .catch(() => {
+      ipAcesso.textContent = "IP de acesso: não encontrado";
+    });
+
+  // === Pop-up de logout ===
+  const btnLogout = document.getElementById("btnLogout");
+  const popup = document.getElementById("popup-logout");
+  const confirmar = document.getElementById("confirmarLogout");
+  const cancelar = document.getElementById("cancelarLogout");
+
+  // abre o pop-up
+  btnLogout.addEventListener("click", () => {
+    popup.style.display = "flex";
+  });
+
+  // confirma logout
+  confirmar.addEventListener("click", () => {
+    localStorage.clear();
+    sessionStorage.clear();
+    window.location.href = "../html/TeladeLogin.html";
+  });
+
+  // cancela logout
+  cancelar.addEventListener("click", () => {
+    popup.style.display = "none";
+  });
+});
+</script>
+
+<script>
+  // ENVIA CHAMADO
+  async function enviarChamado() {
+    const titulo = document.getElementById('titulo').value;
+    const categoria = document.getElementById('categoria').value;
+    const descricao = document.getElementById('descricao').value;
+    const urgencia = document.getElementById('urgencia').value;
+    const protocolo = document.getElementById('protocolo').textContent;
+    const data = document.getElementById('data').textContent;
+
+    const id_usuario = localStorage.getItem("id_usuario"); // ID salvo no login
+
+    const payload = {
+        protocolo,
+        titulo,
+        categoria,
+        urgencia,
+        descricao,
+        anexos: null,
+        status: "aberto",
+        id_usuario: Number(id_usuario),
+        id_tecnico: null
+    };
+
+    try {
+        const resposta = await fetch("http://localhost:5030/api/chamados", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        });
+
+        if (!resposta.ok) throw new Error("Erro ao registrar chamado");
+
+        alert("Chamado registrado com sucesso!");
+        mostrarTela("acompanharChamado");
+
+    } catch (err) {
+        alert("Erro ao enviar chamado: " + err.message);
+    }
+}
+
+// LISTA CHAMADOS FEITOS PELO USUÁRIO
+async function carregarChamadosUsuario() {
+    const id_usuario = Number(localStorage.getItem("id_usuario"));
+    const tabela = document.getElementById("tabela-chamados");
+
+    tabela.innerHTML = "<tr><td colspan='5'>Carregando...</td></tr>";
+
+    try {
+        const r = await fetch("http://localhost:5030/api/chamados");
+        const chamados = await r.json();
+
+        const meusChamados = chamados.filter(c => c.id_usuario === id_usuario);
+
+        tabela.innerHTML = "";
+
+        meusChamados.forEach(chamado => {
+            tabela.innerHTML += `
+                <tr>
+                    <td>${chamado.protocolo}</td>
+                    <td>${chamado.categoria}</td>
+                    <td>${new Date(chamado.createdAt).toLocaleDateString()}</td>
+                    <td>${chamado.status}</td>
+                    <td>
+                        <button class="btn-acao" onclick="verChamado(${chamado.id})">
+                            Ver
+                        </button>
+                    </td>
+                </tr>
+            `;
+        });
+
+    } catch (err) {
+        tabela.innerHTML = "<tr><td colspan='5'>Erro ao carregar chamados</td></tr>";
+    }
+}
+
+async function carregarDadosCliente() {
+    const id = sessionStorage.getItem("usuarioId");
+
+    if (!id) {
+        console.error("Nenhum usuário logado encontrado.");
+        return;
+    }
+
+    try {
+        const response = await fetch(`http://localhost:5030/api/usuarios/${id}`);
+        const user = await response.json();
+
+        document.getElementById("nome").value = user.nome || "";
+        document.getElementById("cpf").value = user.cpf || "";
+        document.getElementById("telefone").value = user.telefone || "";
+        document.getElementById("endereco").value = user.endereco || "";
+        document.getElementById("email").value = user.email || "";
+        document.getElementById("senha").value = user.senha || "";
+
+    } catch (error) {
+        console.error("Erro ao carregar dados do cliente:", error);
+    }
+}
+
+function habilitarEdicaoCliente() {
+    document.querySelectorAll(".user-info input").forEach(input => {
+        input.removeAttribute("readonly");
+        input.style.border = "1px solid #ccc";
+    });
+
+    document.getElementById("editar-btn").style.display = "none";
+    document.getElementById("salvar-btn").style.display = "block";
+}
+
+async function salvarDadosCliente() {
+    const id = sessionStorage.getItem("usuarioId");
+
+    if (!id) {
+        alert("ERRO: ID do usuário está NULL. O login salvou corretamente?");
+        console.log("sessionStorage:", sessionStorage);
+        return;
+    }
+
+    const payload = {
+        nome: document.getElementById("nome").value,
+        cpf: document.getElementById("cpf").value,
+        telefone: document.getElementById("telefone").value,
+        endereco: document.getElementById("endereco").value,
+        email: document.getElementById("email").value,
+        senha: document.getElementById("senha").value,
+
+        tipo: "usuario"
+    };
+
+    console.log("➡️ Enviando PUT para:", `http://localhost:5030/api/usuarios/${id}`);
+    console.log("➡️ Payload:", payload);
+
+    try {
+        const response = await fetch(`http://localhost:5030/api/usuarios/${id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        });
+
+        console.log("➡️ Resposta do servidor:", response);
+
+        // Se erro, pegar texto da resposta
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error("❌ ERRO DO SERVIDOR:", errorText);
+            alert("Erro ao salvar dados!\n\n" + errorText);
+            return;
+        }
+
+        alert("Dados atualizados com sucesso!");
+
+        // Depois que os dados forem salvos com sucesso:
+document.getElementById("salvar-btn").innerText = "EDITAR DADOS";
+document.getElementById("salvar-btn").disabled = false;
+
+// Travar novamente os inputs
+document.querySelectorAll("input").forEach(input => {
+    input.disabled = true;
+});
+
+    } catch (error) {
+        console.error("❌ ERRO JS:", error);
+        alert("Erro ao salvar dados (JS): " + error.message);
+    }
+}
+
+
 </script>
 
 </body>

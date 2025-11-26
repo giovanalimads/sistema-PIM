@@ -199,6 +199,90 @@
           </div>
         </div>
       `;
+    // === Gerar protocolo automático ===
+function gerarProtocoloUnico() {
+
+  // Carrega lista de protocolos já usados
+  let usados = JSON.parse(localStorage.getItem("protocolosUsados")) || [];
+
+  function gerar() {
+    const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let parteLetra =
+      letras[Math.floor(Math.random() * 26)] +
+      letras[Math.floor(Math.random() * 26)] +
+      letras[Math.floor(Math.random() * 26)];
+
+    let parteNumero = Math.floor(100 + Math.random() * 900).toString();
+
+    return parteLetra + parteNumero;
+  }
+
+  let novoProtocolo = gerar();
+
+  // Garante que não repita
+  while (usados.includes(novoProtocolo)) {
+    novoProtocolo = gerar();
+  }
+
+  usados.push(novoProtocolo);
+  localStorage.setItem("protocolosUsados", JSON.stringify(usados));
+
+  return novoProtocolo;
+}
+
+// === Obter data atual ===
+function obterDataAtual() {
+  return new Date().toLocaleString("pt-BR", {
+    timeZone: "America/Sao_Paulo",
+  });
+}
+
+// === Define urgência conforme categoria ===
+function definirUrgencia(categoria, urgencia) {
+  if (!categoria || !urgencia) return;
+
+  categoria.addEventListener("change", () => {
+    let nivel = "";
+
+    switch (categoria.value) {
+      case "Equipamentos":
+      case "Servidores":
+        nivel = "Alta";
+        break;
+
+      case "Sistemas e Maquininhas":
+      case "Redes e Internet":
+        nivel = "Média";
+        break;
+
+      case "Impressoras e Periféricos":
+      case "Instalação/Atualização":
+        nivel = "Baixa";
+        break;
+
+      default:
+        nivel = "";
+    }
+
+    urgencia.value = nivel;
+  });
+}
+
+// === Inicialização após carregar o HTML dinamicamente ===
+setTimeout(() => {
+  const protocolo = document.getElementById("protocolo");
+  const dataAbertura = document.getElementById("data");
+  const categoria = document.getElementById("categoria");
+  const urgencia = document.getElementById("urgencia");
+
+  // Preenche protocolo e data
+  if (protocolo) protocolo.innerText = gerarProtocoloUnico();
+  if (dataAbertura) dataAbertura.innerText = obterDataAtual();
+
+  // Liga categoria → urgência
+  definirUrgencia(categoria, urgencia);
+
+}, 80);
     } else if (tela === 'acompanharChamado') {
       conteudo = `
         <div class="container-Urgentes">
@@ -221,7 +305,43 @@
       </div>
       `;
       setTimeout(() => carregarChamadosUsuario(), 50);
-    } else if (tela === 'meusDados') {
+    } 
+    // tela Ver Chamado
+            else if (tela === 'verChamado') {
+              conteudo = `
+                  <div class="container-Urgentes">
+                      <div class="header-detalhes">
+                            <svg 
+                          id="voltar"
+                          onclick="mostrarTela('subtelaFinalizados')"
+                          xmlns="http://www.w3.org/2000/svg" 
+                          fill="none" 
+                          viewBox="0 0 24 24" 
+                          stroke-width="1.5" 
+                          stroke="currentColor" 
+                          class="size-6">
+                              <path 
+                              stroke-linecap="round" 
+                              stroke-linejoin="round" 
+                              d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                          </svg>
+                          <h2>DETALHES DO CHAMADO</h2>
+                      </div>
+
+                      <hr style="width: 100%; border: 0; border-top: 1px solid #6A6E72; margin: 10px 0 20px 0;">
+
+                      <div class="chamado-detalhes">
+                          <p><strong>Protocolo:</strong> <span id="detProtocolo"></span></p>
+                          <p><strong>Nível:</strong> <span id="detNivel"></span></p>
+                          <p><strong>Título:</strong> <span id="detTitulo"></span></p>
+                          <p><strong>Descrição:</strong><br><span id="detDescricao"></span></p>
+                          <p><strong>Data de Abertura:</strong> <span id="detData"></span></p>
+                          <p><strong>Resposta do Técnico:</strong><br><span id="detResposta"></span></p>
+                      </div>
+                  </div>
+              `;
+              setTimeout(() => carregarChamadoVisualizacao(), 50);
+      } else if (tela === 'meusDados') {
       conteudo = `
         <div class="container-meusDados">
           <h2>MEUS DADOS</h2>
@@ -260,118 +380,7 @@
 
     area.innerHTML = conteudo;
   }
-  // ================================================
-  // REGISTRAR CHAMADO - LÓGICA (Mantido)
-  // ================================================
-  function inicializarRegistrarChamado() {
-    const protocolo = document.getElementById('protocolo');
-    const data = document.getElementById('data');
-    const categoria = document.getElementById('categoria');
-    const urgencia = document.getElementById('urgencia');
-    const dropArea = document.getElementById('drop-area');
 
-    // Gerar protocolo e data
-    protocolo.textContent = 'PRT' + Math.floor(Math.random() * 1000000);
-    data.textContent = new Date().toLocaleDateString('pt-BR');
-
-    // Atualizar urgência conforme categoria
-    categoria.addEventListener('change', () => {
-      let nivel = '';
-      switch (categoria.value) {
-        case 'Equipamentos':
-        case 'Servidores':
-          nivel = 'Alta';
-          break;
-        case 'Redes e Internet':
-        case 'Sistemas e Maquininhas':
-          nivel = 'Média';
-          break;
-        case 'Impressoras e Periféricos':
-        case 'Instalação/Atualização':
-          nivel = 'Baixa';
-          break;
-        default:
-          nivel = '';
-      }
-      urgencia.value = nivel;
-    });
-  }
-
-  // ================================================
-  // FUNÇÃO DE ENVIO DE CHAMADO (Mantido)
-  // ================================================
-  function enviarChamado() {
-    const titulo = document.getElementById('titulo');
-    const categoria = document.getElementById('categoria');
-    const descricao = document.getElementById('descricao');
-
-    document.querySelectorAll('.erro-msg').forEach(e => e.remove());
-
-    let valido = true;
-
-    // --- Validação do título ---
-    if (!titulo.value.trim()) {
-      mostrarErro(titulo, 'O título é obrigatório.');
-      valido = false;
-    }
-
-    // --- Validação da categoria ---
-    if (!categoria.value) {
-      mostrarErro(categoria, 'Selecione uma categoria.');
-      valido = false;
-    }
-
-    // --- Validação da descrição ---
-    if (!descricao.value.trim()) {
-      mostrarErro(descricao, 'A descrição é obrigatória.');
-      valido = false;
-    } else if (descricao.value.trim().length < 10) {
-      mostrarErro(descricao, 'A descrição deve ter pelo menos 10 caracteres.');
-      valido = false;
-    }
-
-    if (!valido) return; 
-
-    // Se passou nas validações
-    alert('Chamado enviado com sucesso!');
-  }
-
-  // Função auxiliar para mostrar mensagens de erro (Mantido)
-  function mostrarErro(elemento, mensagem) {
-    const erro = document.createElement('small');
-    erro.classList.add('erro-msg');
-    erro.style.color = 'red';
-    erro.textContent = mensagem;
-    elemento.parentElement.appendChild(erro);
-  }
-
-  // ================================================
-  // MEUS DADOS - LÓGICA (Mantido)
-  // ================================================
-  function inicializarMeusDados() {
-    const inputs = document.querySelectorAll(".user-info input");
-    const editarBtn = document.getElementById("editar-btn");
-    const salvarBtn = document.getElementById("salvar-btn");
-
-    // Carrega dados do localStorage
-    inputs.forEach(input => input.value = localStorage.getItem(input.id) || '');
-
-    editarBtn.addEventListener('click', () => {
-      inputs.forEach(i => i.removeAttribute('readonly'));
-      editarBtn.style.display = 'none';
-      salvarBtn.style.display = 'inline-block';
-    });
-
-    salvarBtn.addEventListener('click', () => {
-      inputs.forEach(i => {
-        i.setAttribute('readonly', true);
-        localStorage.setItem(i.id, i.value);
-      });
-      salvarBtn.style.display = 'none';
-      editarBtn.style.display = 'inline-block';
-      alert('Dados atualizados com sucesso!');
-    });
-  }
 
   // ================================================
   // INICIALIZAÇÃO DA PÁGINA E LÓGICA DO POP-UP
@@ -403,36 +412,6 @@
 </script>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-  // === Data e hora de acesso ===
-  const dataAcesso = document.getElementById("data-acesso");
-  const agora = new Date();
-
-  const dataFormatada = agora.toLocaleDateString("pt-BR", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "2-digit",
-  });
-
-  const horaFormatada = agora.toLocaleTimeString("pt-BR", {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-
-  dataAcesso.textContent = `Acesso em: ${dataFormatada} às ${horaFormatada}`;
-
-  // === IP público ===
-  const ipAcesso = document.getElementById("ip-acesso");
-
-  fetch("https://api.ipify.org?format=json")
-    .then(response => response.json())
-    .then(data => {
-      ipAcesso.textContent = `IP de acesso: ${data.ip}`;
-    })
-    .catch(() => {
-      ipAcesso.textContent = "IP de acesso: não encontrado";
-    });
-
   // === Pop-up de logout ===
   const btnLogout = document.getElementById("btnLogout");
   const popup = document.getElementById("popup-logout");
@@ -455,53 +434,106 @@
   cancelar.addEventListener("click", () => {
     popup.style.display = "none";
   });
-});
 </script>
 
 <script>
-  // ENVIA CHAMADO
   async function enviarChamado() {
-    const titulo = document.getElementById('titulo').value;
-    const categoria = document.getElementById('categoria').value;
-    const descricao = document.getElementById('descricao').value;
-    const urgencia = document.getElementById('urgencia').value;
-    const protocolo = document.getElementById('protocolo').textContent;
-    const data = document.getElementById('data').textContent;
+  const tituloElem = document.getElementById('titulo');
+  const categoriaElem = document.getElementById('categoria');
+  const descricaoElem = document.getElementById('descricao');
+  const urgenciaElem = document.getElementById('urgencia');
+  const protocoloElem = document.getElementById('protocolo');
+  const dataElem = document.getElementById('data');
 
-    const id_usuario = localStorage.getItem("id_usuario"); // ID salvo no login
+  // Remove mensagens de erro antigas
+  document.querySelectorAll('.erro-msg').forEach(e => e.remove());
 
-    const payload = {
-        protocolo,
-        titulo,
-        categoria,
-        urgencia,
-        descricao,
-        anexos: null,
-        status: "aberto",
-        id_usuario: Number(id_usuario),
-        id_tecnico: null
-    };
+  let valido = true;
 
-    try {
-        const resposta = await fetch("http://localhost:5030/api/chamados", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
-        });
+  // --- Validação ---
+  if (!tituloElem.value.trim()) {
+    mostrarErro(tituloElem, 'O título é obrigatório.');
+    valido = false;
+  }
 
-        if (!resposta.ok) throw new Error("Erro ao registrar chamado");
+  if (!categoriaElem.value) {
+    mostrarErro(categoriaElem, 'Selecione uma categoria.');
+    valido = false;
+  }
 
-        alert("Chamado registrado com sucesso!");
-        mostrarTela("acompanharChamado");
+  if (!descricaoElem.value.trim()) {
+    mostrarErro(descricaoElem, 'A descrição é obrigatória.');
+    valido = false;
+  } else if (descricaoElem.value.trim().length < 10) {
+    mostrarErro(descricaoElem, 'A descrição deve ter pelo menos 10 caracteres.');
+    valido = false;
+  }
 
-    } catch (err) {
-        alert("Erro ao enviar chamado: " + err.message);
+  if (!valido) return; // para aqui se não passar na validação
+
+  // pega id do usuário logado
+  const id_usuario = sessionStorage.getItem("usuarioId");
+  if (!id_usuario) {
+    alert("Erro: Usuário não está autenticado.");
+    return;
+  }
+
+  const payload = {
+    protocolo: protocoloElem.textContent,
+    titulo: tituloElem.value.trim(),
+    categoria: categoriaElem.value,
+    urgencia: urgenciaElem.value,
+    descricao: descricaoElem.value.trim(),
+    anexos: null,
+    status: "aberto",
+    id_usuario: Number(id_usuario),
+    id_tecnico: null
+  };
+
+  try {
+    const resposta = await fetch("http://localhost:5030/api/chamados", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    const responseBody = await resposta.text();
+    console.log("Resposta da API:", responseBody, resposta.status, resposta.statusText);
+
+    if (!resposta.ok) {
+      alert(`Erro ao registrar chamado: ${resposta.status} - ${responseBody}`);
+      return;
     }
+
+    alert("Chamado registrado com sucesso!");
+    mostrarTela("acompanharChamado");
+
+    // Limpa campos
+    tituloElem.value = "";
+    categoriaElem.value = "";
+    urgenciaElem.value = "";
+    descricaoElem.value = "";
+    protocoloElem.textContent = gerarProtocoloUnico();
+    dataElem.textContent = obterDataAtual();
+
+  } catch (err) {
+    console.error("Erro ao enviar chamado:", err);
+    alert("Erro ao enviar chamado: " + err.message);
+  }
+}
+
+// Função auxiliar para mostrar mensagens de erro
+function mostrarErro(elemento, mensagem) {
+  const erro = document.createElement('small');
+  erro.classList.add('erro-msg');
+  erro.style.color = 'red';
+  erro.textContent = mensagem;
+  elemento.parentElement.appendChild(erro);
 }
 
 // LISTA CHAMADOS FEITOS PELO USUÁRIO
 async function carregarChamadosUsuario() {
-    const id_usuario = Number(localStorage.getItem("id_usuario"));
+const id_usuario = Number(sessionStorage.getItem("usuarioId"));
     const tabela = document.getElementById("tabela-chamados");
 
     tabela.innerHTML = "<tr><td colspan='5'>Carregando...</td></tr>";
@@ -510,30 +542,50 @@ async function carregarChamadosUsuario() {
         const r = await fetch("http://localhost:5030/api/chamados");
         const chamados = await r.json();
 
-        const meusChamados = chamados.filter(c => c.id_usuario === id_usuario);
+        const meusChamados = chamados.filter(c => Number(c.id_usuario) === id_usuario);
+
+        if (meusChamados.length === 0) {
+            tabela.innerHTML = "<tr><td colspan='5'>Nenhum chamado encontrado</td></tr>";
+            return;
+        }
 
         tabela.innerHTML = "";
 
         meusChamados.forEach(chamado => {
+            let botoes = "";
+
+            if (chamado.status.toLowerCase() === "finalizado") {
+                botoes = `
+                    <button class="btn-acao" onclick="verChamado(${chamado.id})">Ver</button>
+                    <button class="btn-acao" onclick="avaliarChamado(${chamado.id})">Avaliar</button>
+                `;
+            } else if (chamado.status.toLowerCase() === "aberto") {
+                botoes = `
+                    <button class="btn-acao" onclick="acompanharChamado(${chamado.id})">Acompanhar</button>
+                `;
+            }
+
             tabela.innerHTML += `
                 <tr>
                     <td>${chamado.protocolo}</td>
                     <td>${chamado.categoria}</td>
-                    <td>${new Date(chamado.createdAt).toLocaleDateString()}</td>
+                    <td>${new Date(chamado.data_criacao).toLocaleDateString()}</td>
                     <td>${chamado.status}</td>
-                    <td>
-                        <button class="btn-acao" onclick="verChamado(${chamado.id})">
-                            Ver
-                        </button>
-                    </td>
+                    <td>${botoes}</td>
                 </tr>
             `;
         });
 
     } catch (err) {
+        console.error(err);
         tabela.innerHTML = "<tr><td colspan='5'>Erro ao carregar chamados</td></tr>";
     }
 }
+
+
+// Chama a função depois que a página carregar
+setTimeout(() => carregarChamadosUsuario(), 50);
+
 
 async function carregarDadosCliente() {
     const id = sessionStorage.getItem("usuarioId");
@@ -626,6 +678,48 @@ document.querySelectorAll("input").forEach(input => {
     }
 }
 
+async function verChamado() {
+    const id = sessionStorage.getItem("chamadoVisualizacao");
+    if (!id) return;
+
+    try {
+        // Buscar chamado
+        const resp = await fetch(`http://localhost:5030/api/chamados/${id}`);
+        if (!resp.ok) throw new Error(`Erro ao buscar chamado: ${resp.status}`);
+        const chamado = await resp.json();
+
+        // Buscar histórico do chamado
+        const respHistorico = await fetch(`http://localhost:5030/api/historicochamados`);
+        if (!respHistorico.ok) throw new Error(`Erro ao buscar histórico: ${respHistorico.status}`);
+        const historico = await respHistorico.json();
+
+        // Filtra entradas do histórico deste chamado
+        const historicoDoChamado = historico
+            .filter(h => String(h.id_chamado) === String(id))
+            .sort((a, b) => new Date(b.data_criacao || b.data || 0) - new Date(a.data_criacao || a.data || 0));
+
+        const ultimaEntrada = historicoDoChamado[0];
+
+        const respostaTecnico = ultimaEntrada?.acao || "—";
+
+        // Função auxiliar para preencher elementos
+        const setText = (elId, text) => {
+            const el = document.getElementById(elId);
+            if (el) el.textContent = text || "—";
+        };
+
+        setText("detProtocolo", chamado.protocolo);
+        setText("detNivel", chamado.urgencia || chamado.nivel);
+        setText("detTitulo", chamado.titulo);
+        setText("detDescricao", chamado.descricao);
+        setText("detData", chamado.data_criacao ? new Date(chamado.data_criacao).toLocaleDateString() : "—");
+        setText("detResposta", respostaTecnico);
+
+    } catch (e) {
+        console.error("Erro ao carregar chamado:", e);
+        alert("Erro ao carregar detalhes do chamado. Veja o console para mais informações.");
+    }
+}
 
 </script>
 

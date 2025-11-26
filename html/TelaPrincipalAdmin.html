@@ -675,6 +675,55 @@
       }
     }
 
+    // Seleciona o formulário
+const formCadTec = document.getElementById('cadastroTecForm');
+
+if (formCadTec) {
+    formCadTec.addEventListener('submit', function(e) {
+        e.preventDefault(); // previne o reload da página
+
+        // Captura os valores
+        const nome = document.getElementById('nome')?.value.trim();
+        const cpf = document.getElementById('cpf')?.value.trim();
+        const telefone = document.getElementById('telefone')?.value.trim();
+        const area = document.getElementById('areaEspecializacao')?.value;
+        const nivel = document.getElementById('nivelExperiencia')?.value;
+        const email = document.getElementById('email')?.value.trim();
+        const senha = document.getElementById('senha')?.value;
+        const repetirSenha = document.getElementById('repetirSenha')?.value;
+
+        // Validação básica
+        let erros = false;
+        if (!nome) { document.getElementById('erroNome').innerText = "Informe o nome"; erros = true; } 
+        else { document.getElementById('erroNome').innerText = ""; }
+        // ...faça isso para outros campos obrigatórios
+
+        if (senha !== repetirSenha) {
+            document.getElementById('erroRepetirSenha').innerText = "Senhas não conferem";
+            erros = true;
+        } else {
+            document.getElementById('erroRepetirSenha').innerText = "";
+        }
+
+        if (erros) return;
+
+        // Monta o objeto que será enviado para a API
+        const dadosTecnico = {
+            nome,
+            cpf,
+            telefone,
+            areaEspecializacao: area,
+            nivelExperiencia: nivel,
+            email,
+            senha
+        };
+
+        // Chama a função para enviar para a API
+        cadastrarTecnicoAPI(dadosTecnico);
+    });
+}
+
+
     // LISTA OS CHAMADOS
     async function carregarChamados() {
     const tabela = document.getElementById("tabela-chamados");

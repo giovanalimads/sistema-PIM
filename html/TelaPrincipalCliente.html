@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../css/meusDados.css">
   <link rel="stylesheet" href="../css/chamadosUrgentes.css">
   <link rel="stylesheet" href="../css/registrarChamado.css">
+  <link rel="stylesheet" href="../css/assistente.css">
   <title>Tela Principal - Cliente</title>
 </head>
 <body>
@@ -191,13 +192,46 @@
             </div>
 
             <div class="button">
-              <button id="btn-assistente" class="assistente-float" onclick="abrirAssistente()">
-                  <i class="fas fa-robot"></i> ASSISTENTE VIRTUAL
-              </button>
-              <button class="btn-principal" onclick="enviarChamado()">ENVIAR CHAMADO</button>
-            </div>
+    <button class="btn-assistente" onclick="abrirAssistente()">
+        <i class="fas fa-robot"></i> ASSISTENTE VIRTUAL
+    </button>
+    <button class="btn-principal" onclick="enviarChamado()">ENVIAR CHAMADO</button>
+</div>
+
           </div>
         </div>
+
+      <!-- Modal do Bot -->
+      <div id="modal-assistente" class="modal-overlay">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h3>Assistente Forward Solutions</h3>
+                  <span class="close-btn" onclick="fecharAssistente()">&times;</span>
+              </div>
+              <div class="modal-body">
+                  <div id="tela-categorias">
+                      <p>Qual o tipo de problema você está enfrentando?</p>
+                      <div class="grid-categorias">
+                          <button onclick="verSolucao('sistemas')"><i class="fas fa-desktop"></i> Sistemas e Maquininhas</button>
+                          <button onclick="verSolucao('equipamentos')"><i class="fas fa-laptop"></i> Equipamentos</button>
+                          <button onclick="verSolucao('redes')"><i class="fas fa-wifi"></i> Redes e Internet</button>
+                          <button onclick="verSolucao('impressoras')"><i class="fas fa-print"></i> Impressoras e Periféricos</button>
+                          <button onclick="verSolucao('instalacao')"><i class="fas fa-download"></i> Instalação / Atualização</button>
+                          <button onclick="verSolucao('servidores')"><i class="fas fa-server"></i> Servidores</button>
+                      </div>
+                  </div>
+                  <div id="tela-solucao" style="display: none;">
+                      <h4 id="titulo-categoria" class="titulo-destaque">Categoria</h4>
+                      <div id="texto-solucao" class="texto-solucao"></div>
+                      <div class="acoes-solucao">
+                          <p class="pergunta-resolveu">Isso resolveu seu problema?</p>
+                          <button class="btn-registrar" onclick="fecharAssistente()">Não resolveu (Registrar Chamado)</button>
+                          <button class="btn-voltar" onclick="voltarCategorias()">Voltar para Categorias</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
       `;
     // === Gerar protocolo automático ===
 function gerarProtocoloUnico() {
@@ -720,8 +754,8 @@ async function verChamado() {
         alert("Erro ao carregar detalhes do chamado. Veja o console para mais informações.");
     }
 }
-
 </script>
+<script src="../js/assistente.js"></script>
 
 </body>
 </html>
